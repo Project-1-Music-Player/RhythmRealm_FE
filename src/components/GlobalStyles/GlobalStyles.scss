@@ -1,0 +1,42 @@
+:root {
+    --font-family: 'RosDeeper', sans-serif;
+    --white: #fff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: 1.6rem;
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;
+}
+
+@font-face {
+    font-family: RosDeeper;
+    src: url('/assets/fonts/static/Inter-Regular.ttf');
+    font-weight: 400;
+}
+@font-face {
+    font-family: RosDeeper;
+    src: url('/assets/fonts/static/Inter-Medium.ttf');
+    font-weight: 500;
+}
+@font-face {
+    font-family: RosDeeper;
+    src: url('/assets/fonts/static/Inter-SemiBold.ttf');
+    font-weight: 600;
+}
+@font-face {
+    font-family: RosDeeper;
+    src: url('/assets/fonts/static/Inter-Bold.ttf');
+    font-weight: 700;
+}
