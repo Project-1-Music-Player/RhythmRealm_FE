@@ -1,6 +1,8 @@
+import classNames from "classnames/bind";
+
 import Header from "./Header/Header";
 import Sidebar from "./Sidebar/Sidebar";
-import classNames from "classnames/bind";
+import PlayControl from "./PlayControl/PlayControl";
 import styles from "./DefaultLayout.module.scss"
 
 type DefaultLayoutProps = {
@@ -13,12 +15,14 @@ function DefaultLayout({ children } : DefaultLayoutProps) {
     return (
         <div className={cx('wrapper')}>
             <Header/>
-            <div className="container">
-                <div className="content">
+            <div className={cx('container')}>
+                <div className={cx('content')}>
                     {children}
                 </div>
+                
                 <Sidebar/>
             </div>
+            <PlayControl/>
         </div>
     )
 }

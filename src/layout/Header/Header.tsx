@@ -1,11 +1,12 @@
 import classNames from "classnames/bind"
-import styles from './Header.module.scss'
-import Logo from '../../assets/images/logo_favicon.png'
-import routes from "../../config/routes"
 import { InputGroup, Form } from "react-bootstrap" 
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Navigate, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+
+import styles from './Header.module.scss'
+import Logo from '../../assets/images/logo_favicon.png'
+import routes from "../../config/routes"
 
 const cx = classNames.bind(styles)
 

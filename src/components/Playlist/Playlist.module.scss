@@ -1,0 +1,43 @@
+.wrapper {
+    position: relative;
+}
+
+.image {
+    width: 175px;
+    height: 175px;
+    object-fit: cover;
+    display: inline-block;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.title {
+    color: var(--white);
+}
+
+.author {
+    color: #c9c9c9;
+    display: block;
+    font-size: 1.3rem;
+}
+
+.play_btn {
+    position: absolute;
+    top: 53px;
+    left: 53px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+
+    .playicon {
+        width: 30px;
+        height: 50px;
+        color: #8D00FF;
+    }
+}
