@@ -1,8 +1,8 @@
 import classNames from "classnames/bind";
 
-import Header from "./Header/Header";
-import Sidebar from "./Sidebar/Sidebar";
-import PlayControl from "./PlayControl/PlayControl";
+import Header from "../components/Header/Header";
+import Sidebar from "../components/Sidebar/Sidebar";
+import PlayControl from "../components/PlayControl/PlayControl";
 import styles from "./DefaultLayout.module.scss"
 
 type DefaultLayoutProps = {

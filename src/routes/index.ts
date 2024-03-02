@@ -1,13 +1,12 @@
 import routes from "../config/routes"
 import Home from "../pages/Home/Home"
-import Login from "../pages/Login"
-import Register from "../pages/Register"
+import Authen from "../pages/Authen/Authen"
 import Library from "../pages/Library"
+import AuthenLayout from "../layout/AuthenLayout/AuthenLayout"
 
 const publicRoutes = [
-    {path: routes.home, component: Home},
-    {path: routes.login, component: Login},
-    {path: routes.register, component: Register},
+    {path: routes.home, component: Home, layout: null},
+    {path: routes.authen, component: Authen, layout: AuthenLayout},
     {path: routes.library, component: Library},
 ]
 

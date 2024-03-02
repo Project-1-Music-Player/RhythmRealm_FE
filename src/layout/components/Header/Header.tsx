@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate } from "react-router-dom"
 
 import styles from './Header.module.scss'
-import Logo from '../../assets/images/logo_favicon.png'
-import routes from "../../config/routes"
+import Logo from '../../../assets/images/logo_favicon.png'
+import routes from "../../../config/routes"
 
 const cx = classNames.bind(styles)
 

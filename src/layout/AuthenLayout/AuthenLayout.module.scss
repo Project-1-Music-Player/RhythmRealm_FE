@@ -1,0 +1,10 @@
+.wrapper {
+    background: linear-gradient(to bottom right, #000, 60%, #8D00FF);   
+    height: 100vh;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: calc(100% - 200px);
+    display: flex;
+}

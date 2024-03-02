@@ -1,0 +1,119 @@
+.wrapper {
+    height: 55px;
+    background-color: #6100B0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.container {
+    height: 100%;
+    max-width: calc(100% - 200px);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.control {
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+
+    .control_btn {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .controlicon {
+        color: #fff;
+        width: 25px;
+        height: 25px;
+    }
+}
+
+.progress {
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+    column-gap: 15px;
+
+    .progress_bar {
+        width: 500px;
+        height: 4px;
+        background-color: rgba($color: #fff, $alpha: 0.4);
+    }
+
+    .progress_value {
+        background-color: #D8DD00;
+    }
+
+    .time_start, .time_end {
+        color: #fff;
+        font-weight: 500;
+        font-size: 1.3rem;
+    }
+}
+
+.volumn_btn {
+    display: flex;
+    align-items: center;
+    margin-left: 25px;
+    cursor: pointer;
+
+    .volumnicon {
+        width: 25px;
+        height: 25px;
+        color: #fff;    
+    }
+}
+
+.sound_badge {
+    display: flex;
+    flex: 1;
+    margin-left: 20px;
+    align-items: center;
+
+    .avatar {
+        width: 35px;
+        height: 35px;
+        object-fit: cover;
+        border-radius: 5px;
+        display: block;
+        margin-right: 10px;
+    }
+
+    .author, .title {
+        display: block;
+        max-width: 220px;
+        font-size: 1.3rem;
+        color: var(--white);
+        white-space: nowrap;
+        font-weight: 500;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .author {
+        color: #ccc;
+    }
+}
+
+.actions {
+    margin-left: auto;
+    display: flex;
+
+    .actions_btn {
+        cursor: pointer;
+    }
+
+    .like, .queue {
+        width: 25px;
+        height: 25px;
+    }
+
+    .queue {
+        color: #fff;
+        margin-left: 20px;
+    }
+}
