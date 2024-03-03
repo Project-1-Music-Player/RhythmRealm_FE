@@ -87,6 +87,8 @@
 
     .login {
         padding: 8px 25px;
+        color: var(--white);
+        text-decoration: none;
 
         &:hover {
             background-color: rgba($color: #d2d2d2, $alpha: 0.3);
@@ -97,6 +99,8 @@
 
     .register {
         padding: 8px 25px;
+        color: var(--white);
+        text-decoration: none;
 
         &:hover {
             background-color: rgba($color: #d2d2d2, $alpha: 0.3);

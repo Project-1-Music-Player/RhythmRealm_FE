@@ -21,11 +21,7 @@ function PlayControl() {
                     <div className={cx('control_btn')}>
                         <FontAwesomeIcon icon={faBackwardStep} className={cx('controlicon')}/>
                     </div>
-
-                    <div className={cx('control_btn')}>
-                        <FontAwesomeIcon icon={faForwardStep} className={cx('controlicon')}/>
-                    </div>
-
+                    
                     <div className={cx('control_btn')} onClick={() => {setIsPlaying(!isPlaying)}}>
                         {isPlaying ? 
                             <FontAwesomeIcon icon={faPause} className={cx('controlicon')}/> 
@@ -33,6 +29,11 @@ function PlayControl() {
                         }
                         
                     </div>
+
+                    <div className={cx('control_btn')}>
+                        <FontAwesomeIcon icon={faForwardStep} className={cx('controlicon')}/>
+                    </div>
+
 
                     <div className={cx('control_btn')} onClick={() => {setIsShuffle(!isShuffle)}}>
                         <FontAwesomeIcon 
