@@ -3,7 +3,7 @@ import { useState } from "react"
 
 import styles from "./Playlist.module.scss"
 import { Playlist } from "../../models/Playlist"
-import PlayButton from "./components/PlayButton"
+import PlayButton from "./PlayButton"
 
 const cx = classNames.bind(styles)
 

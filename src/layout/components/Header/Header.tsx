@@ -1,12 +1,14 @@
 import classNames from "classnames/bind"
 import { InputGroup, Form } from "react-bootstrap" 
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
+import { faMagnifyingGlass, faChevronDown } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate, Link } from "react-router-dom"
+import { useState } from "react"
 
 import styles from './Header.module.scss'
 import Logo from '../../../assets/images/logo_favicon.png'
 import routes from "../../../config/routes"
+import avatar from '../../../assets/images/artist_avatar.jpg'
 
 const cx = classNames.bind(styles)
 
@@ -23,16 +25,18 @@ const navs = [
 
 function Header() {
     const navigate = useNavigate()
+    const [isAuthenticated, setIsAuthenticated] = useState(true)
+    const [isMenuHovered, setIsMenuHovered] = useState(false)
 
     return (
-        <div className={cx('wrapper')}>
+        <header className={cx('wrapper')}>
             <div className={cx('nav')}>
                 <img src={Logo} alt="" className={cx('logo')} onClick={() => navigate('/')}/>
                 <ul className={cx('nav_list')}>
                     {
                         navs.map((nav, index) => {
                             return (
-                                <li className={cx('nav_item')}>{nav.title}</li>
+                                <li className={cx('nav_item')} key={index}>{nav.title}</li>
                             )
                         })
                     }
@@ -49,11 +53,37 @@ function Header() {
                 </div>
             </InputGroup>
 
-            <div className={cx('authen')}>
-                <Link to="/login" className={cx('login')}>Sign in</Link>
-                <Link to="/register" className={cx('register')}>Sign up</Link>
-            </div>
-        </div>
+            {isAuthenticated ? 
+                <div className={cx('authen')}>
+                    <span className={cx('for_artist')}>FOR ARTISTS</span>
+                    <div 
+                        className={cx('user')} 
+                        onMouseEnter={() => setIsMenuHovered(true)} 
+                    >
+                        <img src={avatar} alt="" className={cx('avatar')}/>
+                        <FontAwesomeIcon icon={faChevronDown} className={cx('icon')}/>
+                        
+                        {isMenuHovered ?
+                            <ul 
+                                className={cx('menu')} 
+                                onMouseLeave={() => setIsMenuHovered(false)}
+                            >
+                                <li className={cx('menu_item')}>Profile</li>
+                                <li className={cx('menu_item')}>Sign Out</li>
+                            </ul> :
+                            <></>
+                        }
+                    </div>
+                    
+                </div> :
+
+                <div className={cx('authen')}>
+                    <Link to="/login" className={cx('login')}>Sign in</Link>
+                    <Link to="/register" className={cx('register')}>Sign up</Link>
+                </div>
+            }
+
+        </header>
     )
 }
 

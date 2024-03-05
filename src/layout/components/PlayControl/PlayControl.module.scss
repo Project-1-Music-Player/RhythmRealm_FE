@@ -104,15 +104,17 @@
     display: flex;
 
     .actions_btn {
-        cursor: pointer;
+        display: flex;
+        position: relative;
     }
-
+    
     .like, .queue {
         width: 25px;
         height: 25px;
     }
-
+    
     .queue {
+        cursor: pointer;
         color: #fff;
         margin-left: 20px;
     }

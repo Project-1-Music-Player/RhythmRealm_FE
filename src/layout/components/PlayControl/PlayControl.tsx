@@ -5,6 +5,7 @@ import { useState } from "react"
 
 import image from "../../../assets/images/example.png"
 import styles from './PlayControl.module.scss'
+import SongQueue from "../../../components/SongQueue/SongQueue"
 
 const cx = classNames.bind(styles)
 
@@ -13,6 +14,11 @@ function PlayControl() {
     const [isPlaying, setIsPlaying] = useState(false)
     const [isShuffle, setIsShuffle] = useState(false)
     const [isRepeat, setIsRepeat] = useState(false)
+    const [isQueueOpened, setIsQueueOpened] = useState(false)
+
+    const getIsClosed = (result: boolean) => {
+        setIsQueueOpened(!result)
+    }
 
     return (
         <div className={cx('wrapper')}>
@@ -84,8 +90,17 @@ function PlayControl() {
                                 style={isLiked ? {color: '#FF0000'} : {color: '#fff'}}
                             />
                         </div>
+
                         <div className={cx('actions_btn')}>
-                            <FontAwesomeIcon icon={faListUl} className={cx('queue')}/>
+                            <FontAwesomeIcon 
+                                icon={faListUl} 
+                                className={cx('queue')}
+                                onClick={() => setIsQueueOpened(!isQueueOpened)}
+                            />
+
+                            {
+                                isQueueOpened ? <SongQueue isClosed={getIsClosed}/> : <></>
+                            }
                         </div>
                     </div>
                 </section>

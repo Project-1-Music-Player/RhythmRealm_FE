@@ -84,6 +84,61 @@
     margin-left: auto;
     font-weight: 500;
     color: var(--white);
+    position: relative;
+
+    .for_artist {
+        cursor: pointer;
+        border-radius: 5px;
+        padding: 7px 10px;
+        user-select: none;
+
+        &:hover {
+            background-color: #828282;
+        }
+    }
+
+    .user {
+        display: flex;
+        align-items: center;
+        margin-left: 60px;
+        cursor: pointer;
+    }
+
+    .avatar {
+        width: 30px;
+        height: 30px;
+        object-fit: cover;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .icon {
+        width: 16px;
+        height: 16px;
+        margin-left: 8px;
+    }
+
+    .menu {
+        position: absolute;
+        right: 0;
+        bottom: -90px;
+        list-style-type: none;
+        width: 100px;
+        background-color: #6100B0;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .menu_item {
+        font-size: 1.4rem;
+        text-align: center;
+        padding: 10px 0;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgba($color: #fff, $alpha: 0.1);
+        }
+    }
 
     .login {
         padding: 8px 25px;

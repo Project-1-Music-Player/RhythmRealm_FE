@@ -79,6 +79,7 @@
 
 .action {
     cursor: pointer;
+    user-select: none;
 }
 
 .follow {
@@ -92,7 +93,7 @@
 .following {
     padding: 4px 25px;
     color: #FAFF00;
-    border: solid 1px #FAFF00;
+    border: solid 2px #FAFF00;
     border-radius: 3px;
     font-size: 1.3rem;
 }

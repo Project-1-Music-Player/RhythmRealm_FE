@@ -2,7 +2,7 @@ import classNames from "classnames/bind"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome" 
 import { faPlay } from "@fortawesome/free-solid-svg-icons" 
 
-import styles from "../Playlist.module.scss"
+import styles from "./Playlist.module.scss"
 
 const cx = classNames.bind(styles)
 
