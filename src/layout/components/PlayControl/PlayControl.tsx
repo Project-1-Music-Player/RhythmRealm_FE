@@ -81,7 +81,7 @@ function PlayControl() {
                             <FontAwesomeIcon 
                                 icon={faHeart} 
                                 className={cx('like')} 
-                                style={isLiked ? {color: '#fff'} : {color: '#FF0000'}}
+                                style={isLiked ? {color: '#FF0000'} : {color: '#fff'}}
                             />
                         </div>
                         <div className={cx('actions_btn')}>

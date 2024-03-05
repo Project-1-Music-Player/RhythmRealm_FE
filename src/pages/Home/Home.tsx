@@ -1,7 +1,9 @@
 import classNames from "classnames/bind"
+
 import styles from "./Home.module.scss"
 import ModularPlaylist from "../../components/ModularPLaylist/ModularPlaylist"
 import image from "../../assets/images/example.png"
+import { Playlist } from "../../models/Playlist"
 
 const cx = classNames.bind(styles)
 
@@ -36,7 +38,7 @@ const fakePlaylist = [
         title: 'MTP - Songs',
         author: 'Username',        
     },
-]
+] as Playlist[]
 
 function Home() {
     return (

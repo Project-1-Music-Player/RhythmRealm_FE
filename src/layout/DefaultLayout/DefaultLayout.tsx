@@ -20,7 +20,7 @@ function DefaultLayout({ children } : DefaultLayoutProps) {
                     {children}
                 </div>
                 
-                <Sidebar/>
+                <Sidebar isLogin={true}/>
             </div>
             <PlayControl/>
         </div>
