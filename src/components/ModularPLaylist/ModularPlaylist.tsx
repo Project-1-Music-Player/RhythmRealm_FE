@@ -5,25 +5,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from "./ModularPlaylist.module.scss"
 import PlaylistItem from "../Playlist/PlaylistItem"
-import { Playlist } from '../../models/Playlist'
-
+import { PlaylistModel } from "../../models/PlaylistModel"
 const cx = classNames.bind(styles)
 
 type ModularPlaylistProps = {
     title: string,
-    playlist_data: Playlist[],
+    playlist: PlaylistModel[],
 }
 
-
-function ModularPlaylist({ title, playlist_data } : ModularPlaylistProps) {
+function ModularPlaylist({ title, playlist } : ModularPlaylistProps) {
     return (
         <div className={cx('wrapper')}>
             <h2 className={cx('title')}>{title}</h2>
             <div className={cx('slider')}>
                 {
-                    playlist_data.map((playlist, index) => {
+                    playlist.map((item, index) => {
                         return (
-                            <PlaylistItem key={index} data={playlist}/>
+                            <PlaylistItem key={index} data={item}/>
                         )
                     })
                 }

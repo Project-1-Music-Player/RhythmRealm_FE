@@ -2,13 +2,13 @@ import classNames from "classnames/bind"
 import { useState } from "react"
 
 import styles from "./Playlist.module.scss"
-import { Playlist } from "../../models/Playlist"
+import { PlaylistModel } from "../../models/PlaylistModel"
 import PlayButton from "./PlayButton"
 
 const cx = classNames.bind(styles)
 
 type PlaylistProps = {
-    data: Playlist
+    data: PlaylistModel
 }
 
 function PlaylistItem({ data } : PlaylistProps) {
@@ -30,7 +30,7 @@ function PlaylistItem({ data } : PlaylistProps) {
                 <PlayButton isHovered={isHovered}/>
             </div>
             <p className={cx('title')}>{data.title}</p>
-            <span className={cx('author')}>{data.author}</span>
+            <span className={cx('author')}>{data.owner}</span>
 
         </div>
     )

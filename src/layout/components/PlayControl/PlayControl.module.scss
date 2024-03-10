@@ -40,26 +40,86 @@
 
     .progress_bar {
         width: 500px;
-        height: 4px;
+        height: 5px;
+        border-radius: 2px;
         background-color: rgba($color: #fff, $alpha: 0.4);
+        cursor: pointer;
     }
 
     .progress_value {
         background-color: #D8DD00;
+        position: relative;
+        height: 5px;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            // left: 0;
+            right: -6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #D8DD00;
+        }
     }
 
     .time_start, .time_end {
         color: #fff;
         font-weight: 500;
         font-size: 1.3rem;
+        display: block;
+        width: 25px;
     }
 }
 
-.volumn_btn {
+.volumn {
     display: flex;
     align-items: center;
     margin-left: 25px;
     cursor: pointer;
+    position: relative;
+
+    .volumn_btn {
+        display: flex;
+    }
+
+    .volumn_control {
+        position: absolute;
+        left: 0;
+        bottom: 45px;
+        width: 120px;
+        height: 35px;
+        background-color: #6100B0;
+        border-radius: 3px;
+    }
+
+    .volumn_bg {
+        height: 5px;
+        width: 96px;
+        background-color: #000;
+        display: flex;
+        margin: 15px auto;
+    }
+
+    .volumn_value {
+        height: 5px;
+        position: relative;
+        background-color: #D8DD00;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: -6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #D8DD00;
+        }
+    }
 
     .volumnicon {
         width: 25px;
@@ -111,10 +171,10 @@
     .like, .queue {
         width: 25px;
         height: 25px;
+        cursor: pointer;
     }
     
     .queue {
-        cursor: pointer;
         color: #fff;
         margin-left: 20px;
     }

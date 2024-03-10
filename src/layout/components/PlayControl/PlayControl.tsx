@@ -1,109 +1,150 @@
 import classNames from "classnames/bind"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faBackwardStep, faForwardStep, faPlay, faPause, faShuffle, faRepeat, faVolumeHigh, faHeart, faListUl} from "@fortawesome/free-solid-svg-icons"
-import { useState } from "react"
+import React, { useRef, useState } from "react"
 
-import image from "../../../assets/images/example.png"
 import styles from './PlayControl.module.scss'
-import SongQueue from "../../../components/SongQueue/SongQueue"
+import SoundBadge from "./components/SoundBadge"
+import ControlButton from "./components/ControlButton"
+import { MockPlaylist } from "../../../MockData/PlaylistData"
+import VolumnConTrol from "./components/VolumnControl"
 
 const cx = classNames.bind(styles)
 
 function PlayControl() {
-    const [isLiked, setIsLiked] = useState(false)
     const [isPlaying, setIsPlaying] = useState(false)
     const [isShuffle, setIsShuffle] = useState(false)
     const [isRepeat, setIsRepeat] = useState(false)
-    const [isQueueOpened, setIsQueueOpened] = useState(false)
+    const [durationPercent, setDurationPercent] = useState(0)
+    const [currentDuration, setCurrentDuration] = useState('0:00')
+    const [duration, setDuration] = useState('0:00')
+    const [currSongIndex, setCurrSongIndex] = useState(0)
 
-    const getIsClosed = (result: boolean) => {
-        setIsQueueOpened(!result)
+    const audioRef = useRef<HTMLAudioElement>(null)
+
+    const getIsPlaying = (state: boolean) => {
+        setIsPlaying(!state)
+    }
+
+    const getOnNextClick = () => {
+        setCurrSongIndex(currSongIndex + 1)
+        if(currSongIndex >= MockPlaylist.list_song.length - 1) {
+            setCurrSongIndex(0)
+        }
+    }
+
+    const getOnPrevClick = () => {
+        setCurrSongIndex(currSongIndex - 1)
+        if(currSongIndex <= 0) {
+            setCurrSongIndex(MockPlaylist.list_song.length - 1)
+        }
+    }
+
+    const getOnShuffle = (state: boolean) => {
+        setIsShuffle(!state)
+    }
+
+    const getOnRepeat = (state: boolean) => {
+        setIsRepeat(!state)
+    }
+    
+    const getCurrSongIndex = (index: number) => {
+        setCurrSongIndex(index)
+        console.log(currSongIndex)
+    }
+    
+    const getCurrDuration = (e: React.MouseEvent<HTMLAudioElement>) => {
+        const currTime = e.currentTarget.currentTime
+        const percent = ((currTime / e.currentTarget.duration) * 100).toFixed(2)
+
+        const minute = Math.floor(currTime / 60)
+        const seconds = Math.floor(currTime % 60)
+        
+        setDurationPercent(parseFloat(percent))
+        setCurrentDuration(`${minute}:${seconds.toString().padStart(2, '0')}`)
+    }
+
+    const handleProgressBarClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        const barLeftOffset = e.currentTarget.getBoundingClientRect().left
+        let durPercent = Math.floor((e.clientX - barLeftOffset) / 5)
+        
+        if(audioRef.current) {
+            const seekTime = Math.floor((audioRef.current.duration / 100) * durPercent)
+
+            audioRef.current.currentTime = seekTime
+        }
+        
+        setDurationPercent(durPercent)
+    }
+
+    const handleLoadAudio = (e: React.MouseEvent<HTMLAudioElement>) => {
+        changeDuration(e.currentTarget.duration)
+        setDurationPercent(0)
+
+        if(audioRef.current) {
+            if(isPlaying) {
+                audioRef.current.play()
+            } else {
+                audioRef.current.pause()
+            }
+        }
+    }
+
+    const handleEndAudio = () => {
+        if(audioRef.current) {
+            if(isRepeat) {
+                audioRef.current.play()
+            } else if(isShuffle) {
+                let ranIndex 
+
+                do {
+                    ranIndex = Math.floor(Math.random() * MockPlaylist.list_song.length)
+                    setCurrSongIndex(ranIndex)
+                } while (ranIndex === currSongIndex)
+            } else {
+                getOnNextClick()
+            }
+        }
+    }
+
+    const changeDuration = (duration: number) => {
+        const minute = Math.floor(duration / 60)
+        const seconds = Math.floor(duration % 60)
+        
+        setDuration(`${minute}:${seconds.toString().padStart(2, '0')}`)
     }
 
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
-                <section className={cx('control')}>
-                    <div className={cx('control_btn')}>
-                        <FontAwesomeIcon icon={faBackwardStep} className={cx('controlicon')}/>
-                    </div>
-                    
-                    <div className={cx('control_btn')} onClick={() => {setIsPlaying(!isPlaying)}}>
-                        {isPlaying ? 
-                            <FontAwesomeIcon icon={faPause} className={cx('controlicon')}/> 
-                            : <FontAwesomeIcon icon={faPlay} className={cx('controlicon')}/>
-                        }
-                        
-                    </div>
-
-                    <div className={cx('control_btn')}>
-                        <FontAwesomeIcon icon={faForwardStep} className={cx('controlicon')}/>
-                    </div>
-
-
-                    <div className={cx('control_btn')} onClick={() => {setIsShuffle(!isShuffle)}}>
-                        <FontAwesomeIcon 
-                            icon={faShuffle} 
-                            className={cx('controlicon')} 
-                            style={isShuffle ? {color: '#000'} : {color: '#fff'}}
-                        />
-                    </div>
-
-                    <div className={cx('control_btn')} onClick={() => {setIsRepeat(!isRepeat)}}>
-                        <FontAwesomeIcon 
-                            icon={faRepeat} 
-                            className={cx('controlicon')} 
-                            style={isRepeat ? {color: '#000'} : {color: '#fff'}}
-                        />
-                    </div>
-                </section>
+                <ControlButton 
+                    audioRef={audioRef} 
+                    onPlaying={getIsPlaying}
+                    onNext={getOnNextClick}
+                    onPrev={getOnPrevClick}
+                    onShuffle={getOnShuffle}
+                    onRepeat={getOnRepeat}
+                />
 
                 <section className={cx('progress')}>
-                    <span className={cx('time_start')}>0:00</span>
-
-                    <div className={cx('progress_bar')}>
-                        <div style={{height: `4px`, width: `40%`}} className={cx('progress_value')}></div>
-                    </div>
+                    <span className={cx('time_start')}>{currentDuration}</span>
                     
-                    <span className={cx('time_end')}>0:00</span>
-                </section>
-
-                <div className={cx('volumn_btn')}>
-                    <FontAwesomeIcon icon={faVolumeHigh} className={cx('volumnicon')}/>
-                </div>
-
-                <section className={cx('sound_badge')}>
-                    <a href="#!">
-                        <img src={image} alt="" className={cx('avatar')}/>
-                    </a>
-
-                    <div className={cx('info')}>
-                        <span className={cx('author')}>Son Tung M-TP</span>
-                        <span className={cx('title')}>Chung ta khong thuoc ve nhau</span>
+                    <div className={cx('progress_bar')} onClick={handleProgressBarClick}>
+                        <div style={{width: `${durationPercent}%`}} className={cx('progress_value')}></div>
                     </div>
 
-                    <div className={cx('actions')}>
-                        <div className={cx('actions_btn')} onClick={() => {setIsLiked(!isLiked)}}>
-                            <FontAwesomeIcon 
-                                icon={faHeart} 
-                                className={cx('like')} 
-                                style={isLiked ? {color: '#FF0000'} : {color: '#fff'}}
-                            />
-                        </div>
-
-                        <div className={cx('actions_btn')}>
-                            <FontAwesomeIcon 
-                                icon={faListUl} 
-                                className={cx('queue')}
-                                onClick={() => setIsQueueOpened(!isQueueOpened)}
-                            />
-
-                            {
-                                isQueueOpened ? <SongQueue isClosed={getIsClosed}/> : <></>
-                            }
-                        </div>
-                    </div>
+                    <audio 
+                        src={MockPlaylist.list_song[currSongIndex].audio} 
+                        ref={audioRef}
+                        onTimeUpdate={getCurrDuration}
+                        onLoadedData={handleLoadAudio} 
+                        onEnded={handleEndAudio}
+                    ></audio>
+                    
+                    <span className={cx('time_end')}>{duration}</span>
                 </section>
+
+                <VolumnConTrol audioRef={audioRef}/>
+
+                <SoundBadge list_song={MockPlaylist.list_song} currIndex={currSongIndex} getCurrSongIndex={getCurrSongIndex}/>
             </div>
         </div>
     )
