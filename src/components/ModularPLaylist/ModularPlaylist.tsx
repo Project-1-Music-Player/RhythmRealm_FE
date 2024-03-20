@@ -4,7 +4,7 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from "./ModularPlaylist.module.scss"
-import PlaylistItem from "../Playlist/PlaylistItem"
+import PlaylistItem from "../Playlist/Playlist"
 import { PlaylistModel } from "../../models/PlaylistModel"
 const cx = classNames.bind(styles)
 
@@ -27,9 +27,9 @@ function ModularPlaylist({ title, playlist } : ModularPlaylistProps) {
                 }
             </div>
 
-            <div className={cx('slider_btn')}>
+            {/* <div className={cx('slider_btn')}>
                 <FontAwesomeIcon icon={faChevronRight} className={cx('righticon')}/>    
-            </div>
+            </div> */}
         </div>
     )
 }

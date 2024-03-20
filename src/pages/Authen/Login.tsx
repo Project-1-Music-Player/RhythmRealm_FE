@@ -64,7 +64,7 @@ function Login() {
                     </Form.Group>
                 </Form>
 
-                <Button type="submit" className={cx('btn')} form="loginForm">Sign in</Button>
+                <Button type="submit" className={cx('btn')} form="loginForm">Sign In</Button>
             </div>
         </div>
     )

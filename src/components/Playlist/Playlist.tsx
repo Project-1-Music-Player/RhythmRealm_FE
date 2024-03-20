@@ -1,5 +1,5 @@
 import classNames from "classnames/bind"
-import { useState } from "react"
+import React, { useState } from "react"
 
 import styles from "./Playlist.module.scss"
 import { PlaylistModel } from "../../models/PlaylistModel"
@@ -13,7 +13,6 @@ type PlaylistProps = {
 
 function PlaylistItem({ data } : PlaylistProps) {
     const [isHovered, setIsHovered] = useState(false)
-
 
     return (
         <div className={cx('wrapper')}>
@@ -31,7 +30,6 @@ function PlaylistItem({ data } : PlaylistProps) {
             </div>
             <p className={cx('title')}>{data.title}</p>
             <span className={cx('author')}>{data.owner}</span>
-
         </div>
     )
 }

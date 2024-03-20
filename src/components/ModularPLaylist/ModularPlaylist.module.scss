@@ -1,3 +1,4 @@
+
 .wrapper {
     margin-right: 25px;
     padding-bottom: 30px;
@@ -16,11 +17,8 @@
 .slider {
     display: flex;
     column-gap: 30px;
+    padding-bottom: 10px;
     overflow-x: auto;
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
 }
 
 .slider_btn {

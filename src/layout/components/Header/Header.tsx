@@ -25,7 +25,7 @@ const navs = [
 
 function Header() {
     const navigate = useNavigate()
-    const [isAuthenticated, setIsAuthenticated] = useState(true)
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [isMenuHovered, setIsMenuHovered] = useState(false)
 
     return (
