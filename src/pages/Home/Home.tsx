@@ -1,50 +1,21 @@
 import classNames from "classnames/bind"
 
 import styles from "./Home.module.scss"
-import ModularPlaylist from "../../components/ModularPLaylist/ModularPlaylist"
-import image from "../../assets/images/example.png"
-import { PlaylistModel } from "../../models/PlaylistModel"
+import Sidebar from "../../layout/components/Sidebar/Sidebar"
+import ModularPlaylist from "../../components/ModularPlaylist/ModularPlaylist"
+import { MockModular, MockModular1 } from "../../MockData/ModularPlaylist"
 
 const cx = classNames.bind(styles)
 
-const fakePlaylist = [
-    {
-        id: '1',
-        image: image,
-        title: 'MTP - Songs',
-        owner: 'Username',        
-    },
-    {
-        id: '2',
-        image: image,
-        title: 'MTP - Songs',
-        owner: 'Username',        
-    },
-    {
-        id: '3',
-        image: image,
-        title: 'MTP - Songs',
-        owner: 'Username',        
-    },
-    {
-        id: '4',
-        image: image,
-        title: 'MTP - Songs',
-        owner: 'Username',        
-    },
-    {
-        id: '5',
-        image: image,
-        title: 'MTP - Songs',
-        owner: 'Username',        
-    },
-] as PlaylistModel[]
-
 function Home() {
     return (
-        <div>
-            <ModularPlaylist title="Suggestions" playlist={fakePlaylist}/>
-            <ModularPlaylist title="Your mix" playlist={fakePlaylist}/>
+        <div className={cx('container')}>
+            <div className={cx('content')}>
+                <ModularPlaylist title={MockModular.title} playlist={MockModular.list_playlist}/>
+                <ModularPlaylist title={MockModular1.title} playlist={MockModular1.list_playlist}/>
+            </div>
+
+            <Sidebar isLogin={true}/>
         </div>
     )
 }

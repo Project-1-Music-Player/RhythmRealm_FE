@@ -1,15 +1,18 @@
 import classNames from "classnames/bind"
 import React, { useRef, useState } from "react"
+import { useSelector } from "react-redux"
 
 import styles from './PlayControl.module.scss'
 import SoundBadge from "./components/SoundBadge"
 import ControlButton from "./components/ControlButton"
-import { MockPlaylist } from "../../../MockData/PlaylistData"
 import VolumnConTrol from "./components/VolumnControl"
+import { RootState } from "../../../redux/store"
 
 const cx = classNames.bind(styles)
 
 function PlayControl() {
+    const selectedPlaylist = useSelector((state: RootState) => state.playlistSlice.selectedPlaylistData)
+
     const [isPlaying, setIsPlaying] = useState(false)
     const [isShuffle, setIsShuffle] = useState(false)
     const [isRepeat, setIsRepeat] = useState(false)
@@ -26,7 +29,7 @@ function PlayControl() {
 
     const getOnNextClick = () => {
         setCurrSongIndex(currSongIndex + 1)
-        if(currSongIndex >= MockPlaylist.list_song.length - 1) {
+        if(currSongIndex >= selectedPlaylist.list_song.length - 1) {
             setCurrSongIndex(0)
         }
     }
@@ -34,7 +37,7 @@ function PlayControl() {
     const getOnPrevClick = () => {
         setCurrSongIndex(currSongIndex - 1)
         if(currSongIndex <= 0) {
-            setCurrSongIndex(MockPlaylist.list_song.length - 1)
+            setCurrSongIndex(selectedPlaylist.list_song.length - 1)
         }
     }
 
@@ -96,7 +99,7 @@ function PlayControl() {
                 let ranIndex 
 
                 do {
-                    ranIndex = Math.floor(Math.random() * MockPlaylist.list_song.length)
+                    ranIndex = Math.floor(Math.random() * selectedPlaylist.list_song.length)
                     setCurrSongIndex(ranIndex)
                 } while (ranIndex === currSongIndex)
             } else {
@@ -132,7 +135,7 @@ function PlayControl() {
                     </div>
 
                     <audio 
-                        src={MockPlaylist.list_song[currSongIndex].audio} 
+                        src={selectedPlaylist.list_song[currSongIndex].audio} 
                         ref={audioRef}
                         onTimeUpdate={getCurrDuration}
                         onLoadedData={handleLoadAudio} 
@@ -144,7 +147,7 @@ function PlayControl() {
 
                 <VolumnConTrol audioRef={audioRef}/>
 
-                <SoundBadge list_song={MockPlaylist.list_song} currIndex={currSongIndex} getCurrSongIndex={getCurrSongIndex}/>
+                <SoundBadge currIndex={currSongIndex} getCurrSongIndex={getCurrSongIndex}/>
             </div>
         </div>
     )

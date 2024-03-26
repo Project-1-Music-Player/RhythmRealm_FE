@@ -1,0 +1,11 @@
+.container {
+    margin: 0 auto;
+    margin-top: 60px;
+    max-width: calc(100% - 200px);
+    display: flex;
+}
+
+.content {
+    width: 66%;
+    border-right: 2px solid rgba($color: #616161, $alpha: 0.4)
+}

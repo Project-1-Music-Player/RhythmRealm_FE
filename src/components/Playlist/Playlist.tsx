@@ -11,11 +11,11 @@ type PlaylistProps = {
     data: PlaylistModel
 }
 
-function PlaylistItem({ data } : PlaylistProps) {
+function Playlist({ data } : PlaylistProps) {
     const [isHovered, setIsHovered] = useState(false)
 
     return (
-        <div className={cx('wrapper')}>
+        <>
             <div 
                 onMouseOver={() => setIsHovered(true)}
                 onMouseOut={() => setIsHovered(false)}
@@ -26,12 +26,12 @@ function PlaylistItem({ data } : PlaylistProps) {
                     className={cx('image')} 
                 />
 
-                <PlayButton isHovered={isHovered}/>
+                <PlayButton isHovered={isHovered} playlist={data}/>
             </div>
             <p className={cx('title')}>{data.title}</p>
             <span className={cx('author')}>{data.owner}</span>
-        </div>
+        </>
     )
 }
 
-export default PlaylistItem
+export default Playlist

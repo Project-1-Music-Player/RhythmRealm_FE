@@ -12,7 +12,7 @@ type SidebarProps = {
 function Sidebar({ isLogin }: SidebarProps) {
     return (
         <div className={cx('wrapper')}>
-            <ArtistMenu/>
+            {isLogin ? <ArtistMenu/> : <></>}
 
             <p className={cx('dev')}>Powered by NgocHoang Pham and HuyCuong Nguyen</p>
             <p className={cx('contact')}>Contact 21522099@gm.uit.edu.vn </p>

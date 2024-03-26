@@ -1,11 +1,10 @@
-import React from "react"
 import classNames from "classnames/bind"
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useNavigate } from "react-router-dom"
 
 import styles from "./ModularPlaylist.module.scss"
-import PlaylistItem from "../Playlist/Playlist"
+import Playlist from "../Playlist/Playlist"
 import { PlaylistModel } from "../../models/PlaylistModel"
+
 const cx = classNames.bind(styles)
 
 type ModularPlaylistProps = {
@@ -14,6 +13,8 @@ type ModularPlaylistProps = {
 }
 
 function ModularPlaylist({ title, playlist } : ModularPlaylistProps) {
+    const navigate = useNavigate()
+
     return (
         <div className={cx('wrapper')}>
             <h2 className={cx('title')}>{title}</h2>
@@ -21,15 +22,13 @@ function ModularPlaylist({ title, playlist } : ModularPlaylistProps) {
                 {
                     playlist.map((item, index) => {
                         return (
-                            <PlaylistItem key={index} data={item}/>
+                            <div key={index} className={cx('playlist_wrapper')} onClick={() => navigate(`/playlist/${item.id}`)}>
+                                <Playlist data={item}/>
+                            </div>
                         )
                     })
                 }
             </div>
-
-            {/* <div className={cx('slider_btn')}>
-                <FontAwesomeIcon icon={faChevronRight} className={cx('righticon')}/>    
-            </div> */}
         </div>
     )
 }

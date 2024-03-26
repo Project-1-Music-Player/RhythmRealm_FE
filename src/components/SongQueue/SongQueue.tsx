@@ -1,21 +1,23 @@
 import classNames from "classnames/bind"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faXmark } from "@fortawesome/free-solid-svg-icons"
+import { useSelector } from "react-redux"
 
 import styles from "./SongQueue.module.scss"
 import SongCard from "./SongCard"
-import { SongModel } from "~/models/SongModel"
+import { RootState } from "../../redux/store"
 
 const cx = classNames.bind(styles)
 
 type SongQueueProps = {
     currIndex: number,
     isClosed: Function,
-    list_song: SongModel[],
     getCurrSongIndex: Function,
 }
 
-function SongQueue({ isClosed, list_song, getCurrSongIndex, currIndex }: SongQueueProps) {
+function SongQueue({ isClosed, getCurrSongIndex, currIndex }: SongQueueProps) {
+    const selectedPlaylist = useSelector((state: RootState) => state.playlistSlice.selectedPlaylistData)
+
     return (
         <div className={cx('container')}>
             <div className={cx('head')}>
@@ -31,7 +33,7 @@ function SongQueue({ isClosed, list_song, getCurrSongIndex, currIndex }: SongQue
             </div>
 
             {
-                list_song.map((song, index) => {
+                selectedPlaylist.list_song.map((song, index) => {
                     return <SongCard song_data={song} key={index} songIndex={index} getCurrSongIndex={getCurrSongIndex} isCurrIndex={currIndex === index}/>
                 })
             }

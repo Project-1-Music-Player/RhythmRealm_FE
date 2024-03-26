@@ -15,13 +15,9 @@ function DefaultLayout({ children } : DefaultLayoutProps) {
     return (
         <div className={cx('wrapper')}>
             <Header/>
-            <div className={cx('container')}>
-                <div className={cx('content')}>
-                    {children}
-                </div>
-                
-                <Sidebar isLogin={true}/>
-            </div>
+            
+            {children}
+            
             <PlayControl/>
         </div>
     )
