@@ -68,7 +68,7 @@ function Header() {
                                 className={cx('menu')} 
                                 onMouseLeave={() => setIsMenuHovered(false)}
                             >
-                                <li className={cx('menu_item')}>Profile</li>
+                                <li className={cx('menu_item')} onClick={() => navigate(`/profile/1`)}>Profile</li>
                                 <li className={cx('menu_item')}>Sign Out</li>
                             </ul> :
                             <></>

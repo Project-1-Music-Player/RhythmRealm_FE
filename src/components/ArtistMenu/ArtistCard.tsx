@@ -4,7 +4,7 @@ import { faUserGroup } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 
 import styles from './ArtistMenu.module.scss'
-import { User } from "../../models/User"
+import { User } from "../../models/UserModel"
 
 const cx = classNames.bind(styles)
 

@@ -10,12 +10,10 @@ import { RootState } from "../../redux/store"
 const cx = classNames.bind(styles)
 
 type SongQueueProps = {
-    currIndex: number,
     isClosed: Function,
-    getCurrSongIndex: Function,
 }
 
-function SongQueue({ isClosed, getCurrSongIndex, currIndex }: SongQueueProps) {
+function SongQueue({ isClosed }: SongQueueProps) {
     const selectedPlaylist = useSelector((state: RootState) => state.playlistSlice.selectedPlaylistData)
 
     return (
@@ -34,7 +32,7 @@ function SongQueue({ isClosed, getCurrSongIndex, currIndex }: SongQueueProps) {
 
             {
                 selectedPlaylist.list_song.map((song, index) => {
-                    return <SongCard song_data={song} key={index} songIndex={index} getCurrSongIndex={getCurrSongIndex} isCurrIndex={currIndex === index}/>
+                    return <SongCard song_data={song} key={index} songIndex={index}/>
                 })
             }
         </div>

@@ -10,13 +10,9 @@ import { RootState } from "../../../../redux/store"
 
 const cx = classNames.bind(styles)
 
-type SoundBadgeProps = {
-    currIndex: number,
-    getCurrSongIndex: Function,
-}
-
-function SoundBadge({ getCurrSongIndex, currIndex }: SoundBadgeProps) {
+function SoundBadge() {
     const selectedPlaylist = useSelector((state: RootState) => state.playlistSlice.selectedPlaylistData)
+    const currSongIndex = useSelector((state: RootState) => state.playlistSlice.currSongIndex)
 
     const [isLiked, setIsLiked] = useState(false)
     const [isQueueOpened, setIsQueueOpened] = useState(false)
@@ -28,12 +24,12 @@ function SoundBadge({ getCurrSongIndex, currIndex }: SoundBadgeProps) {
     return (
         <section className={cx('sound_badge')}>
             <a href="#!">
-                <img src={selectedPlaylist.list_song[currIndex].image} alt="" className={cx('avatar')}/>
+                <img src={selectedPlaylist.list_song[currSongIndex].image} alt="" className={cx('avatar')}/>
             </a>
 
             <div className={cx('info')}>
-                <span className={cx('author')}>{selectedPlaylist.list_song[currIndex].author}</span>
-                <span className={cx('title')}>{selectedPlaylist.list_song[currIndex].name}</span>
+                <span className={cx('author')}>{selectedPlaylist.list_song[currSongIndex].author}</span>
+                <span className={cx('title')}>{selectedPlaylist.list_song[currSongIndex].name}</span>
             </div>
 
             <div className={cx('actions')}>
@@ -54,7 +50,7 @@ function SoundBadge({ getCurrSongIndex, currIndex }: SoundBadgeProps) {
 
                     {
                         isQueueOpened ? 
-                            <SongQueue isClosed={getIsClosed} getCurrSongIndex={getCurrSongIndex} currIndex={currIndex}/> 
+                            <SongQueue isClosed={getIsClosed}/> 
                         : <></>
                     }
                 </div>

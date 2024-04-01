@@ -1,19 +1,24 @@
 import classNames from "classnames/bind"
 import { useState, useRef } from "react"
+import { useDispatch, useSelector } from "react-redux"
 
 import styles from "./SongQueue.module.scss"
 import { SongModel } from "../../models/SongModel"
+import { AppDispatch, RootState } from "../../redux/store"
+import { setCurrentSongIndex } from "../../redux/slice/PlaylistSlice"
 
 const cx = classNames.bind(styles)
 
 type SongCardProps = {
-    isCurrIndex: boolean,
     songIndex: number,
     song_data: SongModel,
-    getCurrSongIndex: Function
 }
 
-function SongCard({ song_data, getCurrSongIndex, songIndex, isCurrIndex }: SongCardProps) {
+function SongCard({ song_data, songIndex }: SongCardProps) {
+    const currSongIndex = useSelector((state: RootState) => state.playlistSlice.currSongIndex)
+
+    const dispatch: AppDispatch = useDispatch()
+
     const [songDuration, setSongDuration] = useState('0:00')
     const audioRef = useRef<HTMLAudioElement>(null)
 
@@ -26,12 +31,12 @@ function SongCard({ song_data, getCurrSongIndex, songIndex, isCurrIndex }: SongC
         }
     }
 
-    const handleCurrIndex = () => {
-        getCurrSongIndex(songIndex)
+    const handleSelectSong = () => {
+        dispatch(setCurrentSongIndex(songIndex))
     }
 
     return (
-        <div className={cx('item')} onClick={handleCurrIndex} style={isCurrIndex ? {backgroundColor: 'rgba(255, 255, 255, 0.1)'} : {}}>
+        <div className={cx('item')} onClick={handleSelectSong} style={currSongIndex === songIndex ? {backgroundColor: 'rgba(255, 255, 255, 0.1)'} : {}}>
             <a href="#!">
                 <img src={song_data.image} alt="" className={cx('song_image')}/>
             </a>

@@ -13,7 +13,7 @@ const cx = classNames.bind(styles)
 function PlaylistDetails() {
     const { id } = useParams()
 
-    const playlist = MockPlaylist.find(item => item.id === id)
+    const playlist = MockPlaylist.find(playlist => playlist.id === id)
 
     return (
         <div className={cx('wrapper')}>

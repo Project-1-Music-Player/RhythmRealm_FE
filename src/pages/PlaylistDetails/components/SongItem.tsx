@@ -1,10 +1,13 @@
 import classNames from "classnames/bind"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHeadphones, faHeart } from "@fortawesome/free-solid-svg-icons"
-import { useRef, useState } from "react"
+import React, { useRef, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 
 import styles from "../PlaylistDetails.module.scss"
 import { PlaylistModel } from "../../../models/PlaylistModel"
+import { setCurrentPlaylist, setCurrentSongIndex } from "../../../redux/slice/PlaylistSlice"
+import { RootState, AppDispatch } from "../../../redux/store"
 
 const cx = classNames.bind(styles)
 
@@ -49,13 +52,24 @@ type SongItemProps = {
 }
 
 function SongItem({ selectedPlaylist }: SongItemProps) {
+    const currSongIndex = useSelector((state: RootState) => state.playlistSlice.currSongIndex)
+
+    const dispatch: AppDispatch = useDispatch()
+
+    const handleSongClick = (index: number) => {
+        if(selectedPlaylist) {
+            dispatch(setCurrentPlaylist(selectedPlaylist))
+            dispatch(setCurrentSongIndex(index))
+        }
+    }
+
     return (
         selectedPlaylist ?
             <div className={cx('playlist')}>
                 {
                     selectedPlaylist.list_song.map((item, index) => {
                         return (
-                            <div className={cx('song-item')} key={index}>
+                            <div className={cx('song-item')} key={index} onClick={() => handleSongClick(index)} style={currSongIndex === index ? {backgroundColor: '#ffffff1a'} : {}}>
                                 <div className={cx('song-info')}>
                                     <img src={item.image} alt="" className={cx('song-image')}/>
                                     

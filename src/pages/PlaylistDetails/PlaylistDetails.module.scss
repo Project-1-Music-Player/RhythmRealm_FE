@@ -60,7 +60,7 @@
         display: flex;
         flex-direction: column;
         row-gap: 10px;
-        margin-left: 30px;
+        // margin-left: 30px;
     }
 
     .title {
@@ -132,7 +132,8 @@
     margin-left: 30px;
     
     .song-item {
-        margin-bottom: 20px;
+        padding: 5px;
+        margin-bottom: 10px;
         display: flex;
 
         &:hover {

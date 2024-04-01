@@ -35,12 +35,12 @@ function Hero({ selectedPlaylist }: HeroProps) {
 
                 <div className={cx('hero-info')}>
                     <div className={cx('title-head')}>
-                        <div onClick={handlePlayClick}>
+                        {/* <div onClick={handlePlayClick}>
                             {isPause ?
                                 <FontAwesomeIcon icon={faPause} className={cx('icon')} />
                                 : <FontAwesomeIcon icon={faPlay} className={cx('icon')}/>
                             }
-                        </div>
+                        </div> */}
 
                         <div className={cx('info')}>
                             <h3 className={cx('title')}>{selectedPlaylist.title}</h3>

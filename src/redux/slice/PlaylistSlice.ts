@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 import { PlaylistModel } from "../../models/PlaylistModel"
-import { MockModular } from "../../MockData/ModularPlaylist"
+import { MockModular } from "../../MockData/ModularPlaylistData"
 
 interface PlaylistState {
     selectedPlaylistData: PlaylistModel,
@@ -19,9 +19,14 @@ const PlaylistSlice = createSlice({
     reducers: {
         setCurrentPlaylist: (state, action: PayloadAction<PlaylistModel>) => {
            state.selectedPlaylistData = action.payload
+           state.currSongIndex = 0
         },
+
+        setCurrentSongIndex: (state, action: PayloadAction<number>) => {
+            state.currSongIndex = action.payload
+        }
     },
 })
 
-export const { setCurrentPlaylist } = PlaylistSlice.actions
+export const { setCurrentPlaylist, setCurrentSongIndex } = PlaylistSlice.actions
 export default PlaylistSlice.reducer

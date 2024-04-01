@@ -1,17 +1,21 @@
 import classNames from "classnames/bind"
 import React, { useRef, useState } from "react"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 
 import styles from './PlayControl.module.scss'
 import SoundBadge from "./components/SoundBadge"
 import ControlButton from "./components/ControlButton"
 import VolumnConTrol from "./components/VolumnControl"
-import { RootState } from "../../../redux/store"
+import { setCurrentSongIndex } from "../../../redux/slice/PlaylistSlice"
+import { RootState, AppDispatch } from "../../../redux/store"
 
 const cx = classNames.bind(styles)
 
 function PlayControl() {
     const selectedPlaylist = useSelector((state: RootState) => state.playlistSlice.selectedPlaylistData)
+    const currSongIndex = useSelector((state: RootState) => state.playlistSlice.currSongIndex)
+
+    const dispatch: AppDispatch = useDispatch()
 
     const [isPlaying, setIsPlaying] = useState(false)
     const [isShuffle, setIsShuffle] = useState(false)
@@ -19,7 +23,6 @@ function PlayControl() {
     const [durationPercent, setDurationPercent] = useState(0)
     const [currentDuration, setCurrentDuration] = useState('0:00')
     const [duration, setDuration] = useState('0:00')
-    const [currSongIndex, setCurrSongIndex] = useState(0)
 
     const audioRef = useRef<HTMLAudioElement>(null)
 
@@ -28,16 +31,16 @@ function PlayControl() {
     }
 
     const getOnNextClick = () => {
-        setCurrSongIndex(currSongIndex + 1)
+        dispatch(setCurrentSongIndex(currSongIndex + 1))
         if(currSongIndex >= selectedPlaylist.list_song.length - 1) {
-            setCurrSongIndex(0)
+            dispatch(setCurrentSongIndex(0))
         }
     }
 
     const getOnPrevClick = () => {
-        setCurrSongIndex(currSongIndex - 1)
+        dispatch(setCurrentSongIndex(currSongIndex - 1))
         if(currSongIndex <= 0) {
-            setCurrSongIndex(selectedPlaylist.list_song.length - 1)
+            dispatch(setCurrentSongIndex(selectedPlaylist.list_song.length - 1))
         }
     }
 
@@ -47,11 +50,6 @@ function PlayControl() {
 
     const getOnRepeat = (state: boolean) => {
         setIsRepeat(!state)
-    }
-    
-    const getCurrSongIndex = (index: number) => {
-        setCurrSongIndex(index)
-        console.log(currSongIndex)
     }
     
     const getCurrDuration = (e: React.MouseEvent<HTMLAudioElement>) => {
@@ -100,7 +98,7 @@ function PlayControl() {
 
                 do {
                     ranIndex = Math.floor(Math.random() * selectedPlaylist.list_song.length)
-                    setCurrSongIndex(ranIndex)
+                    dispatch(setCurrentSongIndex(ranIndex))
                 } while (ranIndex === currSongIndex)
             } else {
                 getOnNextClick()
@@ -147,7 +145,7 @@ function PlayControl() {
 
                 <VolumnConTrol audioRef={audioRef}/>
 
-                <SoundBadge currIndex={currSongIndex} getCurrSongIndex={getCurrSongIndex}/>
+                <SoundBadge/>
             </div>
         </div>
     )
