@@ -1,6 +1,5 @@
 .wrapper {
     margin: 0 auto;
-    margin-top: 60px;
     max-width: calc(100% - 200px);
     display: flex;
 }
@@ -182,5 +181,36 @@
         color: #fff;
         padding: 0 30px 0 0;
         font-weight: 500;
+    }
+}
+
+.profile-follow {
+    display: flex;
+    column-gap: 60px;
+    row-gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+
+    .follow-img {
+        width: 180px;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .follow-name {
+        font-size: 2rem;
+        font-weight: 500;
+        color: #fff;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .follow-count {
+        font-size: 1.5rem;
+        color: #ccc;
+        display: block;
+        text-align: center;
+        margin-top: 10px;
     }
 }

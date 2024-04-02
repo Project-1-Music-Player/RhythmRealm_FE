@@ -29,7 +29,7 @@ function ProfileHero({ selectedUser }: ProfileHeroProps) {
 
                 <article>
                     <span className={cx('title')}>Following</span>
-                    <span className={cx('statistic')}>{selectedUser.following}</span>
+                    <span className={cx('statistic')}>{selectedUser.following?.length}</span>
                 </article>
             </div>
 

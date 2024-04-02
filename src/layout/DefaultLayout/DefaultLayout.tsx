@@ -16,7 +16,9 @@ function DefaultLayout({ children } : DefaultLayoutProps) {
         <div className={cx('wrapper')}>
             <Header/>
             
-            {children}
+            <div style={{paddingTop: '120px'}}>
+                {children}
+            </div>
             
             <PlayControl/>
         </div>

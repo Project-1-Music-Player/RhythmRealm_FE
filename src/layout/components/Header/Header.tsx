@@ -17,10 +17,6 @@ const navs = [
         title: 'HOME',
         route: routes.home,
     },
-    {
-        title: 'LIBRARY',
-        route: routes.library,
-    },
 ]
 
 function Header() {
@@ -36,7 +32,7 @@ function Header() {
                     {
                         navs.map((nav, index) => {
                             return (
-                                <li className={cx('nav_item')} key={index}>{nav.title}</li>
+                                <li className={cx('nav_item')} key={index} onClick={() => navigate(nav.route)}>{nav.title}</li>
                             )
                         })
                     }

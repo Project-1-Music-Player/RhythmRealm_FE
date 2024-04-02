@@ -40,7 +40,7 @@ function Profile() {
         } else if(currentTab === 2) {
             return <ProfileLike profileSong={UserData1.songs}/>
         } else {
-            return <ProfileFollow/>
+            return <ProfileFollow profileFollow={UserData1.following}/>
         }
     }
 
