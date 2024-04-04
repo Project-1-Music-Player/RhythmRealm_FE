@@ -5,12 +5,12 @@ import React, { useState } from "react"
 
 import styles from "./Authen.module.scss"
 import AuthenDecor from "../../components/AuthenDecor/AuthenDecor"
-import { LoginData } from "../../models/Login"
+import { LoginModel } from "../../models/LoginModel"
 
 const cx = classNames.bind(styles)
 
 function Login() {
-    const [formData, setFormData] = useState<LoginData>({
+    const [formData, setFormData] = useState<LoginModel>({
         username: '',
         password: '',
     })

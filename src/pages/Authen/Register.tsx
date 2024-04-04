@@ -5,12 +5,12 @@ import React, { useState } from "react"
 
 import styles from "./Authen.module.scss"
 import AuthenDecor from "../../components/AuthenDecor/AuthenDecor"
-import { RegisterData } from "../../models/Register"
+import { RegisterModel } from "../../models/RegisterModel"
 
 const cx = classNames.bind(styles)
 
 function Register() {
-    const [formData, setFormData] = useState<RegisterData>({
+    const [formData, setFormData] = useState<RegisterModel>({
         username: '',
         password: '',
         repassword: '',

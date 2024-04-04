@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 
 import styles from "../PlaylistDetails.module.scss"
 import { PlaylistModel } from "../../../models/PlaylistModel"
-import { setCurrentPlaylist, setCurrentSongIndex } from "../../../redux/slice/PlaylistSlice"
+import { setCurrentPlaylist, setCurrentSongIndex, setCurrentSongId } from "../../../redux/slice/PlaylistSlice"
 import { RootState, AppDispatch } from "../../../redux/store"
 
 const cx = classNames.bind(styles)
@@ -52,7 +52,7 @@ type SongItemProps = {
 }
 
 function SongItem({ selectedPlaylist }: SongItemProps) {
-    const currSongIndex = useSelector((state: RootState) => state.playlistSlice.currSongIndex)
+    const currSongId = useSelector((state: RootState) => state.playlistSlice.currSongId)
 
     const dispatch: AppDispatch = useDispatch()
 
@@ -60,6 +60,7 @@ function SongItem({ selectedPlaylist }: SongItemProps) {
         if(selectedPlaylist) {
             dispatch(setCurrentPlaylist(selectedPlaylist))
             dispatch(setCurrentSongIndex(index))
+            dispatch(setCurrentSongId(selectedPlaylist.list_song[index].id))
         }
     }
 
@@ -69,7 +70,12 @@ function SongItem({ selectedPlaylist }: SongItemProps) {
                 {
                     selectedPlaylist.list_song.map((item, index) => {
                         return (
-                            <div className={cx('song-item')} key={index} onClick={() => handleSongClick(index)} style={currSongIndex === index ? {backgroundColor: '#ffffff1a'} : {}}>
+                            <div 
+                                key={index} 
+                                className={cx('song-item')} 
+                                onClick={() => handleSongClick(index)} 
+                                style={selectedPlaylist.list_song[index].id === currSongId ? {backgroundColor: '#ffffff1a'} : {}}
+                            >
                                 <div className={cx('song-info')}>
                                     <img src={item.image} alt="" className={cx('song-image')}/>
                                     

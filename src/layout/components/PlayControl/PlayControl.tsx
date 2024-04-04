@@ -6,7 +6,7 @@ import styles from './PlayControl.module.scss'
 import SoundBadge from "./components/SoundBadge"
 import ControlButton from "./components/ControlButton"
 import VolumnConTrol from "./components/VolumnControl"
-import { setCurrentSongIndex } from "../../../redux/slice/PlaylistSlice"
+import { setCurrentSongIndex, setCurrentSongId } from "../../../redux/slice/PlaylistSlice"
 import { RootState, AppDispatch } from "../../../redux/store"
 
 const cx = classNames.bind(styles)
@@ -34,6 +34,7 @@ function PlayControl() {
         dispatch(setCurrentSongIndex(currSongIndex + 1))
         if(currSongIndex >= selectedPlaylist.list_song.length - 1) {
             dispatch(setCurrentSongIndex(0))
+            dispatch(setCurrentSongId(selectedPlaylist.list_song[currSongIndex].id))
         }
     }
 
@@ -41,6 +42,7 @@ function PlayControl() {
         dispatch(setCurrentSongIndex(currSongIndex - 1))
         if(currSongIndex <= 0) {
             dispatch(setCurrentSongIndex(selectedPlaylist.list_song.length - 1))
+            dispatch(setCurrentSongId(selectedPlaylist.list_song[currSongIndex].id))
         }
     }
 
@@ -99,6 +101,7 @@ function PlayControl() {
                 do {
                     ranIndex = Math.floor(Math.random() * selectedPlaylist.list_song.length)
                     dispatch(setCurrentSongIndex(ranIndex))
+                    dispatch(setCurrentSongId(selectedPlaylist.list_song[ranIndex].id))
                 } while (ranIndex === currSongIndex)
             } else {
                 getOnNextClick()

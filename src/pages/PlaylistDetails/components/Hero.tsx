@@ -1,13 +1,7 @@
 import classNames from "classnames/bind"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlay, faPause } from "@fortawesome/free-solid-svg-icons" 
-import { useDispatch } from "react-redux"
 
 import styles from '../PlaylistDetails.module.scss'
 import { PlaylistModel } from "../../../models/PlaylistModel"
-import { useState } from "react"
-import { setCurrentPlaylist } from "../../../redux/slice/PlaylistSlice"
-import { AppDispatch } from "../../../redux/store"
 
 const cx = classNames.bind(styles)
 
@@ -16,18 +10,6 @@ type HeroProps = {
 }
 
 function Hero({ selectedPlaylist }: HeroProps) {
-    const [isPause, setIsPause] = useState(false)
-
-    const dispatch: AppDispatch = useDispatch()
-
-    const handlePlayClick = () => {
-        if(selectedPlaylist) {
-            dispatch(setCurrentPlaylist(selectedPlaylist))
-        }
-
-        setIsPause(!isPause)
-    }
-
     return (
         selectedPlaylist ? 
             <div className={cx('hero-head')}>

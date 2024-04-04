@@ -1,4 +1,5 @@
 import classNames from "classnames/bind"
+import { useNavigate } from "react-router-dom"
 
 import styles from './AuthenDecor.module.scss'
 import logo from '../../assets/images/logo_favicon.png'
@@ -10,10 +11,12 @@ import musicplayer from '../../assets/icons/BsMusicPlayer.svg'
 const cx = classNames.bind(styles)  
 
 function AuthenDecor() {
+    const navigate = useNavigate()
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('logo')}>
-                <img src={logo} alt="" className={cx('logo_part')}/>
+                <img src={logo} alt="" className={cx('logo_part')} onClick={() => navigate('/')}/>
                 <img src={logoname} alt="" className={cx('logo_part')}/>
             </div>
 

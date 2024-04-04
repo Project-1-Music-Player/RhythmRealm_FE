@@ -17,14 +17,14 @@ export const MockPlaylist2: PlaylistModel = {
     owner: 'Username',
     list_song: [
         {
-            id: '1',
+            id: '11',
             image: song_2,
             author: 'Charlie Puth',
             name: 'Dangerously',
             audio: song_audio_2,
         },
         {
-            id: '2',
+            id: '12',
             image: song_3,
             author: 'Charlie Puth',
             name: 'Light Switch',
@@ -40,14 +40,14 @@ export const MockPlaylist1: PlaylistModel = {
     owner: 'Username',
     list_song: [
         {
-            id: '1',
+            id: '21',
             image: song_4,
             author: 'Son Tung M-TP',
             name: 'Con mua xa dan',
             audio: song_audio_4,
         },
         {
-            id: '2',
+            id: '22',
             image: song_5,
             author: 'Son Tung M-TP',
             name: 'Khong phai dang vua dau',
