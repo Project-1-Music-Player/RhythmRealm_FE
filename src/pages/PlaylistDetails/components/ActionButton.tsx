@@ -13,10 +13,10 @@ type ActionButtonProps = {
 
 function ActionButton({ text, iconProp }: ActionButtonProps) {
     return (
-        <div className={cx('button-wrapper')}>
+        <>
             <FontAwesomeIcon icon={iconProp} className={cx('button-icon')}/>
             <span className={cx('button-text')}>{text}</span>
-        </div>
+        </>
     )
 }
 

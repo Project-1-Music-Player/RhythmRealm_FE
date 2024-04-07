@@ -1,19 +1,30 @@
 import classNames from "classnames/bind"
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { useParams } from "react-router-dom"
+import React, { useState } from "react"
 
 import styles from './PlaylistDetails.module.scss'
 import Hero from "./components/Hero"
 import ActionButton from "./components/ActionButton"
 import { MockPlaylist } from "../../MockData/PlaylistData"
 import SongItem from "./components/SongItem"
+import EditPlaylistForm from "./components/EditPlaylistForm"
 
 const cx = classNames.bind(styles)
 
 function PlaylistDetails() {
     const { id } = useParams()
-
     const playlist = MockPlaylist.find(playlist => playlist.id === id)
+
+    const [isEditForm, setIsEditForm] = useState(false)
+
+    const handleOutFormClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        setIsEditForm(false)
+    }
+
+    const getIsCloseForm = (result: boolean) => {
+        setIsEditForm(!result)
+    }
 
     return (
         <div className={cx('wrapper')}>
@@ -21,8 +32,12 @@ function PlaylistDetails() {
                 <Hero selectedPlaylist={playlist}/>
 
                 <div className={cx('actions')}>
-                    <ActionButton text="Edit" iconProp={faPen}/>
-                    <ActionButton text="Delete playlist" iconProp={faTrash}/>
+                    <div className={cx('button-wrapper')} onClick={() => setIsEditForm(true)}>
+                        <ActionButton text="Edit" iconProp={faPen}/>
+                    </div>
+                    <div className={cx('button-wrapper')}>
+                        <ActionButton text="Delete playlist" iconProp={faTrash}/>
+                    </div>
                 </div>
 
                 <div className={cx('authorization')}>
@@ -32,6 +47,16 @@ function PlaylistDetails() {
             </div>
 
             <SongItem selectedPlaylist={playlist}/>
+
+            {
+                isEditForm ?
+                <div className={cx('form-wrapper')} onClick={(e) => handleOutFormClick(e)}>
+                    <EditPlaylistForm playlist={playlist} getIsCloseForm={getIsCloseForm}/>
+                </div>
+
+                : <></>
+            }
+            
         </div>
     )
 }
