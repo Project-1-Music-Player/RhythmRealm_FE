@@ -4,7 +4,7 @@ import { faCircleXmark } from "@fortawesome/free-solid-svg-icons"
 
 import styles from '../PlaylistDetails.module.scss'
 import { PlaylistModel } from "../../../models/PlaylistModel"
-import React from "react"
+import React, { useState, useEffect } from "react"
 
 const cx = classNames.bind(styles)
 
@@ -14,6 +14,12 @@ type EditPlaylistFormProps = {
 }
 
 function EditPlaylistForm({ playlist, getIsCloseForm }: EditPlaylistFormProps) {
+    const [playlistInfo, setPlaylistInfo] = useState<PlaylistModel | undefined>(playlist)
+
+    // useEffect(() => {
+    //     setPlaylistInfo(playlist)
+    // }, [playlist])
+
     const handleFormClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation()
     }
@@ -29,27 +35,32 @@ function EditPlaylistForm({ playlist, getIsCloseForm }: EditPlaylistFormProps) {
                     marginRight: '35px',
 
                 }}>
-                    <img src={playlist.image} alt="" className={cx('playlist-img')}/>
+                    <img src={playlistInfo?.image} alt="" className={cx('playlist-img')}/>
                     <label htmlFor="playlistImg" className={cx('img-label')}>+ Upload image</label>
-                    <input type="file" name="image" id="playlistImg" style={{display: 'none'}}/>
+                    <input 
+                        type="file" 
+                        name="image" 
+                        id="playlistImg" 
+                        style={{display: 'none'}}
+                    />
                 </article>
 
                 <article style={{flex: 1}}>
                     <div>
                         <span className={cx('info-label')}>Title</span>
-                        <input type="text" name="title" value={playlist.title} className={cx('title-input')}/>
+                        <input type="text" name="title" value={playlistInfo?.title} className={cx('title-input')}/>
                     </div>
 
                     <div>
                         <span className={cx('info-label')}>List song(s)</span>
                         <div>
                             {
-                                playlist.list_song.map((song, index) => {
+                                playlistInfo?.playlist_song.map((song, index) => {
                                     return (
                                         <div key={index} className={cx('song')}>
                                             <img src={song.image} alt="" className={cx('song-img')}/>
                                             <span className={cx('song-author')}>{song.author}</span>
-                                            <span className={cx('song-name')}>{song.name}</span>
+                                            <span className={cx('song-name')}>{song.song_name}</span>
                                             <FontAwesomeIcon icon={faCircleXmark} style={{color: '#c7c7c7', marginLeft: 'auto'}}/>
                                         </div>
                                     )

@@ -51,6 +51,7 @@ function Register() {
                             className={cx('input')}
                             onChange={handleChange}
                         />
+                        <span className={cx('err-message')}>Try again</span>
                     </Form.Group>
 
                     <Form.Group className={cx('password_group')}>
@@ -62,6 +63,7 @@ function Register() {
                             className={cx('input')}
                             onChange={handleChange}
                         />
+                        <span className={cx('err-message')}>Try again</span>
                     </Form.Group>
 
                     <Form.Group className={cx('repassword_group')}>
@@ -73,6 +75,7 @@ function Register() {
                             className={cx('input')}
                             onChange={handleChange}
                         />
+                        <span className={cx('err-message')}>Try again</span>
                     </Form.Group>
                 </Form>
 

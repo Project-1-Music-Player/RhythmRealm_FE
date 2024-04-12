@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import styles from "./SongQueue.module.scss"
 import { SongModel } from "../../models/SongModel"
 import { AppDispatch, RootState } from "../../redux/store"
-import { setCurrentSongIndex } from "../../redux/slice/PlaylistSlice"
+import { setCurrentSongIndex, setCurrentSongId } from "../../redux/slice/PlaylistSlice"
 
 const cx = classNames.bind(styles)
 
@@ -16,6 +16,7 @@ type SongCardProps = {
 
 function SongCard({ song_data, songIndex }: SongCardProps) {
     const currSongIndex = useSelector((state: RootState) => state.playlistSlice.currSongIndex)
+    const selectedPlaylist = useSelector((state: RootState) => state.playlistSlice.selectedPlaylistData)
 
     const dispatch: AppDispatch = useDispatch()
 
@@ -33,6 +34,7 @@ function SongCard({ song_data, songIndex }: SongCardProps) {
 
     const handleSelectSong = () => {
         dispatch(setCurrentSongIndex(songIndex))
+        dispatch(setCurrentSongId(selectedPlaylist.playlist_song[songIndex].id))
     }
 
     return (
@@ -43,10 +45,10 @@ function SongCard({ song_data, songIndex }: SongCardProps) {
 
             <div className={cx('info')}>
                 <h4 className={cx('author')}>{song_data.author}</h4>
-                <p className={cx('song_name')}>{song_data.name}</p>
+                <p className={cx('song_name')}>{song_data.song_name}</p>
             </div>
 
-            <audio ref={audioRef} src={song_data.audio} style={{display: 'none'}} onLoadedData={handleLoad}></audio>
+            <audio ref={audioRef} src={song_data.song_audio} style={{display: 'none'}} onLoadedData={handleLoad}></audio>
 
             <span className={cx('duration')}>{songDuration}</span>
         </div>

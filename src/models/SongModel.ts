@@ -2,6 +2,6 @@ export interface SongModel {
     id: string;
     image: string;
     author: string;
-    name: string;
-    audio: string;
+    song_name: string;
+    song_audio: string;
 }

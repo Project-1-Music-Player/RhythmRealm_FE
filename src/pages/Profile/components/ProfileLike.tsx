@@ -23,7 +23,7 @@ function ProfileLike({ profileSong }: ProfileLikeProps) {
                                 
                                 <article>
                                     <span className={cx('song-author')}>{song.author}</span>
-                                    <p className={cx('song-name')}>{song.name}</p>
+                                    <p className={cx('song-name')}>{song.song_name}</p>
                                 </article>
                                 
                                 <div className={cx('song-statistic')}>

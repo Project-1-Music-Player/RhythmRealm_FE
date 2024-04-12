@@ -60,7 +60,7 @@ function SongItem({ selectedPlaylist }: SongItemProps) {
         if(selectedPlaylist) {
             dispatch(setCurrentPlaylist(selectedPlaylist))
             dispatch(setCurrentSongIndex(index))
-            dispatch(setCurrentSongId(selectedPlaylist.list_song[index].id))
+            dispatch(setCurrentSongId(selectedPlaylist.playlist_song[index].id))
         }
     }
 
@@ -68,13 +68,13 @@ function SongItem({ selectedPlaylist }: SongItemProps) {
         selectedPlaylist ?
             <div className={cx('playlist')}>
                 {
-                    selectedPlaylist.list_song.map((item, index) => {
+                    selectedPlaylist.playlist_song.map((item, index) => {
                         return (
                             <div 
                                 key={index} 
                                 className={cx('song-item')} 
                                 onClick={() => handleSongClick(index)} 
-                                style={selectedPlaylist.list_song[index].id === currSongId ? {backgroundColor: '#ffffff1a'} : {}}
+                                style={selectedPlaylist.playlist_song[index].id === currSongId ? {backgroundColor: '#ffffff1a'} : {}}
                             >
                                 <div className={cx('song-info')}>
                                     <img src={item.image} alt="" className={cx('song-image')}/>
@@ -92,11 +92,11 @@ function SongItem({ selectedPlaylist }: SongItemProps) {
                                         justifyContent: 'space-between'
                                     }}>
                                         <span className={cx('author')}>{item.author}</span>
-                                        <span className={cx('song-name')}>{item.name}</span>
+                                        <span className={cx('song-name')}>{item.song_name}</span>
                                     </div>
                                 </div>
 
-                                <SongMedia audio={item.audio}/>
+                                <SongMedia audio={item.song_audio}/>
                             </div>
                         )
                     })

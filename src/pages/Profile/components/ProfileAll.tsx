@@ -9,8 +9,8 @@ type ProfileAllProps = {
 function ProfileAll({ profileData }: ProfileAllProps) {
     return (
         <>
-            <ProfileLike profileSong={profileData.songs}/>
-            <ProfilePlaylist profilePlaylist={profileData.playlists}/>
+            <ProfileLike profileSong={profileData.like_song}/>
+            <ProfilePlaylist profilePlaylist={profileData.playlist}/>
         </>
     )
 }

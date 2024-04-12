@@ -1,52 +1,57 @@
 import classNames from "classnames/bind"
-import { useNavigate, useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
+import { useState } from "react"
+import { useSelector } from "react-redux"
 
 import styles from './Profile.module.scss'
 import ProfileHero from "./components/ProfileHero"
-import { UserData1 } from "../../MockData/UserData"
+
 import ProfileAll from './components/ProfileAll'
 import ProfilePlaylist from './components/ProfilePlaylist'
 import ProfileLike from "./components/ProfileLike"
 import ProfileFollow from "./components/ProfileFollow"
 
+import { RootState } from "../../redux/store"
+
 const cx = classNames.bind(styles)
 
-function Profile() {
-    const tabs = [
-        {
-            title: 'All',
-        },
-        {
-            title: 'Playlists',
-        },
-        {
-            title: 'Likes',
-        },
-        {
-            title: 'Following',
-        },
-    ]
+const tabs = [
+    {
+        title: 'All',
+    },
+    {
+        title: 'Playlists',
+    },
+    {
+        title: 'Likes',
+    },
+    {
+        title: 'Following',
+    },
+]
 
-    const { id } = useParams()
+function Profile() {
+    const currentUser = useSelector((state: RootState) => state.userSlice.currentUser)
+
+    // const { id } = useParams()
 
     const [currentTab, setCurrentTab] = useState(0)
 
     const renderProfileData = () => {
         if(currentTab === 0) {
-            return <ProfileAll profileData={UserData1}/>
+            return <ProfileAll profileData={currentUser}/>
         } else if(currentTab === 1) {
-            return <ProfilePlaylist profilePlaylist={UserData1.playlists}/>
+            return <ProfilePlaylist profilePlaylist={currentUser.playlist}/>
         } else if(currentTab === 2) {
-            return <ProfileLike profileSong={UserData1.songs}/>
+            return <ProfileLike profileSong={currentUser.like_song}/>
         } else {
-            return <ProfileFollow profileFollow={UserData1.following}/>
+            return <ProfileFollow profileFollow={currentUser.following}/>
         }
     }
 
     return (
         <div className={cx('wrapper')}>
-            <ProfileHero selectedUser={UserData1}/>
+            <ProfileHero selectedUser={currentUser}/>
 
             <div className={cx('profile-media')}>
                 <nav className={cx('navigation')}>

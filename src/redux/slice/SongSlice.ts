@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit"
 
 interface SongState {
     onPlaying: boolean
@@ -12,7 +12,7 @@ const SongSlice = createSlice({
     name: 'song',
     initialState: initialState,
     reducers: {
-        setOnPlayingSong: (state, action: PayloadAction<boolean>) => {
+        setOnPlayingSong: (state) => {
             state.onPlaying = !state.onPlaying
         }
     }

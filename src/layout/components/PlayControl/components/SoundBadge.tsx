@@ -24,12 +24,12 @@ function SoundBadge() {
     return (
         <section className={cx('sound_badge')}>
             <a href="#!">
-                <img src={selectedPlaylist.list_song[currSongIndex].image} alt="" className={cx('avatar')}/>
+                <img src={selectedPlaylist.playlist_song[currSongIndex].image} alt="" className={cx('avatar')}/>
             </a>
 
             <div className={cx('info')}>
-                <span className={cx('author')}>{selectedPlaylist.list_song[currSongIndex].author}</span>
-                <span className={cx('title')}>{selectedPlaylist.list_song[currSongIndex].name}</span>
+                <span className={cx('author')}>{selectedPlaylist.playlist_song[currSongIndex].author}</span>
+                <span className={cx('title')}>{selectedPlaylist.playlist_song[currSongIndex].song_name}</span>
             </div>
 
             <div className={cx('actions')}>

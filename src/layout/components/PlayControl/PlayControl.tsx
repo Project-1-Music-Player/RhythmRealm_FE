@@ -32,17 +32,17 @@ function PlayControl() {
 
     const getOnNextClick = () => {
         dispatch(setCurrentSongIndex(currSongIndex + 1))
-        if(currSongIndex >= selectedPlaylist.list_song.length - 1) {
+        if(currSongIndex >= selectedPlaylist.playlist_song.length - 1) {
             dispatch(setCurrentSongIndex(0))
-            dispatch(setCurrentSongId(selectedPlaylist.list_song[currSongIndex].id))
+            dispatch(setCurrentSongId(selectedPlaylist.playlist_song[currSongIndex].id))
         }
     }
 
     const getOnPrevClick = () => {
         dispatch(setCurrentSongIndex(currSongIndex - 1))
         if(currSongIndex <= 0) {
-            dispatch(setCurrentSongIndex(selectedPlaylist.list_song.length - 1))
-            dispatch(setCurrentSongId(selectedPlaylist.list_song[currSongIndex].id))
+            dispatch(setCurrentSongIndex(selectedPlaylist.playlist_song.length - 1))
+            dispatch(setCurrentSongId(selectedPlaylist.playlist_song[currSongIndex].id))
         }
     }
 
@@ -99,9 +99,9 @@ function PlayControl() {
                 let ranIndex 
 
                 do {
-                    ranIndex = Math.floor(Math.random() * selectedPlaylist.list_song.length)
+                    ranIndex = Math.floor(Math.random() * selectedPlaylist.playlist_song.length)
                     dispatch(setCurrentSongIndex(ranIndex))
-                    dispatch(setCurrentSongId(selectedPlaylist.list_song[ranIndex].id))
+                    dispatch(setCurrentSongId(selectedPlaylist.playlist_song[ranIndex].id))
                 } while (ranIndex === currSongIndex)
             } else {
                 getOnNextClick()
@@ -136,7 +136,7 @@ function PlayControl() {
                     </div>
 
                     <audio 
-                        src={selectedPlaylist.list_song[currSongIndex].audio} 
+                        src={selectedPlaylist.playlist_song[currSongIndex].song_audio} 
                         ref={audioRef}
                         onTimeUpdate={getCurrDuration}
                         onLoadedData={handleLoadAudio} 

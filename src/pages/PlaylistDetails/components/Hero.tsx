@@ -30,7 +30,7 @@ function Hero({ selectedPlaylist }: HeroProps) {
                         </div>
                     </div>
 
-                    <p className={cx('num-track')}><span>{selectedPlaylist.list_song.length}</span>{'Track(s)'}</p>
+                    <p className={cx('num-track')}><span>{selectedPlaylist.playlist_song.length}</span>{'Track(s)'}</p>
                 </div>
             </div>
         : <></>

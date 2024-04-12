@@ -5,5 +5,5 @@ export interface PlaylistModel {
     image: string,
     title: string,
     owner: string,
-    list_song: SongModel[],
+    playlist_song: SongModel[],
 }

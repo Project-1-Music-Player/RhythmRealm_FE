@@ -1,11 +1,11 @@
-import { MockPlaylist2, MockPlaylist1 } from "./PlaylistData"
+import { ListFakePlaylist } from "./PlaylistData"
 
 export const MockModular = {
     id: '1',
     title: 'Your Playlists',
     list_playlist: [
-        MockPlaylist2,
-        MockPlaylist1
+        ListFakePlaylist[0],
+        ListFakePlaylist[1],
     ]
 }
 
@@ -13,13 +13,13 @@ export const MockModular1 = {
     id: '1',
     title: 'Your Playlists',
     list_playlist: [
-        MockPlaylist1,
-        MockPlaylist1,
-        MockPlaylist2,
-        MockPlaylist2,
-        MockPlaylist1,
-        MockPlaylist2,
-        MockPlaylist1,
-        MockPlaylist2,
+        ListFakePlaylist[0],
+        ListFakePlaylist[1],
+        ListFakePlaylist[0],
+        ListFakePlaylist[1],
+        ListFakePlaylist[0],
+        ListFakePlaylist[1],
+        ListFakePlaylist[0],
+        ListFakePlaylist[1],
     ]
 }

@@ -6,7 +6,7 @@ import React, { useState } from "react"
 import styles from './PlaylistDetails.module.scss'
 import Hero from "./components/Hero"
 import ActionButton from "./components/ActionButton"
-import { MockPlaylist } from "../../MockData/PlaylistData"
+import { ListFakePlaylist } from "../../MockData/PlaylistData"
 import SongItem from "./components/SongItem"
 import EditPlaylistForm from "./components/EditPlaylistForm"
 
@@ -14,7 +14,7 @@ const cx = classNames.bind(styles)
 
 function PlaylistDetails() {
     const { id } = useParams()
-    const playlist = MockPlaylist.find(playlist => playlist.id === id)
+    const playlist = ListFakePlaylist.find(playlist => playlist.id === id)
 
     const [isEditForm, setIsEditForm] = useState(false)
 

@@ -25,18 +25,18 @@ function ProfilePlaylist({ profilePlaylist }: ProfilePlaylistProps) {
                                         <p className={cx('playlist-title')}>{playlist.title}</p>
                                     </article>
 
-                                    <article className={cx('playlist-count')}>{playlist.list_song.length} Track(s)</article>
+                                    <article className={cx('playlist-count')}>{playlist.playlist_song.length} Track(s)</article>
                                 </div>
 
                                 <div className={cx('list-song')}>
                                     {
-                                        playlist.list_song.map((song, index) => {
+                                        playlist.playlist_song.map((song, index) => {
                                             return (
                                                 <article key={index} className={cx('sg-content')}>
                                                     <img src={song.image} alt="" className={cx('sg-image')}/>
                                                     <span className={cx('sg-index')}>{index + 1}</span>
                                                     <span className={cx('sg-author')}>{song.author}</span>
-                                                    <span className={cx('sg-name')}>{song.name}</span>
+                                                    <span className={cx('sg-name')}>{song.song_name}</span>
                                                 </article>
                                             )
                                         })

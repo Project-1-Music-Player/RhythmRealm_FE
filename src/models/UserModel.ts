@@ -11,11 +11,13 @@ export interface UserArtistFollow {
 
 export interface UserModel {
     id: string;
+    username: string;
+    password: string;
     role: string | null;
     avatar: string;
     name: string;
     followers: number | null;   
     following: UserArtistFollow[] | null;
-    songs: SongModel[] | null;
-    playlists: PlaylistModel[] | null;
+    like_song: SongModel[] | null;
+    playlist: PlaylistModel[] | null;
 }
