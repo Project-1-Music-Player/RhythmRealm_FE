@@ -1,4 +1,7 @@
+// model
 import { UserModel } from "../../../models/UserModel"
+
+// component
 import ProfileLike from "./ProfileLike"
 import ProfilePlaylist from "./ProfilePlaylist"
 

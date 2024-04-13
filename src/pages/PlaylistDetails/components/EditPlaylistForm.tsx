@@ -1,10 +1,12 @@
 import classNames from "classnames/bind"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons"
+import React, { useState } from "react"
 
 import styles from '../PlaylistDetails.module.scss'
+
+// model
 import { PlaylistModel } from "../../../models/PlaylistModel"
-import React, { useState, useEffect } from "react"
 
 const cx = classNames.bind(styles)
 

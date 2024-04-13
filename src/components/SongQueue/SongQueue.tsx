@@ -4,7 +4,11 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons"
 import { useSelector } from "react-redux"
 
 import styles from "./SongQueue.module.scss"
+
+// component
 import SongCard from "./SongCard"
+
+// redux
 import { RootState } from "../../redux/store"
 
 const cx = classNames.bind(styles)

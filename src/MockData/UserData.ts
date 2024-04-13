@@ -1,6 +1,11 @@
+// asset
 import avt from '../assets/images/artist_avatar.jpg'
 import avt1 from '../assets/images/ex2.jpg'
+
+// model
 import { UserModel, UserArtistFollow } from '../models/UserModel'
+
+// component
 import { ListFakePlaylist } from './PlaylistData'
 import { ListFakeSong } from './SongData'
 

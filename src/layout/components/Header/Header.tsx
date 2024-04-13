@@ -7,7 +7,11 @@ import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
 import styles from './Header.module.scss'
+
+// asset
 import Logo from '../../../assets/images/logo_favicon.png'
+
+// redux
 import { RootState, AppDispatch } from "../../../redux/store"
 import { setNoUser } from "../../../redux/slice/UserSlice"
 

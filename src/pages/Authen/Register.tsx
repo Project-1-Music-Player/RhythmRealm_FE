@@ -4,8 +4,12 @@ import { Link } from "react-router-dom"
 import React, { useState } from "react"
 
 import styles from "./Authen.module.scss"
-import AuthenDecor from "../../components/AuthenDecor/AuthenDecor"
+
+// model
 import { RegisterModel } from "../../models/RegisterModel"
+
+// component
+import AuthenDecor from "../../components/AuthenDecor/AuthenDecor"
 
 const cx = classNames.bind(styles)
 
@@ -50,6 +54,7 @@ function Register() {
                             value={formData.username}
                             className={cx('input')}
                             onChange={handleChange}
+                            autoComplete="off"
                         />
                         <span className={cx('err-message')}>Try again</span>
                     </Form.Group>

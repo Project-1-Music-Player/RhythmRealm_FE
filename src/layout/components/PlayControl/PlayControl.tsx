@@ -3,9 +3,13 @@ import React, { useRef, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
 import styles from './PlayControl.module.scss'
+
+// component
 import SoundBadge from "./components/SoundBadge"
 import ControlButton from "./components/ControlButton"
 import VolumnConTrol from "./components/VolumnControl"
+
+// redux
 import { setCurrentSongIndex, setCurrentSongId } from "../../../redux/slice/PlaylistSlice"
 import { RootState, AppDispatch } from "../../../redux/store"
 

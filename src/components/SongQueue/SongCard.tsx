@@ -3,7 +3,11 @@ import { useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 import styles from "./SongQueue.module.scss"
+
+// model
 import { SongModel } from "../../models/SongModel"
+
+// redux
 import { AppDispatch, RootState } from "../../redux/store"
 import { setCurrentSongIndex, setCurrentSongId } from "../../redux/slice/PlaylistSlice"
 

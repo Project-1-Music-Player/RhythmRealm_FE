@@ -3,8 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUserGroup, faRotate } from "@fortawesome/free-solid-svg-icons"
 
 import styles from './ArtistMenu.module.scss'
+
+// asset
 import artist_avatar from '../../assets/images/artist_avatar.jpg'
-import { User } from "../../models/UserModel"
+
+// model
+import { UserModel } from "../../models/UserModel"
+
+// component
 import ArtistCard from "./ArtistCard"
 
 const cx = classNames.bind(styles)
@@ -31,7 +37,7 @@ const fake_artist = [
         name: 'Son Tung M-TP',
         followers: 1000000
     }
-] as User[]
+] as UserModel[]
 
 function ArtistMenu() {
     return (

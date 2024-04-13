@@ -5,7 +5,11 @@ import { useState } from "react"
 import { useSelector } from "react-redux"
 
 import styles from '../PlayControl.module.scss'
+
+// component
 import SongQueue from "../../../../components/SongQueue/SongQueue"
+
+// redux
 import { RootState } from "../../../../redux/store"
 
 const cx = classNames.bind(styles)

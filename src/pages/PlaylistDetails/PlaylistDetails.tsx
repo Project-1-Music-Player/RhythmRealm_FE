@@ -4,11 +4,15 @@ import { useParams } from "react-router-dom"
 import React, { useState } from "react"
 
 import styles from './PlaylistDetails.module.scss'
+
+// component
 import Hero from "./components/Hero"
 import ActionButton from "./components/ActionButton"
-import { ListFakePlaylist } from "../../MockData/PlaylistData"
 import SongItem from "./components/SongItem"
 import EditPlaylistForm from "./components/EditPlaylistForm"
+
+// mockdata
+import { ListFakePlaylist } from "../../MockData/PlaylistData"
 
 const cx = classNames.bind(styles)
 

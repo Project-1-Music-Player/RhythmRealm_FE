@@ -1,9 +1,10 @@
 import classNames from "classnames/bind";
 
-import Header from "../components/Header/Header";
-import Sidebar from "../components/Sidebar/Sidebar";
-import PlayControl from "../components/PlayControl/PlayControl";
 import styles from "./DefaultLayout.module.scss"
+
+// component
+import Header from "../components/Header/Header"
+import PlayControl from "../components/PlayControl/PlayControl"
 
 type DefaultLayoutProps = {
     children: React.ReactElement

@@ -4,12 +4,14 @@ import { faUserGroup } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 
 import styles from './ArtistMenu.module.scss'
-import { User } from "../../models/UserModel"
+
+// model
+import { UserModel } from "../../models/UserModel"
 
 const cx = classNames.bind(styles)
 
 type ArtistCardProps = {
-    artist: User
+    artist: UserModel
 }
 
 function ArtistCard({ artist }: ArtistCardProps) {
@@ -29,7 +31,7 @@ function ArtistCard({ artist }: ArtistCardProps) {
 
                     <div className={cx('meta')}>
                         <FontAwesomeIcon icon={faUserGroup} className={cx('icon')}/>
-                        <span className={cx('quantity')}>{artist.followers.toString()}</span>
+                        <span className={cx('quantity')}>{artist.followers ? artist.followers.toString() : ''}</span>
                     </div>
                 </div>
             </div>

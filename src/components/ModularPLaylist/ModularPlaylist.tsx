@@ -2,8 +2,12 @@ import classNames from "classnames/bind"
 import { useNavigate } from "react-router-dom"
 
 import styles from "./ModularPlaylist.module.scss"
-import Playlist from "../Playlist/Playlist"
+
+// model
 import { PlaylistModel } from "../../models/PlaylistModel"
+
+// component
+import Playlist from "../Playlist/Playlist"
 
 const cx = classNames.bind(styles)
 

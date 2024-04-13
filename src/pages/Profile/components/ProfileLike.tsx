@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHeart, faHeadphones } from "@fortawesome/free-solid-svg-icons"
 
 import styles from "../Profile.module.scss"
+
+// model
 import { SongModel } from "../../../models/SongModel"
 
 const cx = classNames.bind(styles)

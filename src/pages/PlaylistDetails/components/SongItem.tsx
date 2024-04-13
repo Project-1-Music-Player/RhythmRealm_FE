@@ -5,7 +5,11 @@ import React, { useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 import styles from "../PlaylistDetails.module.scss"
+
+// model
 import { PlaylistModel } from "../../../models/PlaylistModel"
+
+// redux
 import { setCurrentPlaylist, setCurrentSongIndex, setCurrentSongId } from "../../../redux/slice/PlaylistSlice"
 import { RootState, AppDispatch } from "../../../redux/store"
 

@@ -2,6 +2,8 @@ import classNames from "classnames/bind"
 import { useNavigate } from "react-router-dom"
 
 import styles from './AuthenDecor.module.scss'
+
+// asset
 import logo from '../../assets/images/logo_favicon.png'
 import logoname from '../../assets/images/logo_name.png'
 import notelist from '../../assets/icons/BsMusicNoteList.svg'

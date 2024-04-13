@@ -5,11 +5,19 @@ import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 
 import styles from "./Authen.module.scss"
-import AuthenDecor from "../../components/AuthenDecor/AuthenDecor"
+
+// model
 import { LoginModel } from "../../models/LoginModel"
-import { ListFakeUser } from "../../MockData/UserData"
+
+// component
+import AuthenDecor from "../../components/AuthenDecor/AuthenDecor"
+
+// redux
 import { setCurrentUser } from "../../redux/slice/UserSlice"
 import { AppDispatch } from "../../redux/store"
+
+// mockdata
+import { ListFakeUser } from "../../MockData/UserData"
 
 const cx = classNames.bind(styles)
 
@@ -77,6 +85,7 @@ function Login() {
                             className={cx('input')}
                             onChange={handleChange}
                             onInput={() => setValidUsername(true)}
+                            autoComplete="off"
                         />
                         <span style={validUsername ? {} : {color: 'red'}} className={cx('err-message')}>Try another username</span>
                     </Form.Group>

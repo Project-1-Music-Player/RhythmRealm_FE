@@ -1,6 +1,9 @@
+// model
 import { PlaylistModel } from "../models/PlaylistModel"
 import playlist_image from '../assets/images/example.png'
 import playlist_image_1 from '../assets/images/ex2.jpg'
+
+// component
 import { ListFakeSong } from "./SongData"
 
 export const Playlist1: PlaylistModel = {

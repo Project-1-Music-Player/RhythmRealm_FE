@@ -1,6 +1,8 @@
 import classNames from "classnames/bind"
 
 import styles from "./Sidebar.module.scss"
+
+// component
 import ArtistMenu from "../../../components/ArtistMenu/ArtistMenu"
 
 const cx = classNames.bind(styles)

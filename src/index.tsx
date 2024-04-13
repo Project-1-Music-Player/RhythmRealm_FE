@@ -4,7 +4,11 @@ import { Provider } from 'react-redux';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+// component
 import GlobalStyles from './components/GlobalStyles/GlobalStyles';
+
+// redux
 import { store } from './redux/store';
 
 const root = ReactDOM.createRoot(

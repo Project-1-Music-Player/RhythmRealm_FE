@@ -1,5 +1,7 @@
+// model
 import { SongModel } from "../models/SongModel"
 
+// asset
 import song_2 from '../assets/images/song2.jpg'
 import song_3 from '../assets/images/song3.jpg'
 import song_4 from '../assets/images/song4.jpg'
