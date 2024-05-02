@@ -1,7 +1,7 @@
 import { ListFakePlaylist } from "./PlaylistData"
 
 export const MockModular = {
-    id: '1',
+    id: '100',
     title: 'Your Playlists',
     list_playlist: [
         ListFakePlaylist[0],
@@ -10,7 +10,7 @@ export const MockModular = {
 }
 
 export const MockModular1 = {
-    id: '1',
+    id: '101',
     title: 'Your Playlists',
     list_playlist: [
         ListFakePlaylist[0],

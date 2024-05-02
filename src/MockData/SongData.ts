@@ -13,35 +13,43 @@ import song_audio_4 from '../assets/music/song4.mp3'
 import song_audio_5 from '../assets/music/song5.mp3'
 
 export const Song1: SongModel = {
-    id: '1',
+    id: '301',
     image: song_4,
     author: 'Son Tung M-TP',
     song_name: 'Con mua xa dan',
     song_audio: song_audio_4,
+    listen_count: 1234,
+    like_count: 9864
 }
 
 export const Song2: SongModel = {
-    id: '2',
+    id: '302',
     image: song_5,
     author: 'Son Tung M-TP',
     song_name: 'Khong phai dang vua dau',
     song_audio: song_audio_5,
+    listen_count: 45679,
+    like_count: 48913
 }
 
 export const Song3: SongModel = {
-    id: '3',
+    id: '303',
     image: song_2,
     author: 'Charlie Puth',
     song_name: 'Dangerously',
     song_audio: song_audio_2,
+    listen_count: 152,
+    like_count: 71439
 }
 
 export const Song4: SongModel = {
-    id: '4',
+    id: '304',
     image: song_3,
     author: 'Charlie Puth',
     song_name: 'Dangerously',
     song_audio: song_audio_3,
+    listen_count: 789,
+    like_count: 777777
 }
 
 export const ListFakeSong = [

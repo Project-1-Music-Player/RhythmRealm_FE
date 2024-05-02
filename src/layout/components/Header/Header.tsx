@@ -1,6 +1,5 @@
 import classNames from "classnames/bind"
-import { InputGroup, Form } from "react-bootstrap" 
-import { faMagnifyingGlass, faChevronDown } from "@fortawesome/free-solid-svg-icons"
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate, Link } from "react-router-dom"
 import { useState } from "react"
@@ -10,6 +9,9 @@ import styles from './Header.module.scss'
 
 // asset
 import Logo from '../../../assets/images/logo_favicon.png'
+
+// component
+import SearchBar from './components/SearchBar'
 
 // redux
 import { RootState, AppDispatch } from "../../../redux/store"
@@ -23,8 +25,6 @@ function Header() {
 
     const currentUser = useSelector((state: RootState) => state.userSlice.currentUser)
 
-    console.log(currentUser)
-
     const [isMenuHovered, setIsMenuHovered] = useState(false)
 
     return (
@@ -36,15 +36,7 @@ function Header() {
                 </ul>
             </div>
 
-            <InputGroup className={cx('search')}>
-                <Form.Control
-                    placeholder="Search..."
-                    className={cx('search_input')}
-                />
-                <div className={cx('search_btn')}>
-                    <FontAwesomeIcon icon={faMagnifyingGlass} className={cx('search_icon')}/>
-                </div>
-            </InputGroup>
+           <SearchBar/>
 
             {currentUser.id !== '' ? 
                 <div className={cx('authen')}>

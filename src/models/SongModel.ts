@@ -4,4 +4,6 @@ export interface SongModel {
     author: string;
     song_name: string;
     song_audio: string;
+    listen_count: number;
+    like_count: number;
 }

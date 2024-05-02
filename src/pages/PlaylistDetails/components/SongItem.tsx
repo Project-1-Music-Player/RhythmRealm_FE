@@ -12,14 +12,15 @@ import { PlaylistModel } from "../../../models/PlaylistModel"
 // redux
 import { setCurrentPlaylist, setCurrentSongIndex, setCurrentSongId } from "../../../redux/slice/PlaylistSlice"
 import { RootState, AppDispatch } from "../../../redux/store"
+import { SongModel } from "../../../models/SongModel"
 
 const cx = classNames.bind(styles)
 
 type SongMediaProps = {
-    audio: string,
+    song: SongModel,
 }
 
-function SongMedia({ audio }: SongMediaProps) {
+function SongMedia({ song }: SongMediaProps) {
     const [songDuration, setSongDuration] = useState('0:00')
 
     const audioRef = useRef<HTMLAudioElement>(null)
@@ -35,17 +36,17 @@ function SongMedia({ audio }: SongMediaProps) {
 
     return (
         <div className={cx('song-media')}>
-            <audio ref={audioRef} src={audio} onLoadedData={handleload}></audio>
+            <audio ref={audioRef} src={song.song_audio} onLoadedData={handleload}></audio>
             <span style={{color: '#d7d7d7', fontSize: '1.4rem', fontWeight: '600', marginLeft: '10px'}}>{songDuration}</span>
 
             <div>
                 <FontAwesomeIcon icon={faHeadphones} style={{width: '15px', height: '15px', color: '#d7d7d7'}}/>
-                <span style={{color: '#d7d7d7', fontSize: '1.4rem', fontWeight: '600', marginLeft: '10px'}}>1000</span>
+                <span style={{color: '#d7d7d7', fontSize: '1.4rem', fontWeight: '600', marginLeft: '10px'}}>{song.listen_count}</span>
             </div>
 
             <div>
                 <FontAwesomeIcon icon={faHeart} style={{width: '15px', height: '15px', color: '#d7d7d7'}}/>
-                <span style={{color: '#d7d7d7', fontSize: '1.4rem', fontWeight: '600', marginLeft: '10px'}}>1000</span>
+                <span style={{color: '#d7d7d7', fontSize: '1.4rem', fontWeight: '600', marginLeft: '10px'}}>{song.like_count}</span>
             </div>
         </div>
     )
@@ -100,7 +101,7 @@ function SongItem({ selectedPlaylist }: SongItemProps) {
                                     </div>
                                 </div>
 
-                                <SongMedia audio={item.song_audio}/>
+                                <SongMedia song={item}/>
                             </div>
                         )
                     })

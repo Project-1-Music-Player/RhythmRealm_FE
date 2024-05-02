@@ -10,7 +10,7 @@ import { ListFakePlaylist } from './PlaylistData'
 import { ListFakeSong } from './SongData'
 
 export const UserArtistData1: UserArtistFollow = {
-    id: '2',
+    id: '401',
     name: 'Son Tung M-TP',
     avatar: avt,
     role: 'artist',
@@ -18,7 +18,7 @@ export const UserArtistData1: UserArtistFollow = {
 }
 
 export const UserArtistData2: UserArtistFollow = {
-    id: '3',
+    id: '402',
     name: 'Charlie Puth',
     avatar: avt1,
     role: 'artist',
@@ -39,7 +39,7 @@ export const initialUser: UserModel = {
 }
 
 export const UserData1: UserModel = {
-    id: '1',
+    id: '501',
     username: 'deeper',
     password: '123456789',
     name: 'Pham Ngoc Hoang',
@@ -59,7 +59,7 @@ export const UserData1: UserModel = {
 }
 
 export const UserData2: UserModel = {
-    id: '2',
+    id: '502',
     username: 'deeper',
     password: '123456',
     name: 'Pham Ngoc Hoang 1',

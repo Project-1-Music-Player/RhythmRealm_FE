@@ -23,7 +23,7 @@ function ProfileLike({ profileSong }: ProfileLikeProps) {
                             <div key={index} className={cx('song-wrapper')}>
                                 <img src={song.image} alt="" className={cx('song-image')}/>
                                 
-                                <article>
+                                <article style={{maxWidth: '220px'}}>
                                     <span className={cx('song-author')}>{song.author}</span>
                                     <p className={cx('song-name')}>{song.song_name}</p>
                                 </article>
@@ -31,12 +31,12 @@ function ProfileLike({ profileSong }: ProfileLikeProps) {
                                 <div className={cx('song-statistic')}>
                                     <div className={cx('song-reaction')}>
                                         <FontAwesomeIcon icon={faHeart} className={cx('heart-icon')}/>
-                                        <span className={cx('song-num')}>1000</span>
+                                        <span className={cx('song-num')}>{song.listen_count}</span>
                                     </div>
 
                                     <div className={cx('song-reaction')}>
                                         <FontAwesomeIcon icon={faHeadphones} className={cx('headphones-icon')}/>
-                                        <span className={cx('song-num')}>1000</span>
+                                        <span className={cx('song-num')}>{song.like_count}</span>
                                     </div>
                                 </div>
                             </div>

@@ -112,8 +112,14 @@
         margin-top: 10px;
     }
 
+    .song-name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
     .song-statistic {
-        margin-left: auto;
+        margin-left: 300px;
         display: flex;
         flex-direction: column;
         row-gap: 15px;
