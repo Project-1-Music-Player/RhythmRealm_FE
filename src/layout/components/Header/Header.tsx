@@ -16,6 +16,9 @@ import SearchBar from './components/SearchBar'
 // redux
 import { RootState, AppDispatch } from "../../../redux/store"
 import { setNoUser } from "../../../redux/slice/UserSlice"
+import { logout } from "../../../redux/slice/AuthSlice"
+
+import { auth } from "../../../firebase"
 
 const cx = classNames.bind(styles)
 
@@ -23,9 +26,22 @@ function Header() {
     const navigate = useNavigate()
     const dispatch: AppDispatch = useDispatch()
 
-    const currentUser = useSelector((state: RootState) => state.userSlice.currentUser)
+    // const currentUser = useSelector((state: RootState) => state.userSlice.currentUser)
+    const user = useSelector((state: RootState) => state.authSlice.user)
 
     const [isMenuHovered, setIsMenuHovered] = useState(false)
+
+    const handleSignOut = () => {
+        auth.signOut()
+            .then(() => {
+                dispatch(logout())
+                navigate('/login')
+                console.log('Sign out success')
+            })
+            .catch((err) => {
+                console.error('Sign out failed: ', err)
+            })
+    }
 
     return (
         <header className={cx('wrapper')}>
@@ -38,14 +54,14 @@ function Header() {
 
            <SearchBar/>
 
-            {currentUser.id !== '' ? 
+            {user.id !== '' ? 
                 <div className={cx('authen')}>
                     <span className={cx('for_artist')}>FOR ARTISTS</span>
                     <div 
                         className={cx('user')} 
                         onMouseEnter={() => setIsMenuHovered(true)} 
                     >
-                        <img src={currentUser.avatar} alt="" className={cx('avatar')}/>
+                        <img src={user.avatar} alt="" className={cx('avatar')}/>
                         <FontAwesomeIcon icon={faChevronDown} className={cx('icon')}/>
                         
                         {isMenuHovered ?
@@ -53,14 +69,10 @@ function Header() {
                                 className={cx('menu')} 
                                 onMouseLeave={() => setIsMenuHovered(false)}
                             >
-                                <li className={cx('menu_item')} onClick={() => navigate(`/profile/${currentUser.id}`)}>Profile</li>
+                                <li className={cx('menu_item')} onClick={() => navigate(`/profile/${user.id}`)}>Profile</li>
                                 <li 
                                     className={cx('menu_item')} 
-                                    onClick={() => {
-                                        dispatch(setNoUser())
-                                        navigate('/login')
-                                    }}
-                                >Sign Out</li>
+                                    onClick={handleSignOut}>Sign Out</li>
                             </ul> :
                             <></>
                         }

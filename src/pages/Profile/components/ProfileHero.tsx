@@ -4,22 +4,24 @@ import styles from '../Profile.module.scss'
 
 // model
 import { UserModel } from "../../../models/UserModel"
+import { UserAuthModel } from "../../../models/AuthModel"
 
 const cx = classNames.bind(styles)
 
 type ProfileHeroProps = {
-    selectedUser: UserModel
+    selectedUser: UserModel,
+    user: UserAuthModel
 }
 
-function ProfileHero({ selectedUser }: ProfileHeroProps) {
+function ProfileHero({ selectedUser, user }: ProfileHeroProps) {
     return (
         <div className={cx('profile-hero')}>
             <div className={cx('profile-info')}>
-                <img src={selectedUser.avatar} alt="" className={cx('user-avatar')}/>
+                <img src={user.avatar} alt="" className={cx('user-avatar')}/>
 
                 <div className={cx('profile-user-info')}>
-                    <p className={cx('user-name')}>{selectedUser.name}</p>
-                    <p className={cx('user-role')}>{selectedUser.role === 'user' ? 'Normal User' : 'Artist'}</p>
+                    <p className={cx('user-name')}>{user.name}</p>
+                    <p className={cx('user-role')}>{user.role === 'listener' ? 'Normal User' : 'Artist'}</p>
                 </div>
             </div>
 

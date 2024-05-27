@@ -26,7 +26,7 @@ function ProfileFollow({ profileFollow }: ProfileFollowProps) {
                         )
                     })
                 )
-                : <span>None</span>
+                : <span className={cx('empty-msg')}>None</span>
             }
         </div>
     )

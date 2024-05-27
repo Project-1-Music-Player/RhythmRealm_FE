@@ -5,6 +5,9 @@ import React, { useState } from "react"
 
 import styles from "./Authen.module.scss"
 
+// asset
+import gglogo from '../../assets/icons/GG.png'
+
 // model
 import { RegisterModel } from "../../models/RegisterModel"
 
@@ -33,6 +36,9 @@ function Register() {
             ...formData,
             [name]: value
         })
+    }
+
+    const handleGGClick = () => {
     }
 
     return (
@@ -84,7 +90,13 @@ function Register() {
                     </Form.Group>
                 </Form>
 
-                <Button type="submit" className={cx('btn')} form="registerForm">Sign Up</Button>
+                <div style={{display: 'flex', marginTop: '40px', justifyContent: 'space-between'}}>
+                    <div className={cx('gg_btn')}  onClick={handleGGClick}>
+                        <img src={gglogo} alt="" className={cx('gg_logo')}/>
+                        <span className={cx('gg_text')}>Google</span>
+                    </div>
+                    <Button type="submit" className={cx('btn')} form="registerForm">Sign Up</Button>
+                </div>
             </div>
         </div>
     )

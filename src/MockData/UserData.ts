@@ -29,7 +29,7 @@ export const initialUser: UserModel = {
     id: '',
     username: '',
     password: '',
-    role: null,
+    role: 'listener',
     avatar: '',
     name: '',
     followers: null,
@@ -44,7 +44,7 @@ export const UserData1: UserModel = {
     password: '123456789',
     name: 'Pham Ngoc Hoang',
     avatar: avt,
-    role: 'user',
+    role: 'listener',
     followers: 0,
     following: [
         UserArtistData1,
@@ -64,7 +64,7 @@ export const UserData2: UserModel = {
     password: '123456',
     name: 'Pham Ngoc Hoang 1',
     avatar: avt1,
-    role: 'user',
+    role: 'listener',
     followers: 0,
     following: [
         UserArtistData2,

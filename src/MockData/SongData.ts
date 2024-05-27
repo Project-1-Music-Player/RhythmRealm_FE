@@ -13,43 +13,51 @@ import song_audio_4 from '../assets/music/song4.mp3'
 import song_audio_5 from '../assets/music/song5.mp3'
 
 export const Song1: SongModel = {
-    id: '301',
-    image: song_4,
+    song_id: '301',
+    thumbnail_url: song_4,
     author: 'Son Tung M-TP',
-    song_name: 'Con mua xa dan',
-    song_audio: song_audio_4,
+    title: 'Con mua xa dan',
+    song_url: song_audio_4,
     listen_count: 1234,
-    like_count: 9864
+    like_count: 9864,
+    genre: 'pop',
+    album: 'abc',
 }
 
 export const Song2: SongModel = {
-    id: '302',
-    image: song_5,
+    song_id: '302',
+    thumbnail_url: song_5,
     author: 'Son Tung M-TP',
-    song_name: 'Khong phai dang vua dau',
-    song_audio: song_audio_5,
+    title: 'Khong phai dang vua dau',
+    song_url: song_audio_5,
     listen_count: 45679,
-    like_count: 48913
+    like_count: 48913,
+    genre: 'pop',
+    album: 'abc',
 }
 
 export const Song3: SongModel = {
-    id: '303',
-    image: song_2,
+    song_id: '303',
+    thumbnail_url: song_2,
     author: 'Charlie Puth',
-    song_name: 'Dangerously',
-    song_audio: song_audio_2,
+    title: 'Dangerously',
+    song_url: song_audio_2,
     listen_count: 152,
-    like_count: 71439
+    like_count: 71439,
+    genre: 'pop',
+    album: 'abc',
 }
 
 export const Song4: SongModel = {
-    id: '304',
-    image: song_3,
+    song_id: '304',
+    thumbnail_url: song_3,
     author: 'Charlie Puth',
-    song_name: 'Dangerously',
-    song_audio: song_audio_3,
+    title: 'Dangerously',
+    song_url: song_audio_3,
     listen_count: 789,
-    like_count: 777777
+    like_count: 777777,
+    genre: 'pop',
+    album: 'abc',
 }
 
 export const ListFakeSong = [

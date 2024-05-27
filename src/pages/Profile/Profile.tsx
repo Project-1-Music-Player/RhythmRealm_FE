@@ -34,6 +34,7 @@ const tabs = [
 
 function Profile() {
     const currentUser = useSelector((state: RootState) => state.userSlice.currentUser)
+    const user = useSelector((state: RootState) => state.authSlice.user)
 
     // const { id } = useParams()
 
@@ -53,7 +54,7 @@ function Profile() {
 
     return (
         <div className={cx('wrapper')}>
-            <ProfileHero selectedUser={currentUser}/>
+            <ProfileHero selectedUser={currentUser} user={user}/>
 
             <div className={cx('profile-media')}>
                 <nav className={cx('navigation')}>

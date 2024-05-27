@@ -12,7 +12,7 @@ interface PlaylistState {
 const initialState: PlaylistState = {
     selectedPlaylistData: MockModular.list_playlist[0],
     currSongIndex: 0,
-    currSongId: MockModular.list_playlist[0].playlist_song[0].id,
+    currSongId: MockModular.list_playlist[0].playlist_song[0].song_id,
 }
 
 const PlaylistSlice = createSlice({

@@ -43,14 +43,34 @@
         border-left: solid 1px #fff;
     }
 
+    .gg_btn {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 5px;
+        border: 1px solid #D2D1D1;
+        padding: 10px 25px; 
+    }
+
+    .gg-logo {
+        width: 25px;
+        height: 25px;
+        object-fit: cover;
+    }
+
+    .gg_text {
+        font-size: 2rem;
+        color: #fff;
+        font-weight: 500;
+        margin-left: 15px;
+    }
+
     .btn {
         display: block;
-        margin: 0 auto;
-        margin-top: 40px;
         background-color: #D8DD00;
         border: none;
         border-radius: 5px;
-        padding: 10px 100px;
+        padding: 10px 60px;
         font-size: 2.2rem; 
         font-weight: 600;
         font-family: var(--font-family);

@@ -38,21 +38,21 @@ function SongCard({ song_data, songIndex }: SongCardProps) {
 
     const handleSelectSong = () => {
         dispatch(setCurrentSongIndex(songIndex))
-        dispatch(setCurrentSongId(selectedPlaylist.playlist_song[songIndex].id))
+        dispatch(setCurrentSongId(selectedPlaylist.playlist_song[songIndex].song_id))
     }
 
     return (
         <div className={cx('item')} onClick={handleSelectSong} style={currSongIndex === songIndex ? {backgroundColor: 'rgba(255, 255, 255, 0.1)'} : {}}>
             <a href="#!">
-                <img src={song_data.image} alt="" className={cx('song_image')}/>
+                <img src={song_data.thumbnail_url} alt="" className={cx('song_image')}/>
             </a>
 
             <div className={cx('info')}>
                 <h4 className={cx('author')}>{song_data.author}</h4>
-                <p className={cx('song_name')}>{song_data.song_name}</p>
+                <p className={cx('song_name')}>{song_data.title}</p>
             </div>
 
-            <audio ref={audioRef} src={song_data.song_audio} style={{display: 'none'}} onLoadedData={handleLoad}></audio>
+            <audio ref={audioRef} src={song_data.song_url} style={{display: 'none'}} onLoadedData={handleLoad}></audio>
 
             <span className={cx('duration')}>{songDuration}</span>
         </div>

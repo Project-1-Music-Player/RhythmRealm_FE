@@ -35,10 +35,10 @@ function ProfilePlaylist({ profilePlaylist }: ProfilePlaylistProps) {
                                         playlist.playlist_song.map((song, index) => {
                                             return (
                                                 <article key={index} className={cx('sg-content')}>
-                                                    <img src={song.image} alt="" className={cx('sg-image')}/>
+                                                    <img src={song.thumbnail_url} alt="" className={cx('sg-image')}/>
                                                     <span className={cx('sg-index')}>{index + 1}</span>
                                                     <span className={cx('sg-author')}>{song.author}</span>
-                                                    <span className={cx('sg-name')}>{song.song_name}</span>
+                                                    <span className={cx('sg-name')}>{song.title}</span>
                                                 </article>
                                             )
                                         })
@@ -48,7 +48,7 @@ function ProfilePlaylist({ profilePlaylist }: ProfilePlaylistProps) {
                         )
                     })
                 )
-                : <span>None</span>
+                : <span className={cx('empty-msg')}>None</span>
             }
         </div>
     )

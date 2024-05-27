@@ -36,7 +36,7 @@ function SongMedia({ song }: SongMediaProps) {
 
     return (
         <div className={cx('song-media')}>
-            <audio ref={audioRef} src={song.song_audio} onLoadedData={handleload}></audio>
+            <audio ref={audioRef} src={song.song_url} onLoadedData={handleload}></audio>
             <span style={{color: '#d7d7d7', fontSize: '1.4rem', fontWeight: '600', marginLeft: '10px'}}>{songDuration}</span>
 
             <div>
@@ -65,7 +65,7 @@ function SongItem({ selectedPlaylist }: SongItemProps) {
         if(selectedPlaylist) {
             dispatch(setCurrentPlaylist(selectedPlaylist))
             dispatch(setCurrentSongIndex(index))
-            dispatch(setCurrentSongId(selectedPlaylist.playlist_song[index].id))
+            dispatch(setCurrentSongId(selectedPlaylist.playlist_song[index].song_id))
         }
     }
 
@@ -79,10 +79,10 @@ function SongItem({ selectedPlaylist }: SongItemProps) {
                                 key={index} 
                                 className={cx('song-item')} 
                                 onClick={() => handleSongClick(index)} 
-                                style={selectedPlaylist.playlist_song[index].id === currSongId ? {backgroundColor: '#ffffff1a'} : {}}
+                                style={selectedPlaylist.playlist_song[index].song_id === currSongId ? {backgroundColor: '#ffffff1a'} : {}}
                             >
                                 <div className={cx('song-info')}>
-                                    <img src={item.image} alt="" className={cx('song-image')}/>
+                                    <img src={item.thumbnail_url} alt="" className={cx('song-image')}/>
                                     
                                     <span style={{
                                         display: 'block',   
@@ -97,7 +97,7 @@ function SongItem({ selectedPlaylist }: SongItemProps) {
                                         justifyContent: 'space-between'
                                     }}>
                                         <span className={cx('author')}>{item.author}</span>
-                                        <span className={cx('song-name')}>{item.song_name}</span>
+                                        <span className={cx('song-name')}>{item.title}</span>
                                     </div>
                                 </div>
 

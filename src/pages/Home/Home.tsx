@@ -1,4 +1,5 @@
 import classNames from "classnames/bind"
+import { useSelector } from "react-redux"
 
 import styles from "./Home.module.scss"
 
@@ -6,20 +7,41 @@ import styles from "./Home.module.scss"
 import Sidebar from "../../layout/components/Sidebar/Sidebar"
 import ModularPlaylist from "../../components/ModularPlaylist/ModularPlaylist"
 
+// redux
+import { RootState, AppDispatch } from "../../redux/store"
+
+// model
+import { PlaylistModel } from "../../models/PlaylistModel"
+
 // mockdata
-import { MockModular, MockModular1 } from "../../MockData/ModularPlaylistData"
+import { MockModular } from "../../MockData/ModularPlaylistData"
 
 const cx = classNames.bind(styles)
 
 function Home() {
+    const user = useSelector((state: RootState) => state.authSlice.user)
+
+    const userSongs : PlaylistModel[] = [
+        {
+            id: 'self',
+            image: user.avatar,
+            title: 'My songs',
+            owner: user.name,
+            playlist_song: []
+        }
+    ]
+    
     return (
         <div className={cx('container')}>
             <div className={cx('content')}>
+                {user.id !== '' ? 
+                    <ModularPlaylist title='Yourself' playlist={userSongs}/> 
+                    : <></>
+                }
                 <ModularPlaylist title={MockModular.title} playlist={MockModular.list_playlist}/>
-                {/* <ModularPlaylist title={MockModular1.title} playlist={MockModular1.list_playlist}/> */}
             </div>
 
-            <Sidebar isLogin={true}/>
+            <Sidebar isLogin={user.id !== '' ? true : false}/>
         </div>
     )
 }

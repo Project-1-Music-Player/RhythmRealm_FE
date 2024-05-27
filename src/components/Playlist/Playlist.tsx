@@ -30,7 +30,7 @@ function Playlist({ data } : PlaylistProps) {
                     className={cx('image')} 
                 />
 
-                <PlayButton isHovered={isHovered} playlist={data}/>
+                {/* <PlayButton isHovered={isHovered} playlist={data}/> */}
             </div>
             <p className={cx('title')}>{data.title}</p>
             <span className={cx('author')}>{data.owner}</span>

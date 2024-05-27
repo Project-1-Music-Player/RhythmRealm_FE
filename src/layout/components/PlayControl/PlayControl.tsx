@@ -38,7 +38,7 @@ function PlayControl() {
         dispatch(setCurrentSongIndex(currSongIndex + 1))
         if(currSongIndex >= selectedPlaylist.playlist_song.length - 1) {
             dispatch(setCurrentSongIndex(0))
-            dispatch(setCurrentSongId(selectedPlaylist.playlist_song[currSongIndex].id))
+            dispatch(setCurrentSongId(selectedPlaylist.playlist_song[currSongIndex].song_id))
         }
     }
 
@@ -46,7 +46,7 @@ function PlayControl() {
         dispatch(setCurrentSongIndex(currSongIndex - 1))
         if(currSongIndex <= 0) {
             dispatch(setCurrentSongIndex(selectedPlaylist.playlist_song.length - 1))
-            dispatch(setCurrentSongId(selectedPlaylist.playlist_song[currSongIndex].id))
+            dispatch(setCurrentSongId(selectedPlaylist.playlist_song[currSongIndex].song_id))
         }
     }
 
@@ -105,7 +105,7 @@ function PlayControl() {
                 do {
                     ranIndex = Math.floor(Math.random() * selectedPlaylist.playlist_song.length)
                     dispatch(setCurrentSongIndex(ranIndex))
-                    dispatch(setCurrentSongId(selectedPlaylist.playlist_song[ranIndex].id))
+                    dispatch(setCurrentSongId(selectedPlaylist.playlist_song[ranIndex].song_id))
                 } while (ranIndex === currSongIndex)
             } else {
                 getOnNextClick()
@@ -140,7 +140,7 @@ function PlayControl() {
                     </div>
 
                     <audio 
-                        src={selectedPlaylist.playlist_song[currSongIndex].song_audio} 
+                        src={selectedPlaylist.playlist_song[currSongIndex].song_url} 
                         ref={audioRef}
                         onTimeUpdate={getCurrDuration}
                         onLoadedData={handleLoadAudio} 

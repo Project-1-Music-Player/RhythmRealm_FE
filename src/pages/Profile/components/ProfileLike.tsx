@@ -21,11 +21,11 @@ function ProfileLike({ profileSong }: ProfileLikeProps) {
                     profileSong.map((song, index) => {
                         return (
                             <div key={index} className={cx('song-wrapper')}>
-                                <img src={song.image} alt="" className={cx('song-image')}/>
+                                <img src={song.thumbnail_url} alt="" className={cx('song-image')}/>
                                 
                                 <article style={{maxWidth: '220px'}}>
                                     <span className={cx('song-author')}>{song.author}</span>
-                                    <p className={cx('song-name')}>{song.song_name}</p>
+                                    <p className={cx('song-name')}>{song.title}</p>
                                 </article>
                                 
                                 <div className={cx('song-statistic')}>
@@ -43,7 +43,7 @@ function ProfileLike({ profileSong }: ProfileLikeProps) {
                         )
                     })
                 )
-                : <span>None</span>
+                : <span className={cx('empty-msg')}>None</span>
             }
         </div>
     )
