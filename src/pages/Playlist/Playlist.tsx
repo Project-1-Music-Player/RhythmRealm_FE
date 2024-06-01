@@ -5,8 +5,9 @@ import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import axios from "axios"
 
-import styles from './PlaylistDetails.module.scss'
+import styles from './Playlist.module.scss'
 
+import song1 from '../../assets/images/song2.jpg'
 // component
 import Hero from "./components/Hero"
 import ActionButton from "./components/ActionButton"
@@ -24,25 +25,25 @@ import { SongModel } from "../../models/SongModel"
 import { ListFakePlaylist } from "../../MockData/PlaylistData"
 import { BASE_API_URL, MUSIC_API_ROUTES } from "../../constants/api"
 
-import minioClient from "../../utils/minioClient"
-
 const cx = classNames.bind(styles)
 
-function PlaylistDetails() {
+function Playlist() {
     const { id } = useParams()
-    console.log(id)
-
+    const fakePlaylist = ListFakePlaylist.find(playlist => playlist.id === id)
+    
     const [isEditForm, setIsEditForm] = useState(false)
     const [songs, setSongs] = useState<SongModel[]>([])
- 
-    const playlist = ListFakePlaylist.find(playlist => playlist.id === id)
-
-    const user = useSelector((state: RootState) => state.authSlice.user)
-    const idToken = useSelector((state: RootState) => state.authSlice.accessToken)
+    const [playlist, setPlaylist] = useState<PlaylistModel>()
     
-    useEffect(() => {
-        getSongsInPlaylist()
-    }, [])
+    const user = useSelector((state: RootState) => state.authSlice.user)
+    const userIdToken = useSelector((state: RootState) => state.authSlice.accessToken)
+    
+    const handleOutFormClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        setIsEditForm(false)
+    }
+    const getIsCloseForm = (result: boolean) => {
+        setIsEditForm(!result)
+    }
 
     const getSongsInPlaylist = async () => {
         try {
@@ -50,38 +51,34 @@ function PlaylistDetails() {
                 BASE_API_URL + MUSIC_API_ROUTES.getSong,
                 {
                     headers: { 
-                        'Authorization': `Bearer ${idToken}` 
+                        'Authorization': `Bearer ${userIdToken}` 
                     }
                 }
             )
 
             setSongs(response.data)
+            setPlaylist({
+                id: user.id,
+                image: user.avatar,
+                title: 'RosDeeper',
+                owner: user.name,
+                songs: response.data
+            })
             console.log(response.data)
 
         } catch(err) {
             console.error('Error fetching songs:', err)
         }
     }
-
-    const check = async () => {
-        const res = await minioClient.bucketExists("music")
-        console.log(res)
-    }
-
-    check()
-
-    const handleOutFormClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        setIsEditForm(false)
-    }
-
-    const getIsCloseForm = (result: boolean) => {
-        setIsEditForm(!result)
-    }
+    
+    useEffect(() => {
+        getSongsInPlaylist()
+    }, [])
 
     return (
         <div className={cx('wrapper')}>
             <div className={cx('hero')}>
-                <Hero image_url={user.avatar} owner={user.name} length={songs.length}/>
+                <Hero playlist={playlist} length={songs ? songs.length : 0}/>
 
                 <div className={cx('actions')}>
                     <div className={cx('button-wrapper')} onClick={() => setIsEditForm(true)}>
@@ -98,7 +95,7 @@ function PlaylistDetails() {
                 </div>
             </div>
 
-            <SongItem selectedPlaylist={playlist}/>
+            <SongItem playlist={playlist}/>
 
             {
                 isEditForm ?
@@ -113,4 +110,4 @@ function PlaylistDetails() {
     )
 }
 
-export default PlaylistDetails
+export default Playlist

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons"
 import React, { useState } from "react"
 
-import styles from '../PlaylistDetails.module.scss'
+import styles from '../Playlist.module.scss'
 
 // model
 import { PlaylistModel } from "../../../models/PlaylistModel"
@@ -57,12 +57,12 @@ function EditPlaylistForm({ playlist, getIsCloseForm }: EditPlaylistFormProps) {
                         <span className={cx('info-label')}>List song(s)</span>
                         <div>
                             {
-                                playlistInfo?.playlist_song.map((song, index) => {
+                                playlistInfo?.songs.map((song, index) => {
                                     return (
                                         <div key={index} className={cx('song')}>
-                                            <img src={song.image} alt="" className={cx('song-img')}/>
+                                            <img src={song.thumbnail_url} alt="" className={cx('song-img')}/>
                                             <span className={cx('song-author')}>{song.author}</span>
-                                            <span className={cx('song-name')}>{song.song_name}</span>
+                                            <span className={cx('song-name')}>{song.title}</span>
                                             <FontAwesomeIcon icon={faCircleXmark} style={{color: '#c7c7c7', marginLeft: 'auto'}}/>
                                         </div>
                                     )

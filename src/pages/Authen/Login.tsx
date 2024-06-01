@@ -35,8 +35,6 @@ function Login() {
     const dispatch: AppDispatch = useDispatch()
     const navigate = useNavigate()
 
-    let user: User | null = null
-
     const [formData, setFormData] = useState<LoginModel>({
         username: '',
         password: '',
@@ -80,8 +78,8 @@ function Login() {
     const handleGGSignIn = async () => {
         try {
             const result = await signInWithPopup(auth, googleProvider)
-            user = result.user
-            const idToken = await user.getIdToken()
+            const user = result.user
+            const userIdToken = await user.getIdToken()
             
             await axios.post(
                 BASE_API_URL + AUTH_API_ROUTES.loginGoogle, 
@@ -93,7 +91,7 @@ function Login() {
                 {
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${idToken}`
+                        'Authorization': `Bearer ${userIdToken}`
                     }
                 }
             )
@@ -105,12 +103,11 @@ function Login() {
                     avatar: user.photoURL || '',
                     role: 'listener'
                 },
-                accessToken: idToken,
+                accessToken: userIdToken,
                 refreshToken: user.refreshToken
             }))
 
             navigate('/')
-
             console.log('Login successfully: ', user.displayName)
 
         } catch(err) {

@@ -35,7 +35,7 @@ function SongQueue({ isClosed }: SongQueueProps) {
             </div>
 
             {
-                selectedPlaylist.playlist_song.map((song, index) => {
+                selectedPlaylist.songs.map((song, index) => {
                     return <SongCard song_data={song} key={index} songIndex={index}/>
                 })
             }

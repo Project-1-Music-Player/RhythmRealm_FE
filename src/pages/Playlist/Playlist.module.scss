@@ -134,6 +134,7 @@
         padding: 5px;
         margin-bottom: 10px;
         display: flex;
+        justify-content: space-between;
         border-radius: 5px;
 
         &:hover {
@@ -169,7 +170,7 @@
         font-size: 1.6rem;
         font-weight: 500;
         color: var(--white);
-        max-width: 300px;
+        width: 200px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -178,7 +179,6 @@
     .song-media {
         display: flex;
         align-items: center;
-        margin-left: 200px;
         column-gap: 40px;
     }
 }

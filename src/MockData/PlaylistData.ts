@@ -11,7 +11,7 @@ export const Playlist1: PlaylistModel = {
     image: playlist_image,
     title: 'M-TP Songs',
     owner: 'Username',
-    playlist_song: [
+    songs: [
         ListFakeSong[0],
         ListFakeSong[1],
     ]
@@ -22,7 +22,7 @@ export const Playlist2: PlaylistModel = {
     image: playlist_image_1,
     title: 'Charlie Puth Songs',
     owner: 'Username',
-    playlist_song: [
+    songs: [
         ListFakeSong[2],
         ListFakeSong[3],
     ]

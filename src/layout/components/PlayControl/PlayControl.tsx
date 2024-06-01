@@ -36,17 +36,17 @@ function PlayControl() {
 
     const getOnNextClick = () => {
         dispatch(setCurrentSongIndex(currSongIndex + 1))
-        if(currSongIndex >= selectedPlaylist.playlist_song.length - 1) {
+        if(currSongIndex >= selectedPlaylist.songs.length - 1) {
             dispatch(setCurrentSongIndex(0))
-            dispatch(setCurrentSongId(selectedPlaylist.playlist_song[currSongIndex].song_id))
+            dispatch(setCurrentSongId(selectedPlaylist.songs[currSongIndex].song_id))
         }
     }
 
     const getOnPrevClick = () => {
         dispatch(setCurrentSongIndex(currSongIndex - 1))
         if(currSongIndex <= 0) {
-            dispatch(setCurrentSongIndex(selectedPlaylist.playlist_song.length - 1))
-            dispatch(setCurrentSongId(selectedPlaylist.playlist_song[currSongIndex].song_id))
+            dispatch(setCurrentSongIndex(selectedPlaylist.songs.length - 1))
+            dispatch(setCurrentSongId(selectedPlaylist.songs[currSongIndex].song_id))
         }
     }
 
@@ -103,9 +103,9 @@ function PlayControl() {
                 let ranIndex 
 
                 do {
-                    ranIndex = Math.floor(Math.random() * selectedPlaylist.playlist_song.length)
+                    ranIndex = Math.floor(Math.random() * selectedPlaylist.songs.length)
                     dispatch(setCurrentSongIndex(ranIndex))
-                    dispatch(setCurrentSongId(selectedPlaylist.playlist_song[ranIndex].song_id))
+                    dispatch(setCurrentSongId(selectedPlaylist.songs[ranIndex].song_id))
                 } while (ranIndex === currSongIndex)
             } else {
                 getOnNextClick()
@@ -118,6 +118,10 @@ function PlayControl() {
         const seconds = Math.floor(duration % 60)
         
         setDuration(`${minute}:${seconds.toString().padStart(2, '0')}`)
+    }
+
+    const streamUrl = (songID: string) => {
+        return `http://localhost:3000/music/stream/${songID}`;
     }
 
     return (
@@ -140,7 +144,7 @@ function PlayControl() {
                     </div>
 
                     <audio 
-                        src={selectedPlaylist.playlist_song[currSongIndex].song_url} 
+                        src={streamUrl(selectedPlaylist.songs[currSongIndex].song_id)}
                         ref={audioRef}
                         onTimeUpdate={getCurrDuration}
                         onLoadedData={handleLoadAudio} 

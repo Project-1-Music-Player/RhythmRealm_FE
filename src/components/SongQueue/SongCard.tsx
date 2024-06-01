@@ -38,7 +38,7 @@ function SongCard({ song_data, songIndex }: SongCardProps) {
 
     const handleSelectSong = () => {
         dispatch(setCurrentSongIndex(songIndex))
-        dispatch(setCurrentSongId(selectedPlaylist.playlist_song[songIndex].song_id))
+        dispatch(setCurrentSongId(selectedPlaylist.songs[songIndex].song_id))
     }
 
     return (
