@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom"
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import { User } from "firebase/auth"
-import { auth, googleProvider, signInAnonymously, signInWithPopup } from "../../firebase"
+import { auth, googleProvider, signInWithPopup } from "../../firebase"
 
 import styles from "./Authen.module.scss"
 
@@ -27,6 +27,7 @@ import { BASE_API_URL, AUTH_API_ROUTES } from "../../constants/api"
 
 // mockdata
 import { ListFakeUser } from "../../MockData/UserData"
+import axios from "axios"
 
 const cx = classNames.bind(styles)
 
@@ -35,8 +36,6 @@ function Login() {
     const navigate = useNavigate()
 
     let user: User | null = null
-    let error: Error | null = null
-
 
     const [formData, setFormData] = useState<LoginModel>({
         username: '',
@@ -82,39 +81,40 @@ function Login() {
         try {
             const result = await signInWithPopup(auth, googleProvider)
             user = result.user
-
             const idToken = await user.getIdToken()
-
-            const response = await fetch(BASE_API_URL + AUTH_API_ROUTES.loginGoogle, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${idToken}`,
-                },
-                body: JSON.stringify({
+            
+            await axios.post(
+                BASE_API_URL + AUTH_API_ROUTES.loginGoogle, 
+                {
                     username: user.displayName || '',
                     email: user.email || '',
                     role: 'listener',
-                })
-            })
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${idToken}`
+                    }
+                }
+            )
 
-            if(response.ok) {
-                dispatch(login({
-                    user: {
-                        id: user.uid,
-                        name: user.displayName || '',
-                        avatar: user.photoURL || '',
-                        role: 'listener'
-                    },
-                    accessToken: idToken,
-                    refreshToken: user.refreshToken
-                }))
+            dispatch(login({
+                user: {
+                    id: user.uid,
+                    name: user.displayName || '',
+                    avatar: user.photoURL || '',
+                    role: 'listener'
+                },
+                accessToken: idToken,
+                refreshToken: user.refreshToken
+            }))
 
-                navigate('/')
-            }
+            navigate('/')
+
+            console.log('Login successfully: ', user.displayName)
+
         } catch(err) {
-            error = err as Error | null;
-            console.error('Google sign-in failed:', error);
+            console.error('Google sign-in failed:', err);
         }
     }
 

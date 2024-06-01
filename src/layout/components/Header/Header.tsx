@@ -15,7 +15,6 @@ import SearchBar from './components/SearchBar'
 
 // redux
 import { RootState, AppDispatch } from "../../../redux/store"
-import { setNoUser } from "../../../redux/slice/UserSlice"
 import { logout } from "../../../redux/slice/AuthSlice"
 
 import { auth } from "../../../firebase"
@@ -31,16 +30,19 @@ function Header() {
 
     const [isMenuHovered, setIsMenuHovered] = useState(false)
 
-    const handleSignOut = () => {
-        auth.signOut()
-            .then(() => {
-                dispatch(logout())
-                navigate('/login')
-                console.log('Sign out success')
-            })
-            .catch((err) => {
-                console.error('Sign out failed: ', err)
-            })
+    const handleSignOut = async () => {
+        try {
+            await auth.signOut()
+
+            dispatch(logout())
+
+            navigate('/login')
+
+            console.log('Logout successfully: ', user.name)
+
+        } catch(err) {
+            console.error('Sign out failed: ', err)
+        }
     }
 
     return (
@@ -73,8 +75,8 @@ function Header() {
                                 <li 
                                     className={cx('menu_item')} 
                                     onClick={handleSignOut}>Sign Out</li>
-                            </ul> :
-                            <></>
+                            </ul> 
+                            : <></>
                         }
                     </div>
                     

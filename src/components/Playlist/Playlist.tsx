@@ -16,25 +16,16 @@ type PlaylistProps = {
 }
 
 function Playlist({ data } : PlaylistProps) {
-    const [isHovered, setIsHovered] = useState(false)
-
     return (
-        <>
-            <div 
-                onMouseOver={() => setIsHovered(true)}
-                onMouseOut={() => setIsHovered(false)}
-            >
-                <img 
-                    src={data.image} 
-                    alt="" 
-                    className={cx('image')} 
-                />
-
-                {/* <PlayButton isHovered={isHovered} playlist={data}/> */}
-            </div>
+        <div>
+            <img 
+                src={data.image} 
+                alt="" 
+                className={cx('image')} 
+            />
             <p className={cx('title')}>{data.title}</p>
             <span className={cx('author')}>{data.owner}</span>
-        </>
+        </div>
     )
 }
 

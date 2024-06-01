@@ -1,6 +1,6 @@
 import classNames from "classnames/bind"
 import { Form, Button } from "react-bootstrap"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import React, { useState } from "react"
 
 import styles from "./Authen.module.scss"
@@ -13,10 +13,23 @@ import { RegisterModel } from "../../models/RegisterModel"
 
 // component
 import AuthenDecor from "../../components/AuthenDecor/AuthenDecor"
+import { User } from "firebase/auth"
+import { auth, googleProvider, signInWithPopup } from "../../firebase"
+import { BASE_API_URL, AUTH_API_ROUTES } from "../../constants/api"
+import axios from "axios"
+import { AppDispatch } from "../../redux/store"
+import { useDispatch } from "react-redux"
+import { login } from "../../redux/slice/AuthSlice"
+
 
 const cx = classNames.bind(styles)
 
 function Register() {
+    const dispatch: AppDispatch = useDispatch()
+    const navigate = useNavigate()
+    
+    let user: User | null = null
+    
     const [formData, setFormData] = useState<RegisterModel>({
         username: '',
         password: '',
@@ -38,7 +51,45 @@ function Register() {
         })
     }
 
-    const handleGGClick = () => {
+    const handleGGClick = async () => {
+        try {
+            const result = await signInWithPopup(auth, googleProvider)
+            user = result.user
+            const idToken = await user.getIdToken()
+            
+            await axios.post(
+                BASE_API_URL + AUTH_API_ROUTES.loginGoogle, 
+                {
+                    username: user.displayName || '',
+                    email: user.email || '',
+                    role: 'listener',
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${idToken}`
+                    }
+                }
+            )
+
+            dispatch(login({
+                user: {
+                    id: user.uid,
+                    name: user.displayName || '',
+                    avatar: user.photoURL || '',
+                    role: 'listener'
+                },
+                accessToken: idToken,
+                refreshToken: user.refreshToken
+            }))
+
+            navigate('/')
+
+            console.log('Login successfully: ', user.displayName)
+
+        } catch(err) {
+            console.error('Google sign-in failed:', err);
+        }
     }
 
     return (

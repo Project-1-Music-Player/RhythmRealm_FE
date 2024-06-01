@@ -8,6 +8,8 @@ import { PlaylistModel } from "../../models/PlaylistModel"
 
 // component
 import Playlist from "../Playlist/Playlist"
+import { RootState } from "../../redux/store"
+import { useSelector } from "react-redux"
 
 const cx = classNames.bind(styles)
 
@@ -18,6 +20,7 @@ type ModularPlaylistProps = {
 
 function ModularPlaylist({ title, playlist } : ModularPlaylistProps) {
     const navigate = useNavigate()
+    const user = useSelector((state: RootState) => state.authSlice.user)
 
     return (
         <div className={cx('wrapper')}>
@@ -26,7 +29,7 @@ function ModularPlaylist({ title, playlist } : ModularPlaylistProps) {
                 {
                     playlist.map((item, index) => {
                         return (
-                            <div key={index} className={cx('playlist_wrapper')} onClick={() => navigate(`/playlist/${item.id}`)}>
+                            <div key={index} className={cx('playlist_wrapper')} onClick={() => navigate(`/playlist/${user.id}`)}>
                                 <Playlist data={item}/>
                             </div>
                         )
