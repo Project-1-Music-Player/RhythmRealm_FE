@@ -7,6 +7,7 @@ import styles from '../Playlist.module.scss'
 
 // model
 import { PlaylistModel } from "../../../models/PlaylistModel"
+import { BASE_API_URL, MUSIC_API_ROUTES } from "../../../constants/api"
 
 const cx = classNames.bind(styles)
 
@@ -18,12 +19,12 @@ type EditPlaylistFormProps = {
 function EditPlaylistForm({ playlist, getIsCloseForm }: EditPlaylistFormProps) {
     const [playlistInfo, setPlaylistInfo] = useState<PlaylistModel | undefined>(playlist)
 
-    // useEffect(() => {
-    //     setPlaylistInfo(playlist)
-    // }, [playlist])
-
     const handleFormClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation()
+    }
+
+    const thumbnailUrl = (songID: string) => {
+        return BASE_API_URL + MUSIC_API_ROUTES.getThumbSong + '/' + songID;
     }
 
     return (
@@ -60,7 +61,7 @@ function EditPlaylistForm({ playlist, getIsCloseForm }: EditPlaylistFormProps) {
                                 playlistInfo?.songs.map((song, index) => {
                                     return (
                                         <div key={index} className={cx('song')}>
-                                            <img src={song.thumbnail_url} alt="" className={cx('song-img')}/>
+                                            <img src={thumbnailUrl(song.song_id)} alt="" className={cx('song-img')}/>
                                             <span className={cx('song-author')}>{song.author}</span>
                                             <span className={cx('song-name')}>{song.title}</span>
                                             <FontAwesomeIcon icon={faCircleXmark} style={{color: '#c7c7c7', marginLeft: 'auto'}}/>

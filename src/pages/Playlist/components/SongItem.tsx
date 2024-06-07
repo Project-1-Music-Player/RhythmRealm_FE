@@ -10,12 +10,11 @@ import styles from "../Playlist.module.scss"
 import { PlaylistModel } from "../../../models/PlaylistModel"
 
 // redux
-import { setCurrentPlaylist, setCurrentSongIndex, setCurrentSongId } from "../../../redux/slice/PlaylistSlice"
+import { setCurrPlaylist, setSongIndex, setIsPlayControlOn } from "../../../redux/slice/PlaylistSlice"
 import { RootState, AppDispatch } from "../../../redux/store"
+import { setCurrSong } from "../../../redux/slice/SongSlice"
 import { SongModel } from "../../../models/SongModel"
-
-import defaulsImage from '../../../assets/images/logo_favicon.png'
-
+import { formatSongDuration } from "../../../utils/formatTime"
 import { BASE_API_URL, MUSIC_API_ROUTES } from "../../../constants/api"
 
 const cx = classNames.bind(styles)
@@ -26,34 +25,26 @@ type SongMediaProps = {
 
 function SongMedia({ song }: SongMediaProps) {
     const audioRef = useRef<HTMLAudioElement>(null)
+    const dispatch: AppDispatch = useDispatch()
     const [songDuration, setSongDuration] = useState('0:00')
+
     const streamUrl = (songID: string) => {
         return BASE_API_URL + MUSIC_API_ROUTES.streamSong + '/' + songID;
     }
 
-    const handleDuration = () => {
-        if(audioRef.current) {
-            const minute = Math.floor(audioRef.current.duration / 60)
-            const seconds = Math.floor(audioRef.current.duration % 60)
-            
-            setSongDuration(`${minute}:${seconds.toString().padStart(2, '0')}`)
-        }
-    }
-
-
     return (
         <div className={cx('song-media')}>
-            <audio ref={audioRef} src={streamUrl(song.song_id)} onLoadedData={handleDuration}></audio>
+            <audio ref={audioRef} src={streamUrl(song.song_id)} onLoadedData={() => formatSongDuration(audioRef, setSongDuration)}></audio>
             <span style={{color: '#d7d7d7', fontSize: '1.4rem', fontWeight: '600', marginLeft: '10px', width: '35px'}}>{songDuration}</span>
 
             <div>
                 <FontAwesomeIcon icon={faHeadphones} style={{width: '15px', height: '15px', color: '#d7d7d7'}}/>
-                <span style={{color: '#d7d7d7', fontSize: '1.4rem', fontWeight: '600', marginLeft: '10px'}}>{song.listen_count}</span>
+                {/* <span style={{color: '#d7d7d7', fontSize: '1.4rem', fontWeight: '600', marginLeft: '10px'}}>{song.listen_count}</span> */}
             </div>
 
             <div>
                 <FontAwesomeIcon icon={faHeart} style={{width: '15px', height: '15px', color: '#d7d7d7'}}/>
-                <span style={{color: '#d7d7d7', fontSize: '1.4rem', fontWeight: '600', marginLeft: '10px'}}>{song.like_count}</span>
+                {/* <span style={{color: '#d7d7d7', fontSize: '1.4rem', fontWeight: '600', marginLeft: '10px'}}>{song.like_count}</span> */}
             </div>
         </div>
     )
@@ -64,22 +55,27 @@ type SongItemProps = {
 }
 
 function SongItem({ playlist }: SongItemProps) {
-    const currSongId = useSelector((state: RootState) => state.playlistSlice.currSongId)
-
+    const currSongId = useSelector((state: RootState) => state.songSlice.currSong.song_id)
+    
     const dispatch: AppDispatch = useDispatch()
 
     const handleSongClick = (index: number) => {
         if(playlist) {
-            dispatch(setCurrentPlaylist(playlist))
-            dispatch(setCurrentSongIndex(index))
-            dispatch(setCurrentSongId(playlist.songs[index].song_id))
+            dispatch(setCurrPlaylist(playlist))
+            dispatch(setSongIndex(index))
+            dispatch(setCurrSong(playlist.songs[index]))
+            dispatch(setIsPlayControlOn(true))
         }
+    }
+
+    const thumbnailUrl = (songID: string) => {
+        return BASE_API_URL + MUSIC_API_ROUTES.getThumbSong + '/' + songID;
     }
 
     return (
         <div className={cx('playlist')}>
-            {
-                playlist?.songs.map((song, index) => {
+            {playlist?.songs ?
+                playlist.songs.map((song, index) => {
                     return (
                         <div 
                             key={index} 
@@ -88,7 +84,7 @@ function SongItem({ playlist }: SongItemProps) {
                             style={playlist.songs[index].song_id === currSongId ? {backgroundColor: '#ffffff1a'} : {}}
                         >
                             <div className={cx('song-info')}>
-                                <img src={defaulsImage && song.thumbnail_url} alt="" className={cx('song-image')}/>
+                                <img src={thumbnailUrl(song.song_id)} alt="" className={cx('song-image')}/>
                                 
                                 <span style={{
                                     display: 'block',   
@@ -111,6 +107,7 @@ function SongItem({ playlist }: SongItemProps) {
                         </div>
                     )
                 })
+                : <></>
             }
         </div> 
     )

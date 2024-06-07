@@ -9,7 +9,10 @@ import { SongModel } from "../../models/SongModel"
 
 // redux
 import { AppDispatch, RootState } from "../../redux/store"
-import { setCurrentSongIndex, setCurrentSongId } from "../../redux/slice/PlaylistSlice"
+import { setSongIndex } from "../../redux/slice/PlaylistSlice"
+import { setCurrSong } from "../../redux/slice/SongSlice"
+import { BASE_API_URL, MUSIC_API_ROUTES } from "../../constants/api"
+import { formatSongDuration } from "../../utils/formatTime"
 
 const cx = classNames.bind(styles)
 
@@ -19,40 +22,38 @@ type SongCardProps = {
 }
 
 function SongCard({ song_data, songIndex }: SongCardProps) {
-    const currSongIndex = useSelector((state: RootState) => state.playlistSlice.currSongIndex)
-    const selectedPlaylist = useSelector((state: RootState) => state.playlistSlice.selectedPlaylistData)
+    const currSongIndex = useSelector((state: RootState) => state.playlistSlice.songIndex)
+    const selectedPlaylist = useSelector((state: RootState) => state.playlistSlice.currPlaylist)
 
     const dispatch: AppDispatch = useDispatch()
 
     const [songDuration, setSongDuration] = useState('0:00')
     const audioRef = useRef<HTMLAudioElement>(null)
 
-    const handleLoad = () => {
-        if(audioRef.current) {
-            const minute = Math.floor(audioRef.current.duration / 60)
-            const seconds = Math.floor(audioRef.current.duration % 60)
-            
-            setSongDuration(`${minute}:${seconds.toString().padStart(2, '0')}`)
-        }
+    const handleSelectSong = () => {
+        dispatch(setSongIndex(songIndex))
+        dispatch(setCurrSong(selectedPlaylist.songs[songIndex]))
     }
 
-    const handleSelectSong = () => {
-        dispatch(setCurrentSongIndex(songIndex))
-        dispatch(setCurrentSongId(selectedPlaylist.songs[songIndex].song_id))
+    const streamUrl = (songID: string) => {
+        return BASE_API_URL + MUSIC_API_ROUTES.streamSong + '/' + songID;
+    }
+    const thumbnailUrl = (songID: string) => {
+        return BASE_API_URL + MUSIC_API_ROUTES.getThumbSong + '/' + songID;
     }
 
     return (
         <div className={cx('item')} onClick={handleSelectSong} style={currSongIndex === songIndex ? {backgroundColor: 'rgba(255, 255, 255, 0.1)'} : {}}>
             <a href="#!">
-                <img src={song_data.thumbnail_url} alt="" className={cx('song_image')}/>
+                <img src={thumbnailUrl(song_data.song_id)} alt="" className={cx('song_image')}/>
             </a>
 
             <div className={cx('info')}>
-                <h4 className={cx('author')}>{song_data.author}</h4>
+                <h4 className={cx('author')}>{song_data.album}</h4>
                 <p className={cx('song_name')}>{song_data.title}</p>
             </div>
 
-            <audio ref={audioRef} src={song_data.song_url} style={{display: 'none'}} onLoadedData={handleLoad}></audio>
+            <audio ref={audioRef} src={streamUrl(song_data.song_id)} style={{display: 'none'}} onLoadedData={() => formatSongDuration(audioRef, setSongDuration)}></audio>
 
             <span className={cx('duration')}>{songDuration}</span>
         </div>

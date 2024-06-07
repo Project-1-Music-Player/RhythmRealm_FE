@@ -2,8 +2,10 @@ import classNames from "classnames/bind"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBackwardStep, faForwardStep, faPause, faPlay, faRepeat, faShuffle } from "@fortawesome/free-solid-svg-icons"
 import React, { useState } from "react"
+import { useDispatch } from "react-redux"
 
 import styles from '../PlayControl.module.scss'
+import { AppDispatch } from "../../../../redux/store"
 
 const cx = classNames.bind(styles)
 
@@ -17,6 +19,8 @@ type ControlButtonProps = {
 }
 
 function ControlButton({ audioRef, onPlaying, onNext, onPrev, onShuffle, onRepeat }: ControlButtonProps) {
+    const dispatch: AppDispatch = useDispatch()
+
     const [isPlaying, setIsPlaying] = useState(false)
     const [isShuffle, setIsShuffle] = useState(false)
     const [isRepeat, setIsRepeat] = useState(false)
@@ -51,11 +55,7 @@ function ControlButton({ audioRef, onPlaying, onNext, onPrev, onShuffle, onRepea
             </div>
             
             <div className={cx('control_btn')} onClick={handlePlay}>
-                {isPlaying ? 
-                    <FontAwesomeIcon icon={faPause} className={cx('controlicon')}/> 
-                    : <FontAwesomeIcon icon={faPlay} className={cx('controlicon')}/>
-                }
-                
+                <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} className={cx('controlicon')}/> 
             </div>
 
             <div className={cx('control_btn')} onClick={() => onNext()}>

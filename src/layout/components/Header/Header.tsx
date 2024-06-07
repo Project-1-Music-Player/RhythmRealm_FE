@@ -12,12 +12,14 @@ import Logo from '../../../assets/images/logo_favicon.png'
 
 // component
 import SearchBar from './components/SearchBar'
+import SearchResults from "./components/SearchResults"
 
 // redux
 import { RootState, AppDispatch } from "../../../redux/store"
 import { logout } from "../../../redux/slice/AuthSlice"
 
 import { auth } from "../../../firebase"
+import { SongModel } from "../../../models/SongModel"
 
 const cx = classNames.bind(styles)
 
@@ -25,19 +27,17 @@ function Header() {
     const navigate = useNavigate()
     const dispatch: AppDispatch = useDispatch()
 
-    // const currentUser = useSelector((state: RootState) => state.userSlice.currentUser)
     const user = useSelector((state: RootState) => state.authSlice.user)
 
     const [isMenuHovered, setIsMenuHovered] = useState(false)
+    const [isShowSearchResults, setIsShowSearchResults] = useState(false)
+    const [searchResult, setSearchResult] = useState<SongModel[]>([])
 
     const handleSignOut = async () => {
         try {
             await auth.signOut()
-
             dispatch(logout())
-
             navigate('/login')
-
             console.log('Logout successfully: ', user.name)
 
         } catch(err) {
@@ -54,11 +54,12 @@ function Header() {
                 </ul>
             </div>
 
-           <SearchBar/>
+           <SearchBar setSearchResults={setSearchResult} isShowSearchResults={setIsShowSearchResults}/>
+           {isShowSearchResults ? <SearchResults results={searchResult} setShowSearchResult={setIsShowSearchResults}/> : <></>}
 
             {user.id !== '' ? 
                 <div className={cx('authen')}>
-                    <span className={cx('for_artist')}>FOR ARTISTS</span>
+                    <span className={cx('for_artist')}>UPLOAD SONG</span>
                     <div 
                         className={cx('user')} 
                         onMouseEnter={() => setIsMenuHovered(true)} 

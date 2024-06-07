@@ -6,7 +6,7 @@ import React, { useState } from "react"
 
 import styles from "./Playlist.module.scss"
 import { PlaylistModel } from "../../models/PlaylistModel"
-import { setCurrentPlaylist } from "../../redux/slice/PlaylistSlice"
+import { setCurrPlaylist } from "../../redux/slice/PlaylistSlice"
 import { AppDispatch } from "../../redux/store"
 
 const cx = classNames.bind(styles)
@@ -24,7 +24,7 @@ function PlayButton({ isHovered, playlist } : PlayButtonProps) {
     const handlePlaylistPlay = (playlist: PlaylistModel, e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation()
         setIsPlaying(!isPlaying)
-        dispatch(setCurrentPlaylist(playlist))
+        dispatch(setCurrPlaylist(playlist))
     }
 
     return (

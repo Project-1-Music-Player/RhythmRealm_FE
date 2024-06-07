@@ -18,10 +18,11 @@ export const Song1: SongModel = {
     author: 'Son Tung M-TP',
     title: 'Con mua xa dan',
     song_url: song_audio_4,
-    listen_count: 1234,
+    play_count: 1234,
     like_count: 9864,
     genre: 'pop',
     album: 'abc',
+    release_date: ''
 }
 
 export const Song2: SongModel = {
@@ -30,10 +31,11 @@ export const Song2: SongModel = {
     author: 'Son Tung M-TP',
     title: 'Khong phai dang vua dau',
     song_url: song_audio_5,
-    listen_count: 45679,
+    play_count: 45679,
     like_count: 48913,
     genre: 'pop',
     album: 'abc',
+    release_date: ''
 }
 
 export const Song3: SongModel = {
@@ -42,10 +44,11 @@ export const Song3: SongModel = {
     author: 'Charlie Puth',
     title: 'Dangerously',
     song_url: song_audio_2,
-    listen_count: 152,
+    play_count: 152,
     like_count: 71439,
     genre: 'pop',
     album: 'abc',
+    release_date: ''
 }
 
 export const Song4: SongModel = {
@@ -54,10 +57,11 @@ export const Song4: SongModel = {
     author: 'Charlie Puth',
     title: 'Dangerously',
     song_url: song_audio_3,
-    listen_count: 789,
+    play_count: 789,
     like_count: 777777,
     genre: 'pop',
     album: 'abc',
+    release_date: ''
 }
 
 export const ListFakeSong = [

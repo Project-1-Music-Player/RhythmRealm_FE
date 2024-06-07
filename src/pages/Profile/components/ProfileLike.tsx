@@ -31,7 +31,7 @@ function ProfileLike({ profileSong }: ProfileLikeProps) {
                                 <div className={cx('song-statistic')}>
                                     <div className={cx('song-reaction')}>
                                         <FontAwesomeIcon icon={faHeart} className={cx('heart-icon')}/>
-                                        <span className={cx('song-num')}>{song.listen_count}</span>
+                                        <span className={cx('song-num')}>{song.play_count}</span>
                                     </div>
 
                                     <div className={cx('song-reaction')}>

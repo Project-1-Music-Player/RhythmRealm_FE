@@ -35,7 +35,7 @@ function Home() {
         <div className={cx('container')}>
             <div className={cx('content')}>
                 {user.id !== '' ? 
-                    <ModularPlaylist title='Yourself' playlist={userPlaylist}/> 
+                    <ModularPlaylist title='My songs' playlist={userPlaylist}/> 
                     : <></>
                 }
                 <ModularPlaylist title={MockModular.title} playlist={MockModular.list_playlist}/>

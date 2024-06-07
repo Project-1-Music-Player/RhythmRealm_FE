@@ -11,12 +11,12 @@ import SongQueue from "../../../../components/SongQueue/SongQueue"
 
 // redux
 import { RootState } from "../../../../redux/store"
+import { BASE_API_URL, MUSIC_API_ROUTES } from "../../../../constants/api"
 
 const cx = classNames.bind(styles)
 
 function SoundBadge() {
-    const selectedPlaylist = useSelector((state: RootState) => state.playlistSlice.selectedPlaylistData)
-    const currSongIndex = useSelector((state: RootState) => state.playlistSlice.currSongIndex)
+    const currSong = useSelector((state: RootState) => state.songSlice.currSong)
 
     const [isLiked, setIsLiked] = useState(false)
     const [isQueueOpened, setIsQueueOpened] = useState(false)
@@ -25,15 +25,19 @@ function SoundBadge() {
         setIsQueueOpened(!result)
     }
 
+    const thumbnailUrl = (songID: string) => {
+        return BASE_API_URL + MUSIC_API_ROUTES.getThumbSong + '/' + songID;
+    }
+
     return (
         <section className={cx('sound_badge')}>
             <a href="#!">
-                <img src={selectedPlaylist.songs[currSongIndex].thumbnail_url} alt="" className={cx('avatar')}/>
+                <img src={thumbnailUrl(currSong.song_id)} alt="" className={cx('avatar')}/>
             </a>
 
             <div className={cx('info')}>
-                <span className={cx('author')}>{selectedPlaylist.songs[currSongIndex].author}</span>
-                <span className={cx('title')}>{selectedPlaylist.songs[currSongIndex].title}</span>
+                <span className={cx('author')}>{currSong.album}</span>
+                <span className={cx('title')}>{currSong.title}</span>
             </div>
 
             <div className={cx('actions')}>
@@ -45,7 +49,7 @@ function SoundBadge() {
                     />
                 </div>
 
-                <div className={cx('actions_btn')}>
+                {/* <div className={cx('actions_btn')}>
                     <FontAwesomeIcon 
                         icon={faListUl} 
                         className={cx('queue')}
@@ -57,7 +61,7 @@ function SoundBadge() {
                             <SongQueue isClosed={getIsClosed}/> 
                         : <></>
                     }
-                </div>
+                </div> */}
             </div>
         </section>
     )

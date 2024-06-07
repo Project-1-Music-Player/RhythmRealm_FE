@@ -169,3 +169,31 @@
         }
     }
 }
+
+.container {
+    width: 400px;
+    max-height: 136px;
+    background-color: white;
+    position: absolute;
+    top: 60px;
+    left: 417px;
+    border-radius: 5px;
+    overflow: auto;
+
+    .result-item {
+        display: flex;
+        align-items: center;    
+        padding: 5px 10px;
+
+        &:hover {
+            background-color: #ddd;
+            cursor: pointer;
+        }
+    }
+
+    .song-title {
+        color: #686868;
+        font-weight: 500;
+        margin-left: 15px;
+    }
+}

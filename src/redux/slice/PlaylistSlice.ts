@@ -4,35 +4,35 @@ import { PlaylistModel } from "../../models/PlaylistModel"
 import { MockModular } from "../../MockData/ModularPlaylistData"
 
 interface PlaylistState {
-    selectedPlaylistData: PlaylistModel,
-    currSongIndex: number,
-    currSongId: string,
+    currPlaylist: PlaylistModel,
+    songIndex: number,
+    isPlayControlOn: boolean
 }
 
 const initialState: PlaylistState = {
-    selectedPlaylistData: MockModular.list_playlist[0],
-    currSongIndex: 0,
-    currSongId: MockModular.list_playlist[0].songs[0].song_id,
+    currPlaylist: MockModular.list_playlist[0],
+    songIndex: 0,
+    isPlayControlOn: false,
 }
 
 const PlaylistSlice = createSlice({
     name: 'playlist',
     initialState: initialState,
     reducers: {
-        setCurrentPlaylist: (state, action: PayloadAction<PlaylistModel>) => {
-           state.selectedPlaylistData = action.payload
-           state.currSongIndex = 0
+        setCurrPlaylist: (state, action: PayloadAction<PlaylistModel>) => {
+           state.currPlaylist = action.payload
+           state.songIndex = 0
         },
 
-        setCurrentSongIndex: (state, action: PayloadAction<number>) => {
-            state.currSongIndex = action.payload
+        setSongIndex: (state, action: PayloadAction<number>) => {
+            state.songIndex = action.payload
         },
 
-        setCurrentSongId: (state, action: PayloadAction<string>) => {
-            state.currSongId = action.payload
+        setIsPlayControlOn: (state, action: PayloadAction<boolean>) => {
+            state.isPlayControlOn = action.payload
         }
     },
 })
 
-export const { setCurrentPlaylist, setCurrentSongIndex, setCurrentSongId } = PlaylistSlice.actions
+export const { setCurrPlaylist, setSongIndex, setIsPlayControlOn } = PlaylistSlice.actions
 export default PlaylistSlice.reducer

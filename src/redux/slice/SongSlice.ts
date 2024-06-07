@@ -1,22 +1,24 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { PayloadAction, createSlice } from "@reduxjs/toolkit"
+import { SongModel } from "../../models/SongModel"
+import { MockModular } from "../../MockData/ModularPlaylistData"
 
 interface SongState {
-    onPlaying: boolean
+    currSong: SongModel,
 }
 
 const initialState: SongState = {
-    onPlaying: false,
+    currSong: MockModular.list_playlist[0].songs[0]
 }
 
 const SongSlice = createSlice({
     name: 'song',
     initialState: initialState,
     reducers: {
-        setOnPlayingSong: (state) => {
-            state.onPlaying = !state.onPlaying
+        setCurrSong: (state, action: PayloadAction<SongModel>) => {
+            state.currSong = action.payload
         }
     }
 })
 
-export const { setOnPlayingSong } = SongSlice.actions
+export const { setCurrSong } = SongSlice.actions
 export default SongSlice.reducer

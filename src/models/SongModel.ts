@@ -6,6 +6,7 @@ export interface SongModel {
     song_url: string | '';
     genre: string | '';
     album: string | '';
-    listen_count: number;
+    play_count: number;
+    release_date: string | '';
     like_count: number;
 }

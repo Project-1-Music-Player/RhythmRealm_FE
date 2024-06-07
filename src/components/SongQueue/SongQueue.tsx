@@ -18,7 +18,7 @@ type SongQueueProps = {
 }
 
 function SongQueue({ isClosed }: SongQueueProps) {
-    const selectedPlaylist = useSelector((state: RootState) => state.playlistSlice.selectedPlaylistData)
+    const selectedPlaylist = useSelector((state: RootState) => state.playlistSlice.currPlaylist)
 
     return (
         <div className={cx('container')}>

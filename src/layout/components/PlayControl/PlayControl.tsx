@@ -10,15 +10,19 @@ import ControlButton from "./components/ControlButton"
 import VolumnConTrol from "./components/VolumnControl"
 
 // redux
-import { setCurrentSongIndex, setCurrentSongId } from "../../../redux/slice/PlaylistSlice"
+import { setSongIndex } from "../../../redux/slice/PlaylistSlice"
+import { setCurrSong } from "../../../redux/slice/SongSlice"
 import { RootState, AppDispatch } from "../../../redux/store"
+import { BASE_API_URL, MUSIC_API_ROUTES } from "../../../constants/api"
 
 const cx = classNames.bind(styles)
 
 function PlayControl() {
-    const selectedPlaylist = useSelector((state: RootState) => state.playlistSlice.selectedPlaylistData)
-    const currSongIndex = useSelector((state: RootState) => state.playlistSlice.currSongIndex)
-
+    const selectedPlaylist = useSelector((state: RootState) => state.playlistSlice.currPlaylist)
+    const currSongIndex = useSelector((state: RootState) => state.playlistSlice.songIndex)
+    const currSong = useSelector((state: RootState) => state.songSlice.currSong)
+    
+    const audioRef = useRef<HTMLAudioElement>(null)
     const dispatch: AppDispatch = useDispatch()
 
     const [isPlaying, setIsPlaying] = useState(false)
@@ -28,32 +32,26 @@ function PlayControl() {
     const [currentDuration, setCurrentDuration] = useState('0:00')
     const [duration, setDuration] = useState('0:00')
 
-    const audioRef = useRef<HTMLAudioElement>(null)
-
     const getIsPlaying = (state: boolean) => {
         setIsPlaying(!state)
     }
-
     const getOnNextClick = () => {
-        dispatch(setCurrentSongIndex(currSongIndex + 1))
+        dispatch(setSongIndex(currSongIndex + 1))
         if(currSongIndex >= selectedPlaylist.songs.length - 1) {
-            dispatch(setCurrentSongIndex(0))
-            dispatch(setCurrentSongId(selectedPlaylist.songs[currSongIndex].song_id))
+            dispatch(setSongIndex(0))
         }
+        dispatch(setCurrSong(selectedPlaylist.songs[currSongIndex]))
     }
-
     const getOnPrevClick = () => {
-        dispatch(setCurrentSongIndex(currSongIndex - 1))
+        dispatch(setSongIndex(currSongIndex - 1))
         if(currSongIndex <= 0) {
-            dispatch(setCurrentSongIndex(selectedPlaylist.songs.length - 1))
-            dispatch(setCurrentSongId(selectedPlaylist.songs[currSongIndex].song_id))
-        }
+            dispatch(setSongIndex(selectedPlaylist.songs.length - 1))
+            }
+        dispatch(setCurrSong(selectedPlaylist.songs[currSongIndex]))
     }
-
     const getOnShuffle = (state: boolean) => {
         setIsShuffle(!state)
     }
-
     const getOnRepeat = (state: boolean) => {
         setIsRepeat(!state)
     }
@@ -104,8 +102,8 @@ function PlayControl() {
 
                 do {
                     ranIndex = Math.floor(Math.random() * selectedPlaylist.songs.length)
-                    dispatch(setCurrentSongIndex(ranIndex))
-                    dispatch(setCurrentSongId(selectedPlaylist.songs[ranIndex].song_id))
+                    dispatch(setSongIndex(ranIndex))
+
                 } while (ranIndex === currSongIndex)
             } else {
                 getOnNextClick()
@@ -120,8 +118,8 @@ function PlayControl() {
         setDuration(`${minute}:${seconds.toString().padStart(2, '0')}`)
     }
 
-    const streamUrl = (songID: string) => {
-        return `http://localhost:3000/music/stream/${songID}`;
+    const streamUrl = (songId: string) => {
+        return BASE_API_URL + MUSIC_API_ROUTES.streamSong + '/' + songId;
     }
 
     return (
@@ -144,7 +142,7 @@ function PlayControl() {
                     </div>
 
                     <audio 
-                        src={streamUrl(selectedPlaylist.songs[currSongIndex].song_id)}
+                        src={streamUrl(currSong.song_id)}
                         ref={audioRef}
                         onTimeUpdate={getCurrDuration}
                         onLoadedData={handleLoadAudio} 
