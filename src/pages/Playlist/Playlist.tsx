@@ -33,8 +33,6 @@ function Playlist() {
     const userIdToken = useSelector((state: RootState) => state.authSlice.accessToken)
     
     const { id } = useParams()
-    const fakePlaylist = ListFakePlaylist.find(playlist => playlist.id === id)
-    // setPlaylist(fakePlaylist)
 
     const handleOutFormClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         setIsEditForm(false)
@@ -68,7 +66,12 @@ function Playlist() {
         }
     }
     useEffect(() => {
-        getSongsInPlaylist()
+        if(id === user.id) {
+            getSongsInPlaylist()
+        } else {
+            const fakePlaylist = ListFakePlaylist.find(playlist => playlist.id === id)
+            setPlaylist(fakePlaylist)
+        }
     }, [])
 
     return (

@@ -103,8 +103,9 @@ function PlayControl() {
                 do {
                     ranIndex = Math.floor(Math.random() * selectedPlaylist.songs.length)
                     dispatch(setSongIndex(ranIndex))
-
                 } while (ranIndex === currSongIndex)
+                // getOnNextClick()
+
             } else {
                 getOnNextClick()
             }

@@ -1,8 +1,8 @@
 import classNames from "classnames/bind"
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useNavigate, Link } from "react-router-dom"
-import { useState } from "react"
+import { useNavigate, Link, useLocation } from "react-router-dom"
+import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
 import styles from './Header.module.scss'
@@ -25,13 +25,22 @@ const cx = classNames.bind(styles)
 
 function Header() {
     const navigate = useNavigate()
+    const location = useLocation() 
     const dispatch: AppDispatch = useDispatch()
 
     const user = useSelector((state: RootState) => state.authSlice.user)
 
     const [isMenuHovered, setIsMenuHovered] = useState(false)
+    const [uploadBtn, setUploadBtn] = useState(true)
     const [isShowSearchResults, setIsShowSearchResults] = useState(false)
     const [searchResult, setSearchResult] = useState<SongModel[]>([])
+
+    const handleUploadBtn = () => {
+        navigate('/upload')
+    }
+    useEffect(() => {
+        setUploadBtn(!uploadBtn)
+    }, [location.pathname.includes('/upload')])
 
     const handleSignOut = async () => {
         try {
@@ -59,7 +68,12 @@ function Header() {
 
             {user.id !== '' ? 
                 <div className={cx('authen')}>
-                    <span className={cx('for_artist')}>UPLOAD SONG</span>
+                    <span 
+                        className={cx('upload')}  
+                        onClick={handleUploadBtn}
+                        style={uploadBtn ? {backgroundColor: '#828282'} : {}}
+                    >UPLOAD SONG</span>
+
                     <div 
                         className={cx('user')} 
                         onMouseEnter={() => setIsMenuHovered(true)} 

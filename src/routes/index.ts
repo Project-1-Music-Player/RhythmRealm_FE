@@ -6,6 +6,7 @@ import AuthenLayout from "../layout/AuthenLayout/AuthenLayout"
 import Playlist from "../pages/Playlist/Playlist"
 import Profile from "../pages/Profile/Profile"
 import Search from "../pages/Search/Search"
+import Upload from "../pages/Upload/Upload"
 
 const publicRoutes = [
     {path: routes.home, component: Home, layout: null},
@@ -13,7 +14,8 @@ const publicRoutes = [
     {path: routes.register, component: Register, layout: AuthenLayout},
     {path: routes.playlist, component: Playlist},
     {path: routes.profile, component: Profile},
-    {path: routes.search, component: Search, layout: null}
+    {path: routes.search, component: Search, layout: null},
+    {path: routes.upload, component: Upload}
 ]
 
 export { publicRoutes }
