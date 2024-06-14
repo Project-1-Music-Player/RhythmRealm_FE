@@ -5,11 +5,9 @@ import { useSelector } from "react-redux"
 
 import styles from "./SongQueue.module.scss"
 
-// component
-import SongCard from "./SongCard"
+import { RootState } from "@/redux/store"
 
-// redux
-import { RootState } from "../../redux/store"
+import SongCard from "./SongCard"
 
 const cx = classNames.bind(styles)
 

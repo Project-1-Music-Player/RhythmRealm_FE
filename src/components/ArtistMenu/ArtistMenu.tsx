@@ -4,13 +4,9 @@ import { faUserGroup, faRotate } from "@fortawesome/free-solid-svg-icons"
 
 import styles from './ArtistMenu.module.scss'
 
-// asset
-import artist_avatar from '../../assets/images/artist_avatar.jpg'
+import artist_avatar from '@/assets/images/artist_avatar.jpg'
+import { UserModel } from "@/models/UserModel"
 
-// model
-import { UserModel } from "../../models/UserModel"
-
-// component
 import ArtistCard from "./ArtistCard"
 
 const cx = classNames.bind(styles)

@@ -4,15 +4,12 @@ import { useDispatch, useSelector } from "react-redux"
 
 import styles from "./SongQueue.module.scss"
 
-// model
-import { SongModel } from "../../models/SongModel"
-
-// redux
-import { AppDispatch, RootState } from "../../redux/store"
-import { setSongIndex } from "../../redux/slice/PlaylistSlice"
-import { setCurrSong } from "../../redux/slice/SongSlice"
-import { BASE_API_URL, MUSIC_API_ROUTES } from "../../constants/api"
-import { formatSongDuration } from "../../utils/formatTime"
+import { SongModel } from "@/models/SongModel"
+import { AppDispatch, RootState } from "@/redux/store"
+import { setSongIndex } from "@/redux/slice/PlaylistSlice"
+import { setCurrSong } from "@/redux/slice/SongSlice"
+import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
+import { formatSongDuration } from "@/utils/formatTime"
 
 const cx = classNames.bind(styles)
 

@@ -6,8 +6,9 @@ import { useSelector } from "react-redux"
 import axios from "axios"
 
 import styles from './Upload.module.scss'
-import { BASE_API_URL, MUSIC_API_ROUTES } from "../../constants/api"
-import { RootState } from "../../redux/store"
+
+import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
+import { RootState } from "@/redux/store"
 
 const cx = classNames.bind(styles)
 
@@ -20,11 +21,12 @@ type UploadModel = {
     song: File | null,
 }
 
+const songGenres = ["Blues", "Classical", "Country", "EDM", "Hip-Hop/Rap", "Indie", "Jazz", "Metal", "Pop", "R&B", "Reggae", "Rock"]
+
 function Upload() {
     const navigate = useNavigate()
     const userIdToken = useSelector((state: RootState) => state.authSlice.accessToken)
     const userId = useSelector((state: RootState) => state.authSlice.user.id)
-
 
     const [songData, setSongData] = useState<UploadModel>({
         title: '',
@@ -136,15 +138,23 @@ function Upload() {
 
                 <Form.Group style={{marginBottom: '20px'}}>
                     <Form.Label className={cx('label')}>Genre</Form.Label>
-                    <Form.Control
-                        autoComplete="off"
+                    <Form.Control 
+                        as="select"
                         required
-                        type="text"
+                        className={cx('select-input')}
                         name="genre"
-                        className={cx('input')}
                         value={songData.genre}
                         onChange={handleFormChange}
-                    />
+                    >
+                        <option value="" style={{color: '#000', fontWeight: '500', fontSize: '1.6rem', minHeight: '20px'}}>Choose song genre...</option>
+                        {songGenres.map((genre, index) => (
+                            <option 
+                                key={index} 
+                                value={genre}
+                                className={cx('genre-option')}
+                            >{genre}</option>
+                        ))}
+                    </Form.Control>  
                 </Form.Group>
 
                 <Form.Group style={{marginBottom: '20px'}}>

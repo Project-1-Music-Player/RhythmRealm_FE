@@ -5,9 +5,8 @@ import React, { useState } from "react"
 
 import styles from '../Playlist.module.scss'
 
-// model
-import { PlaylistModel } from "../../../models/PlaylistModel"
-import { BASE_API_URL, MUSIC_API_ROUTES } from "../../../constants/api"
+import { PlaylistModel } from "@/models/PlaylistModel"
+import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
 
 const cx = classNames.bind(styles)
 

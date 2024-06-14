@@ -3,10 +3,8 @@ import { useNavigate } from "react-router-dom"
 
 import styles from "./ModularPlaylist.module.scss"
 
-// model
-import { PlaylistModel } from "../../models/PlaylistModel"
+import { PlaylistModel } from "@/models/PlaylistModel"
 
-// component
 import Playlist from "../Playlist/Playlist"
 
 const cx = classNames.bind(styles)

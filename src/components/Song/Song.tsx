@@ -1,12 +1,8 @@
 import classNames from "classnames/bind"
-import React, { useState } from "react"
 
 import styles from "./Playlist.module.scss"
 
-// model
-import { SongModel } from "../../models/SongModel"
-
-// component
+import { SongModel } from "@/models/SongModel"
 
 const cx = classNames.bind(styles)
 

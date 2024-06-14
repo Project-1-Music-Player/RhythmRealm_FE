@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-import { UserModel } from "../../models/UserModel"
-import { initialUser } from "../../MockData/UserData"
+import { UserModel } from "@/models/UserModel"
+import { initialUser } from "@/MockData/UserData"
 
 interface UserState {
     currentUser: UserModel,

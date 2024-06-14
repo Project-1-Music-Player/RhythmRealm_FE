@@ -2,9 +2,8 @@ import classNames from "classnames/bind"
 
 import styles from '../Profile.module.scss'
 
-// model
-import { UserModel } from "../../../models/UserModel"
-import { UserAuthModel } from "../../../models/AuthModel"
+import { UserModel } from "@/models/UserModel"
+import { UserAuthModel } from "@/models/AuthModel"
 
 const cx = classNames.bind(styles)
 

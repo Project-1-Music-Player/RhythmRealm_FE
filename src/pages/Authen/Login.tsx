@@ -3,31 +3,19 @@ import { Form, Button } from "react-bootstrap"
 import { Link, useNavigate } from "react-router-dom"
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
-import { User } from "firebase/auth"
-import { auth, googleProvider, signInWithPopup } from "../../firebase"
+import axios from "axios"
 
 import styles from "./Authen.module.scss"
 
-// asset
-import gglogo from '../../assets/icons/GG.png'
-
-// model
-import { LoginModel } from "../../models/LoginModel"
-
-// component
-import AuthenDecor from "../../components/AuthenDecor/AuthenDecor"
-
-// redux
-import { setCurrentUser } from "../../redux/slice/UserSlice"
-import { login } from "../../redux/slice/AuthSlice"
-import { AppDispatch } from "../../redux/store"
-
-// constants
-import { BASE_API_URL, AUTH_API_ROUTES } from "../../constants/api"
-
-// mockdata
-import { ListFakeUser } from "../../MockData/UserData"
-import axios from "axios"
+import { auth, googleProvider, signInWithPopup } from "@/firebase"
+import { LoginModel } from "@/models/LoginModel"
+import AuthenDecor from "@/components/AuthenDecor/AuthenDecor"
+import { setCurrentUser } from "@/redux/slice/UserSlice"
+import { login } from "@/redux/slice/AuthSlice"
+import { AppDispatch } from "@/redux/store"
+import gglogo from '@/assets/icons/GG.png'
+import { BASE_API_URL, AUTH_API_ROUTES } from "@/constants/api"
+import { ListFakeUser } from "@/MockData/UserData"
 
 const cx = classNames.bind(styles)
 

@@ -6,10 +6,11 @@ import { useEffect, useState } from "react"
 
 import styles from './Search.module.scss'
 
-import Sidebar from "../../layout/components/Sidebar/Sidebar"
-import { RootState } from "../../redux/store"
-import { BASE_API_URL, MUSIC_API_ROUTES } from "../../constants/api"
-import { SongModel } from "../../models/SongModel"
+import Sidebar from "@/layout/components/Sidebar/Sidebar"
+import { RootState } from "@/redux/store"
+import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
+import { SongModel } from "@/models/SongModel"
+
 import SongResult from "./components/SongResult"
 
 const cx = classNames.bind(styles)

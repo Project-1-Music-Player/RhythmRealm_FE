@@ -3,12 +3,11 @@ import { useNavigate } from "react-router-dom"
 
 import styles from './AuthenDecor.module.scss'
 
-// asset
-import logo from '../../assets/images/logo_favicon.png'
-import logoname from '../../assets/images/logo_name.png'
-import notelist from '../../assets/icons/BsMusicNoteList.svg'
-import notebeam from '../../assets/icons/BsMusicNoteBeamed.svg'
-import musicplayer from '../../assets/icons/BsMusicPlayer.svg'
+import logo from '@/assets/images/logo_favicon.png'
+import logoname from '@/assets/images/logo_name.png'
+import notelist from '@/assets/icons/BsMusicNoteList.svg'
+import notebeam from '@/assets/icons/BsMusicNoteBeamed.svg'
+import musicplayer from '@/assets/icons/BsMusicPlayer.svg'
 
 const cx = classNames.bind(styles)  
 

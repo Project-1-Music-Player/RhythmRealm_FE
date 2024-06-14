@@ -1,7 +1,8 @@
 import classNames from "classnames/bind"
 
 import styles from '../Playlist.module.scss'
-import { PlaylistModel } from "../../../models/PlaylistModel"
+
+import { PlaylistModel } from "@/models/PlaylistModel"
 
 const cx = classNames.bind(styles)
 

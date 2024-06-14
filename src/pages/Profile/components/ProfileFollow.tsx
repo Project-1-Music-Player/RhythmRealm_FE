@@ -2,8 +2,7 @@ import classNames from "classnames/bind"
 
 import styles from "../Profile.module.scss"
 
-// model
-import { UserArtistFollow } from "../../../models/UserModel"
+import { UserArtistFollow } from "@/models/UserModel"
 
 const cx = classNames.bind(styles)
 

@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 
 import styles from "./DefaultLayout.module.scss"
 
-// component
+import { RootState } from "@/redux/store"
+
 import Header from "../components/Header/Header"
 import PlayControl from "../components/PlayControl/PlayControl"
-import { RootState } from "../../redux/store";
 
 type DefaultLayoutProps = {
     children: React.ReactElement

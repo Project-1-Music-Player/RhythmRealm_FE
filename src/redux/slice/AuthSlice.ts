@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-import { AuthModel } from "../../models/AuthModel"
+import { AuthModel } from "@/models/AuthModel"
 
 const initialState: AuthModel = {
     user: {

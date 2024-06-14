@@ -7,19 +7,14 @@ import { useSelector, useDispatch } from "react-redux"
 
 import styles from './Header.module.scss'
 
-// asset
-import Logo from '../../../assets/images/logo_favicon.png'
+import Logo from '@/assets/images/logo_favicon.png'
+import { auth } from "@/firebase"
+import { logout } from "@/redux/slice/AuthSlice"
+import { RootState, AppDispatch } from "@/redux/store"
+import { SongModel } from "@/models/SongModel"
 
-// component
 import SearchBar from './components/SearchBar'
 import SearchResults from "./components/SearchResults"
-
-// redux
-import { RootState, AppDispatch } from "../../../redux/store"
-import { logout } from "../../../redux/slice/AuthSlice"
-
-import { auth } from "../../../firebase"
-import { SongModel } from "../../../models/SongModel"
 
 const cx = classNames.bind(styles)
 
@@ -38,9 +33,15 @@ function Header() {
     const handleUploadBtn = () => {
         navigate('/upload')
     }
+    
+    const windowUrl = location.pathname.includes('/upload')
     useEffect(() => {
-        setUploadBtn(!uploadBtn)
-    }, [location.pathname.includes('/upload')])
+        if(windowUrl) {
+            setUploadBtn(true)
+        } else {
+            setUploadBtn(false)
+        }
+    }, [windowUrl])
 
     const handleSignOut = async () => {
         try {

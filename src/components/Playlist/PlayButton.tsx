@@ -5,9 +5,10 @@ import { useDispatch } from "react-redux"
 import React, { useState } from "react"
 
 import styles from "./Playlist.module.scss"
-import { PlaylistModel } from "../../models/PlaylistModel"
-import { setCurrPlaylist } from "../../redux/slice/PlaylistSlice"
-import { AppDispatch } from "../../redux/store"
+
+import { PlaylistModel } from "@/models/PlaylistModel"
+import { setCurrPlaylist } from "@/redux/slice/PlaylistSlice"
+import { AppDispatch } from "@/redux/store"
 
 const cx = classNames.bind(styles)
 

@@ -6,16 +6,13 @@ import { useDispatch, useSelector } from "react-redux"
 
 import styles from "../Playlist.module.scss"
 
-// model
-import { PlaylistModel } from "../../../models/PlaylistModel"
-
-// redux
-import { setCurrPlaylist, setSongIndex, setIsPlayControlOn } from "../../../redux/slice/PlaylistSlice"
-import { RootState, AppDispatch } from "../../../redux/store"
-import { setCurrSong } from "../../../redux/slice/SongSlice"
-import { SongModel } from "../../../models/SongModel"
-import { formatSongDuration } from "../../../utils/formatTime"
-import { BASE_API_URL, MUSIC_API_ROUTES } from "../../../constants/api"
+import { PlaylistModel } from "@/models/PlaylistModel"
+import { SongModel } from "@/models/SongModel"
+import { formatSongDuration } from "@/utils/formatTime"
+import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
+import { RootState, AppDispatch } from "@/redux/store"
+import { setCurrSong } from "@/redux/slice/SongSlice"
+import { setCurrPlaylist, setSongIndex, setIsPlayControlOn } from "@/redux/slice/PlaylistSlice"
 
 const cx = classNames.bind(styles)
 

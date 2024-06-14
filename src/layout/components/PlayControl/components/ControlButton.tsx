@@ -5,7 +5,8 @@ import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 
 import styles from '../PlayControl.module.scss'
-import { AppDispatch } from "../../../../redux/store"
+
+import { AppDispatch } from "@/redux/store"
 
 const cx = classNames.bind(styles)
 

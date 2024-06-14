@@ -1,29 +1,22 @@
 import classNames from "classnames/bind"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faHeart, faListUl } from "@fortawesome/free-solid-svg-icons"
+import { faHeart, faCaretDown } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 import styles from '../PlayControl.module.scss'
 
-// component
-import SongQueue from "../../../../components/SongQueue/SongQueue"
-
-// redux
-import { RootState } from "../../../../redux/store"
-import { BASE_API_URL, MUSIC_API_ROUTES } from "../../../../constants/api"
+import { AppDispatch, RootState } from "@/redux/store"
+import { setIsPlayControlOn } from "@/redux/slice/PlaylistSlice"
+import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
 
 const cx = classNames.bind(styles)
 
 function SoundBadge() {
+    const dispatch:AppDispatch = useDispatch()
     const currSong = useSelector((state: RootState) => state.songSlice.currSong)
 
     const [isLiked, setIsLiked] = useState(false)
-    const [isQueueOpened, setIsQueueOpened] = useState(false)
-
-    const getIsClosed = (result: boolean) => {
-        setIsQueueOpened(!result)
-    }
 
     const thumbnailUrl = (songID: string) => {
         return BASE_API_URL + MUSIC_API_ROUTES.getThumbSong + '/' + songID;
@@ -49,19 +42,13 @@ function SoundBadge() {
                     />
                 </div>
 
-                {/* <div className={cx('actions_btn')}>
+                <div className={cx('actions_btn')}>
                     <FontAwesomeIcon 
-                        icon={faListUl} 
+                        icon={faCaretDown} 
                         className={cx('queue')}
-                        onClick={() => setIsQueueOpened(!isQueueOpened)}
+                        onClick={() => dispatch(setIsPlayControlOn(false))}
                     />
-
-                    {
-                        isQueueOpened ? 
-                            <SongQueue isClosed={getIsClosed}/> 
-                        : <></>
-                    }
-                </div> */}
+                </div>
             </div>
         </section>
     )

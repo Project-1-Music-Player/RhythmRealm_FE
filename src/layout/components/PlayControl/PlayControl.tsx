@@ -4,16 +4,14 @@ import { useSelector, useDispatch } from "react-redux"
 
 import styles from './PlayControl.module.scss'
 
-// component
+import { setSongIndex } from "@/redux/slice/PlaylistSlice"
+import { setCurrSong } from "@/redux/slice/SongSlice"
+import { RootState, AppDispatch } from "@/redux/store"
+import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
+
 import SoundBadge from "./components/SoundBadge"
 import ControlButton from "./components/ControlButton"
 import VolumnConTrol from "./components/VolumnControl"
-
-// redux
-import { setSongIndex } from "../../../redux/slice/PlaylistSlice"
-import { setCurrSong } from "../../../redux/slice/SongSlice"
-import { RootState, AppDispatch } from "../../../redux/store"
-import { BASE_API_URL, MUSIC_API_ROUTES } from "../../../constants/api"
 
 const cx = classNames.bind(styles)
 

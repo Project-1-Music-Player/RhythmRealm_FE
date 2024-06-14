@@ -7,7 +7,8 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
 import styles from '../Header.module.scss'
-import { BASE_API_URL, MUSIC_API_ROUTES } from "../../../../constants/api"
+
+import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
 
 const cx = classNames.bind(styles)
 
@@ -45,7 +46,7 @@ function SearchBar({ setSearchResults, isShowSearchResults }: SearchBarProps) {
         setSearchValue(e.target.value)
     }
     const handleEnterDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if(e.key === 'Enter') {
+        if(e.key === 'Enter' && searchValue !== '') {
             updateURLWithQuery(searchValue)
             isShowSearchResults(false)
         }

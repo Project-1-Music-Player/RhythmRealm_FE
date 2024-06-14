@@ -2,25 +2,19 @@ import classNames from "classnames/bind"
 import { Form, Button } from "react-bootstrap"
 import { Link, useNavigate } from "react-router-dom"
 import React, { useState } from "react"
+import { User } from "firebase/auth"
+import { useDispatch } from "react-redux"
+import axios from "axios"
 
 import styles from "./Authen.module.scss"
 
-// asset
-import gglogo from '../../assets/icons/GG.png'
-
-// model
-import { RegisterModel } from "../../models/RegisterModel"
-
-// component
-import AuthenDecor from "../../components/AuthenDecor/AuthenDecor"
-import { User } from "firebase/auth"
-import { auth, googleProvider, signInWithPopup } from "../../firebase"
-import { BASE_API_URL, AUTH_API_ROUTES } from "../../constants/api"
-import axios from "axios"
-import { AppDispatch } from "../../redux/store"
-import { useDispatch } from "react-redux"
-import { login } from "../../redux/slice/AuthSlice"
-
+import { RegisterModel } from "@/models/RegisterModel"
+import gglogo from '@/assets/icons/GG.png'
+import AuthenDecor from "@/components/AuthenDecor/AuthenDecor"
+import { auth, googleProvider, signInWithPopup } from "@/firebase"
+import { BASE_API_URL, AUTH_API_ROUTES } from "@/constants/api"
+import { AppDispatch } from "@/redux/store"
+import { login } from "@/redux/slice/AuthSlice"
 
 const cx = classNames.bind(styles)
 

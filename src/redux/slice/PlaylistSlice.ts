@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-import { PlaylistModel } from "../../models/PlaylistModel"
-import { MockModular } from "../../MockData/ModularPlaylistData"
+import { PlaylistModel } from "@/models/PlaylistModel"
+import { MockModular } from "@/MockData/ModularPlaylistData"
 
 interface PlaylistState {
     currPlaylist: PlaylistModel,

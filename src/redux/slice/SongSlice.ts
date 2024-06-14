@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { SongModel } from "../../models/SongModel"
-import { MockModular } from "../../MockData/ModularPlaylistData"
+import { SongModel } from "@/models/SongModel"
+import { MockModular } from "@/MockData/ModularPlaylistData"
 
 interface SongState {
     currSong: SongModel,

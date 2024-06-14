@@ -1,19 +1,16 @@
 import classNames from "classnames/bind"
-import { useParams } from "react-router-dom"
 import { useState } from "react"
 import { useSelector } from "react-redux"
 
 import styles from './Profile.module.scss'
 
-// component
+import { RootState } from "@/redux/store"
+
 import ProfileHero from "./components/ProfileHero"
 import ProfileAll from './components/ProfileAll'
 import ProfilePlaylist from './components/ProfilePlaylist'
 import ProfileLike from "./components/ProfileLike"
 import ProfileFollow from "./components/ProfileFollow"
-
-// redux
-import { RootState } from "../../redux/store"
 
 const cx = classNames.bind(styles)
 

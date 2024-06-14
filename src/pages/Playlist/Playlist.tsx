@@ -7,21 +7,15 @@ import axios from "axios"
 
 import styles from './Playlist.module.scss'
 
-// component
+import { RootState } from "@/redux/store"
+import { PlaylistModel } from "@/models/PlaylistModel"
+import { ListFakePlaylist } from "@/MockData/PlaylistData"
+import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
+
 import Hero from "./components/Hero"
 import ActionButton from "./components/ActionButton"
 import SongItem from "./components/SongItem"
 import EditPlaylistForm from "./components/EditPlaylistForm"
-
-// redux
-import { RootState } from "../../redux/store"
-
-// model
-import { PlaylistModel } from "../../models/PlaylistModel"
-
-// mockdata
-import { ListFakePlaylist } from "../../MockData/PlaylistData"
-import { BASE_API_URL, MUSIC_API_ROUTES } from "../../constants/api"
 
 const cx = classNames.bind(styles)
 

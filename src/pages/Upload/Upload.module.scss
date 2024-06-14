@@ -14,6 +14,7 @@
     display: inline-block;
 }
 
+.select-input,
 .input {
     width: 450px;
     height: 46px;
@@ -27,6 +28,17 @@
     padding: 0 20px;
     margin-left: 20px;
     letter-spacing: 1px;
+}
+
+.select-input {
+    appearance: none;
+    cursor: pointer;
+}
+
+.genre-option {
+    background-color: #ccc;
+    color: #000;
+    margin-top: 10px;
 }
 
 .thumbnail {

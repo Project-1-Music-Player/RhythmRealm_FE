@@ -5,8 +5,7 @@ import { useState } from "react"
 
 import styles from './ArtistMenu.module.scss'
 
-// model
-import { UserModel } from "../../models/UserModel"
+import { UserModel } from "@/models/UserModel"
 
 const cx = classNames.bind(styles)
 

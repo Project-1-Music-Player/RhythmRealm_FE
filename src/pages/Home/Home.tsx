@@ -3,18 +3,11 @@ import { useSelector } from "react-redux"
 
 import styles from "./Home.module.scss"
 
-// component
-import Sidebar from "../../layout/components/Sidebar/Sidebar"
-import ModularPlaylist from "../../components/ModularPlaylist/ModularPlaylist"
-
-// redux
-import { RootState } from "../../redux/store"
-
-// model
-import { PlaylistModel } from "../../models/PlaylistModel"
-
-// mockdata
-import { MockModular } from "../../MockData/ModularPlaylistData"
+import Sidebar from "@/layout/components/Sidebar/Sidebar"
+import ModularPlaylist from "@/components/ModularPlaylist/ModularPlaylist"
+import { RootState } from "@/redux/store"
+import { PlaylistModel } from "@/models/PlaylistModel"
+import { MockModular } from "@/MockData/ModularPlaylistData"
 
 const cx = classNames.bind(styles)
 

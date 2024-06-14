@@ -2,10 +2,10 @@ import classNames from "classnames/bind"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons"
 import { useNavigate } from "react-router-dom"
-import { useState } from "react"
 
 import styles from '../Header.module.scss'
-import { SongModel } from "../../../../models/SongModel"
+
+import { SongModel } from "@/models/SongModel"
 
 const cx = classNames.bind(styles)
 
