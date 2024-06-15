@@ -67,7 +67,7 @@ function PlayControl() {
 
     const handleProgressBarClick = (e: React.MouseEvent<HTMLDivElement>) => {
         const barLeftOffset = e.currentTarget.getBoundingClientRect().left
-        let durPercent = Math.floor((e.clientX - barLeftOffset) / 5)
+        let durPercent = Math.floor((e.clientX - barLeftOffset) * 100 / 450)
         
         if(audioRef.current) {
             const seekTime = Math.floor((audioRef.current.duration / 100) * durPercent)

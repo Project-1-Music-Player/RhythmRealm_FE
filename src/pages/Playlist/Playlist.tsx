@@ -47,10 +47,11 @@ function Playlist() {
             )
 
             setPlaylist({
-                id: user.id,
+                playlist_id: user.id,
                 image: user.avatar,
-                title: 'RosDeeper',
+                name: 'RosDeeper',
                 owner: user.name,
+                description: 'mayfav',
                 songs: response.data
             })
             console.log(response.data)
@@ -63,7 +64,7 @@ function Playlist() {
         if(id === user.id) {
             getSongsInPlaylist()
         } else {
-            const fakePlaylist = ListFakePlaylist.find(playlist => playlist.id === id)
+            const fakePlaylist = ListFakePlaylist.find(playlist => playlist.playlist_id === id)
             setPlaylist(fakePlaylist)
         }
     }, [])

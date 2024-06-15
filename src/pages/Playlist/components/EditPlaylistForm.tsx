@@ -50,7 +50,7 @@ function EditPlaylistForm({ playlist, getIsCloseForm }: EditPlaylistFormProps) {
                 <article style={{flex: 1}}>
                     <div>
                         <span className={cx('info-label')}>Title</span>
-                        <input type="text" name="title" value={playlistInfo?.title} className={cx('title-input')}/>
+                        <input type="text" name="title" value={playlistInfo?.name} className={cx('title-input')}/>
                     </div>
 
                     <div>

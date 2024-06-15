@@ -32,7 +32,7 @@ function ModularPlaylist({ title, playlists, songs } : ModularPlaylistProps) {
                                     <div 
                                         key={index} 
                                         className={cx('playlist_wrapper')} 
-                                        onClick={() => navigate(`/playlist/${playlist.id}`)}
+                                        onClick={() => navigate(`/playlist/${playlist.playlist_id}`)}
                                     >
                                         <Playlist playlist={playlist}/>
                                     </div>

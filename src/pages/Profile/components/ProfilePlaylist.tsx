@@ -23,7 +23,7 @@ function ProfilePlaylist({ profilePlaylist }: ProfilePlaylistProps) {
                                     
                                     <article>
                                         <span className={cx('playlist-owner')}>{playlist.owner}</span>
-                                        <p className={cx('playlist-title')}>{playlist.title}</p>
+                                        <p className={cx('playlist-title')}>{playlist.name}</p>
                                     </article>
 
                                     <article className={cx('playlist-count')}>{playlist.songs.length} Track(s)</article>

@@ -10,6 +10,12 @@
 .playlist_wrapper {
     position: relative;
     cursor: pointer;
+    border: solid 1px rgba($color: #fff, $alpha: .2);
+    border-radius: 5px;
+
+    &:hover {
+        background-color: rgba($color: #fff, $alpha: .1);
+    }
 }
 
 .title {

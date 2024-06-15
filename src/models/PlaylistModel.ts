@@ -1,9 +1,10 @@
 import { SongModel } from "./SongModel";
 
 export interface PlaylistModel {
-    id: string,
+    playlist_id: string,
     image: string,
-    title: string,
-    owner: string,
+    name: string,
+    description: string,
+    owner: string | '',
     songs: SongModel[],
 }

@@ -1,6 +1,6 @@
 import classNames from "classnames/bind"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faHeart, faCaretDown } from "@fortawesome/free-solid-svg-icons"
+import { faHeart, faCaretDown, faPlus } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
@@ -41,7 +41,12 @@ function SoundBadge() {
                         style={isLiked ? {color: '#FF0000'} : {color: '#fff'}}
                     />
                 </div>
-
+                <div className={cx('actions_btn')}>
+                    <FontAwesomeIcon 
+                        icon={faPlus} 
+                        className={cx('queue')}
+                    />
+                </div>
                 <div className={cx('actions_btn')}>
                     <FontAwesomeIcon 
                         icon={faCaretDown} 

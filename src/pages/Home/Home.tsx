@@ -10,21 +10,24 @@ import ModularPlaylist from "@/components/ModularPlaylist/ModularPlaylist"
 import { RootState } from "@/redux/store"
 import { PlaylistModel } from "@/models/PlaylistModel"
 import { SongModel } from "@/models/SongModel"
-import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
+import { BASE_API_URL, MUSIC_API_ROUTES, PLAYLIST_API_ROUTES } from "@/constants/api"
 
 const cx = classNames.bind(styles)
 
 function Home() {
     const user = useSelector((state: RootState) => state.authSlice.user)
+    const userIdToken = useSelector((state: RootState) => state.authSlice.accessToken)
 
     const [songsOfGenre, setSongsOfGenre] = useState<SongModel[]>([])
+    const [playlists, setPlaylists] = useState<PlaylistModel[]>([])
 
     const userSongUpload: PlaylistModel[] = [
         {
-            id: user.id,
+            playlist_id: user.id,
             image: user.avatar,
-            title: 'My songs',
+            name: 'My songs',
             owner: user.name,
+            description: 'mayfav',
             songs: []
         }
     ]
@@ -41,9 +44,27 @@ function Home() {
             console.log('Get all songs failed: ', err)
         }
     }
+    const getAllUserPlaylists = async () => {
+        try {
+            const response = await axios.get(
+                BASE_API_URL + PLAYLIST_API_ROUTES.getPlaylist,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${userIdToken}`
+                    }
+                }
+            )
+            console.log(response.data)
+            setPlaylists(response.data)
+
+        } catch(err) {
+            console.log('Get all playlists failed: ', err)
+        }
+    }
 
     useEffect(() => {
         getAllSongs()
+        getAllUserPlaylists()
     }, [])
     
     return (
@@ -54,6 +75,7 @@ function Home() {
                     : <></>
                 }
 
+                <ModularPlaylist title='My Playlists' playlists={playlists}/>
                 <ModularPlaylist title='Rock' songs={songsOfGenre}/>
             </div>
 

@@ -19,7 +19,7 @@ function Hero({ playlist, length }: HeroProps) {
             <div className={cx('hero-info')}>
                 <div className={cx('title-head')}>
                     <div className={cx('info')}>
-                        <h3 className={cx('title')}>{playlist?.title ? playlist.title : 'My songs'}</h3>
+                        <h3 className={cx('title')}>{playlist?.name ? playlist.name : 'My songs'}</h3>
                         <p className={cx('owner')}>{playlist?.owner}</p>
                     </div>
                 </div>

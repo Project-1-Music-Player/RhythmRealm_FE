@@ -32,7 +32,7 @@ function Song({ song } : SongProps) {
     }
 
     return (
-        <div onClick={handleSongClick} style={{cursor: 'pointer'}}>
+        <div onClick={handleSongClick} className={cx('wrapper')}>
             <img 
                 src={thumbnailUrl(song.song_id)} 
                 alt="" 
