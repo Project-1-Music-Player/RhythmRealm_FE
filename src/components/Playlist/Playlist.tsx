@@ -7,20 +7,20 @@ import { PlaylistModel } from "@/models/PlaylistModel"
 const cx = classNames.bind(styles)
 
 type PlaylistProps = {
-    data: PlaylistModel
+    playlist: PlaylistModel
 }
 
-function Playlist({ data } : PlaylistProps) {
+function Playlist({ playlist } : PlaylistProps) {
     return (
-        <div>
+        <>
             <img 
-                src={data.image} 
+                src={playlist.image} 
                 alt="" 
                 className={cx('image')} 
             />
-            <p className={cx('title')}>{data.title}</p>
-            <span className={cx('author')}>{data.owner}</span>
-        </div>
+            <p className={cx('title')}>{playlist.title}</p>
+            <span className={cx('author')}>{playlist.owner}</span>
+        </>
     )
 }
 

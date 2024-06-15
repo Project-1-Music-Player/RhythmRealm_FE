@@ -22,7 +22,6 @@ type SongMediaProps = {
 
 function SongMedia({ song }: SongMediaProps) {
     const audioRef = useRef<HTMLAudioElement>(null)
-    const dispatch: AppDispatch = useDispatch()
     const [songDuration, setSongDuration] = useState('0:00')
 
     const streamUrl = (songID: string) => {
