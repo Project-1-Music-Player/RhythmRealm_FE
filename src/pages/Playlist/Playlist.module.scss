@@ -8,7 +8,7 @@
 .hero {
     border-right: 2px solid rgba($color: #616161, $alpha: 0.4);
     height: fit-content;
-    width: 45%;
+    width: 40%;
 }
 
 .hero-head {
@@ -180,6 +180,16 @@
         display: flex;
         align-items: center;
         column-gap: 40px;
+    }
+
+    .song-genre {
+        font-size: 1.4rem;
+        color: white;
+        background-color: rgba($color: #d7d7d7, $alpha: .5);
+        min-width: 70px;
+        text-align: center;
+        padding: 3px 4px;
+        border-radius: 99px;
     }
 }
 

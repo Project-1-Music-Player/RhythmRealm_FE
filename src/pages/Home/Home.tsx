@@ -18,8 +18,9 @@ function Home() {
     const user = useSelector((state: RootState) => state.authSlice.user)
     const userIdToken = useSelector((state: RootState) => state.authSlice.accessToken)
 
-    const [songsOfGenre, setSongsOfGenre] = useState<SongModel[]>([])
+    const [allSongs, setAllSongs] = useState<SongModel[]>([])
     const [playlists, setPlaylists] = useState<PlaylistModel[]>([])
+    const [groupedSongs, setGroupedSongs] = useState<{ [key: string]: SongModel[] }>({});
 
     const userSongUpload: PlaylistModel[] = [
         {
@@ -37,8 +38,7 @@ function Home() {
             const response = await axios.get(
                 BASE_API_URL + MUSIC_API_ROUTES.getAllSongs
             )
-            setSongsOfGenre(response.data)
-            console.log('aaa')
+            setAllSongs(response.data)
 
         } catch(err) {
             console.log('Get all songs failed: ', err)
@@ -62,21 +62,38 @@ function Home() {
         }
     }
 
+    const renderSongsOfGenre = () => {
+        const songsByGenre: { [key: string]: SongModel[] } = {};
+
+        allSongs.forEach((song) => {
+        if (!songsByGenre[song.genre]) {
+            songsByGenre[song.genre] = [];
+        }
+        songsByGenre[song.genre].push(song);
+        });
+
+        setGroupedSongs(songsByGenre);
+    }
+
     useEffect(() => {
         getAllSongs()
         getAllUserPlaylists()
     }, [])
-    
+
+    useEffect(() => {
+        renderSongsOfGenre()
+    }, [allSongs])
+
     return (
         <div className={cx('container')}>
             <div className={cx('content')}>
-                {user.id !== '' ? 
-                    <ModularPlaylist title='Uploaded Songs' playlists={userSongUpload}/> 
-                    : <></>
-                }
+                {user.id !== '' ? <ModularPlaylist title='Uploaded Songs' playlists={userSongUpload}/> : <></>}
 
                 <ModularPlaylist title='My Playlists' playlists={playlists}/>
-                <ModularPlaylist title='Rock' songs={songsOfGenre}/>
+
+                {Object.keys(groupedSongs).map((genre) => (
+                    <ModularPlaylist title={genre} songs={groupedSongs[genre]}/>
+                ))}
             </div>
 
             <Sidebar isLogin={user.id !== '' ? true : false}/>

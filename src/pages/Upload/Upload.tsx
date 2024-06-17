@@ -8,6 +8,7 @@ import axios from "axios"
 import styles from './Upload.module.scss'
 
 import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
+import { songGenres } from "@/constants/genreSongs"
 import { RootState } from "@/redux/store"
 
 const cx = classNames.bind(styles)
@@ -20,8 +21,6 @@ type UploadModel = {
     thumbnail: File | null,
     song: File | null,
 }
-
-const songGenres = ["Blues", "Classical", "Country", "EDM", "Hip-Hop/Rap", "Indie", "Jazz", "Metal", "Pop", "R&B", "Reggae", "Rock"]
 
 function Upload() {
     const navigate = useNavigate()

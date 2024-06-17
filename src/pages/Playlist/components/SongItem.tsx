@@ -31,6 +31,9 @@ function SongMedia({ song }: SongMediaProps) {
     return (
         <div className={cx('song-media')}>
             <audio ref={audioRef} src={streamUrl(song.song_id)} onLoadedData={() => formatSongDuration(audioRef, setSongDuration)}></audio>
+            
+            <span className={cx('song-genre')}>{song.genre}</span>
+
             <span style={{color: '#d7d7d7', fontSize: '1.4rem', fontWeight: '600', marginLeft: '10px', width: '35px'}}>{songDuration}</span>
 
             <div>
@@ -94,7 +97,7 @@ function SongItem({ playlist }: SongItemProps) {
                                     flexDirection: 'column',  
                                     justifyContent: 'space-between'
                                 }}>
-                                    <span className={cx('author')}>{song.genre}</span>
+                                    <span className={cx('author')}>{song.album}</span>
                                     <span className={cx('song-name')}>{song.title}</span>
                                 </div>
                             </div>

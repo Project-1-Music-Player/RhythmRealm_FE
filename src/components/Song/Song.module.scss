@@ -18,6 +18,10 @@
 
 .title {
     color: var(--white);
+    overflow: hidden;
+    max-width: 175px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .author {
