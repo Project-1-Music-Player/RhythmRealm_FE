@@ -52,3 +52,28 @@
     height: 16px;
     color: #686868;
 }
+
+.message {
+    color: #ddd;
+}
+
+.create-btn {
+    width: fit-content;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #CED200;
+    font-size: 1.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.form-wrapper {
+    background-color: rgba($color: #6100B0, $alpha: 0.5);
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}

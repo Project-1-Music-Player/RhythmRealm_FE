@@ -3,6 +3,7 @@ import classNames from "classnames/bind"
 import styles from '../Playlist.module.scss'
 
 import { PlaylistModel } from "@/models/PlaylistModel"
+import defaultImg from '@/assets/icons/song_note.png'
 
 const cx = classNames.bind(styles)
 
@@ -14,13 +15,13 @@ type HeroProps = {
 function Hero({ playlist, length }: HeroProps) {
     return (
         <div className={cx('hero-head')}>
-            <img src={playlist?.image} alt="" className={cx('image')}/>
+            <img src={playlist?.image ?? defaultImg} alt="" className={cx('image')}/>
 
             <div className={cx('hero-info')}>
                 <div className={cx('title-head')}>
                     <div className={cx('info')}>
                         <h3 className={cx('title')}>{playlist?.name ? playlist.name : 'My songs'}</h3>
-                        <p className={cx('owner')}>{playlist?.owner}</p>
+                        <p className={cx('owner')}>{playlist?.description}</p>
                     </div>
                 </div>
 

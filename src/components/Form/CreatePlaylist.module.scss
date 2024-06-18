@@ -1,0 +1,47 @@
+.form-modal {
+    margin: 0 auto;
+    margin-top: 100px;
+    width: fit-content;
+    background-color: #6100B0;
+    border-radius: 5px;
+    border: 2px solid rgba($color: #333, $alpha: .7);
+    padding: 30px;
+}
+
+.info-label {
+    color: white;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.input {
+    font-size: 1.6rem;
+    padding: 10px 20px;
+    outline: none;
+    border: none;
+    width: 500px;
+    border-radius: 5px;
+    font-weight: 500;
+    color: #000;
+}
+
+.form-action {
+    margin-top: 40px;
+    text-align: right;
+}
+
+.cancel-btn, .save-btn {
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    color: #fff;
+}
+
+.save-btn {
+    padding: 10px 25px;
+    margin-left: 40px;
+    background-color: #CED200;
+    border-radius: 5px;
+}

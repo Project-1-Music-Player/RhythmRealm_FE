@@ -6,13 +6,15 @@ import { MockModular } from "@/MockData/ModularPlaylistData"
 interface PlaylistState {
     currPlaylist: PlaylistModel,
     songIndex: number,
-    isPlayControlOn: boolean
+    isPlayControlOn: boolean,
+    userPlaylist: PlaylistModel[],
 }
 
 const initialState: PlaylistState = {
     currPlaylist: MockModular.list_playlist[0],
     songIndex: 0,
     isPlayControlOn: false,
+    userPlaylist: [],
 }
 
 const PlaylistSlice = createSlice({
@@ -30,9 +32,13 @@ const PlaylistSlice = createSlice({
 
         setIsPlayControlOn: (state, action: PayloadAction<boolean>) => {
             state.isPlayControlOn = action.payload
+        },
+
+        setUserPlaylist: (state, action: PayloadAction<PlaylistModel[]>) => {
+            state.userPlaylist = action.payload
         }
     },
 })
 
-export const { setCurrPlaylist, setSongIndex, setIsPlayControlOn } = PlaylistSlice.actions
+export const { setCurrPlaylist, setSongIndex, setIsPlayControlOn, setUserPlaylist } = PlaylistSlice.actions
 export default PlaylistSlice.reducer

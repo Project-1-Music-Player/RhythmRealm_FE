@@ -24,6 +24,7 @@ function Playlist() {
     const [playlist, setPlaylist] = useState<PlaylistModel>()
     
     const user = useSelector((state: RootState) => state.authSlice.user)
+    const userPlaylist = useSelector((state: RootState) => state.playlistSlice.userPlaylist)
     const userIdToken = useSelector((state: RootState) => state.authSlice.accessToken)
     
     const { id } = useParams()
@@ -49,12 +50,11 @@ function Playlist() {
             setPlaylist({
                 playlist_id: user.id,
                 image: user.avatar,
-                name: 'RosDeeper',
-                owner: user.name,
+                name: user.name,
+                owner: 'RosDeeper',
                 description: 'mayfav',
                 songs: response.data
             })
-            console.log(response.data)
 
         } catch(err) {
             console.error('Error fetching songs:', err)
@@ -64,8 +64,8 @@ function Playlist() {
         if(id === user.id) {
             getSongsInPlaylist()
         } else {
-            const fakePlaylist = ListFakePlaylist.find(playlist => playlist.playlist_id === id)
-            setPlaylist(fakePlaylist)
+            const playlist = userPlaylist.find(playlist => playlist.playlist_id === id)
+            setPlaylist(playlist)
         }
     }, [])
 

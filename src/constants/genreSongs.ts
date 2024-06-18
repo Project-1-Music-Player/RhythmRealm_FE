@@ -10,5 +10,6 @@ export const songGenres = [
     "Pop", 
     "R&B", 
     "Reggae", 
-    "Rock"
+    "Rock",
+    "Ballab",
 ]
