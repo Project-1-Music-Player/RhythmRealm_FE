@@ -87,7 +87,6 @@ function Home() {
     useEffect(() => {
         renderSongsOfGenre()
     }, [allSongs])
-    console.log(playlists)
 
     return (
         <div className={cx('container')}>

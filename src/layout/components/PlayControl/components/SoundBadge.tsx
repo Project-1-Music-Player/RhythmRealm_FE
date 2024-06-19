@@ -10,6 +10,8 @@ import { AppDispatch, RootState } from "@/redux/store"
 import { setIsPlayControlOn } from "@/redux/slice/PlaylistSlice"
 import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
 
+import ListPlaylist from "./ListPlaylist"
+
 const cx = classNames.bind(styles)
 
 function SoundBadge() {
@@ -17,6 +19,7 @@ function SoundBadge() {
     const currSong = useSelector((state: RootState) => state.songSlice.currSong)
 
     const [isLiked, setIsLiked] = useState(false)
+    const [openListPlaylist, setOpenListPlaylist] = useState(false)
 
     const thumbnailUrl = (songID: string) => {
         return BASE_API_URL + MUSIC_API_ROUTES.getThumbSong + '/' + songID;
@@ -45,6 +48,7 @@ function SoundBadge() {
                     <FontAwesomeIcon 
                         icon={faPlus} 
                         className={cx('queue')}
+                        onClick={() => setOpenListPlaylist(true)}
                     />
                 </div>
                 <div className={cx('actions_btn')}>
@@ -55,6 +59,12 @@ function SoundBadge() {
                     />
                 </div>
             </div>
+
+            {openListPlaylist ? 
+                <div className={cx('list')} onClick={() => setOpenListPlaylist(false)}>
+                    <ListPlaylist setOpen={setOpenListPlaylist}/>
+                </div>
+            : <></>}
         </section>
     )
 }

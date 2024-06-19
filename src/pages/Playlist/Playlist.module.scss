@@ -195,12 +195,10 @@
 
 .form-wrapper {
     background-color: rgba($color: #6100B0, $alpha: 0.5);
-    position: absolute;
+    position: fixed;
     z-index: 3;
-    top: -120px;
-    left: -100px;
-    right: -100px;
-    bottom: -55px;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
 

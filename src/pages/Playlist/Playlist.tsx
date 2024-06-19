@@ -1,6 +1,6 @@
 import classNames from "classnames/bind"
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import axios from "axios"
@@ -9,8 +9,7 @@ import styles from './Playlist.module.scss'
 
 import { RootState } from "@/redux/store"
 import { PlaylistModel } from "@/models/PlaylistModel"
-import { ListFakePlaylist } from "@/MockData/PlaylistData"
-import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
+import { BASE_API_URL, MUSIC_API_ROUTES, PLAYLIST_API_ROUTES } from "@/constants/api"
 
 import Hero from "./components/Hero"
 import ActionButton from "./components/ActionButton"
@@ -22,6 +21,7 @@ const cx = classNames.bind(styles)
 function Playlist() {
     const [isEditForm, setIsEditForm] = useState(false)
     const [playlist, setPlaylist] = useState<PlaylistModel>()
+    const navigate = useNavigate()
     
     const user = useSelector((state: RootState) => state.authSlice.user)
     const userPlaylist = useSelector((state: RootState) => state.playlistSlice.userPlaylist)
@@ -36,6 +36,22 @@ function Playlist() {
         setIsEditForm(!result)
     }
 
+    const handleDeletePlaylist = async () => {
+        try {
+            await axios.delete(
+                BASE_API_URL + PLAYLIST_API_ROUTES.deletePlaylist + '/' +id,
+                {
+                    headers: {
+                        "Authorization": `Bearer ${userIdToken}`
+                    }
+                }
+            )
+            navigate('/')
+
+        } catch(err) {
+            console.log('Delete playlist failed: ', err)
+        }
+    }
     const getSongsInPlaylist = async () => {
         try {
             const response = await axios.get(   
@@ -74,14 +90,18 @@ function Playlist() {
             <div className={cx('hero')}>
                 <Hero playlist={playlist} length={playlist?.songs ? playlist.songs.length : 0}/>
 
-                <div className={cx('actions')}>
-                    <div className={cx('button-wrapper')} onClick={() => setIsEditForm(true)}>
-                        <ActionButton text="Edit" iconProp={faPen}/>
+                {
+                    id !== user.id ? 
+                    <div className={cx('actions')}>
+                        <div className={cx('button-wrapper')} onClick={() => setIsEditForm(true)}>
+                            <ActionButton text="Edit" iconProp={faPen}/>
+                        </div>
+                        <div className={cx('button-wrapper')} onClick={handleDeletePlaylist}>
+                            <ActionButton text="Delete playlist" iconProp={faTrash}/>
+                        </div>
                     </div>
-                    <div className={cx('button-wrapper')}>
-                        <ActionButton text="Delete playlist" iconProp={faTrash}/>
-                    </div>
-                </div>
+                    : <></>
+                }
 
                 <div className={cx('authorization')}>
                     <p className={cx('dev')}>Powered by NgocHoang Pham and HuyCuong Nguyen</p>

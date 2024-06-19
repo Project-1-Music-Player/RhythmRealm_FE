@@ -2,6 +2,7 @@
     height: 55px;
     background-color: #6100B0;
     position: fixed;
+    z-index: 1;
     bottom: 0;
     width: 100%;
 }
@@ -177,5 +178,54 @@
     .queue {
         color: #fff;
         margin-left: 20px;
+    }
+}
+
+.list {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba($color: #6100B0, $alpha: 0.5);
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+
+    .list-modal {
+        width: fit-content;
+        background-color: #6100B0;
+        margin: 200px auto 0;
+        border-radius: 5px;
+        padding: 20px 30px;
+    }
+
+    .list-head {
+        font-size: 2rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: white;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .list-show {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .item-list {
+        color: #000;
+        background-color: #CED200;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .cancel {
+        color: white;
+        margin-top: 30px;
+        display: inline-block;
+        margin-left: auto;
+        cursor: pointer;
     }
 }
