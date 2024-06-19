@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import axios from "axios"
 
-import styles from './Upload.module.scss'
+import styles from './UploadSong.module.scss'
 
 import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
 import { songGenres } from "@/constants/genreSongs"
@@ -13,7 +13,7 @@ import { RootState } from "@/redux/store"
 
 const cx = classNames.bind(styles)
 
-type UploadModel = {
+type UploadSongModel = {
     title: string,
     album: string,
     genre: string,
@@ -22,12 +22,12 @@ type UploadModel = {
     song: File | null,
 }
 
-function Upload() {
+function UploadSong() {
     const navigate = useNavigate()
     const userIdToken = useSelector((state: RootState) => state.authSlice.accessToken)
     const userId = useSelector((state: RootState) => state.authSlice.user.id)
 
-    const [songData, setSongData] = useState<UploadModel>({
+    const [songData, setSongData] = useState<UploadSongModel>({
         title: '',
         album: '',
         genre: '',
@@ -208,4 +208,4 @@ function Upload() {
     )
 }
 
-export default Upload
+export default UploadSong

@@ -31,7 +31,7 @@ function Header() {
     const [searchResult, setSearchResult] = useState<SongModel[]>([])
 
     const handleUploadBtn = () => {
-        navigate('/upload')
+        navigate('/upload-song')
     }
     
     const windowUrl = location.pathname.includes('/upload')

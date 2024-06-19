@@ -1,7 +1,6 @@
 import classNames from "classnames/bind"
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
-import { useState } from "react"
 
 import styles from "./ModularPlaylist.module.scss"
 
@@ -9,7 +8,6 @@ import { PlaylistModel } from "@/models/PlaylistModel"
 import { SongModel } from "@/models/SongModel"
 import { RootState } from "@/redux/store"
 
-import CreatePlaylist from "../Form/CreatePlaylist"
 import Playlist from "../Playlist/Playlist"
 import Song from "../Song/Song"
 
@@ -26,18 +24,12 @@ function ModularPlaylist({ title, playlists, songs, isPlaylist } : ModularPlayli
     const navigate = useNavigate()
     const user = useSelector((state: RootState) => state.authSlice.user)
 
-    const [isOpenForm, setIsOpenForm] = useState(false)
-
     const handleCreatePlaylist = () => {
         if(user.id !== '') {
-            setIsOpenForm(true)
+            navigate('/upload-playlist')
         } else {
             navigate('/login')
         }
-    }
-
-    const handleOutFormClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        setIsOpenForm(false)
     }
 
     return (
@@ -74,13 +66,6 @@ function ModularPlaylist({ title, playlists, songs, isPlaylist } : ModularPlayli
                     </div>
                 ) : <></>
             )}
-            {
-                isOpenForm && isPlaylist ? 
-                <div className={cx('form-wrapper')} onClick={(e) => handleOutFormClick(e)}>
-                    <CreatePlaylist getIsOpenForm={setIsOpenForm}/> 
-                </div>
-                : <></>
-            }
         </div>
     )
 }
