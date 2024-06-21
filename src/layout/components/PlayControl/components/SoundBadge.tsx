@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHeart, faCaretDown, faPlus } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 
 import styles from '../PlayControl.module.scss'
 
@@ -17,7 +18,10 @@ const cx = classNames.bind(styles)
 
 function SoundBadge() {
     const dispatch:AppDispatch = useDispatch()
+    const navigate = useNavigate()
+
     const currSong = useSelector((state: RootState) => state.songSlice.currSong)
+    const userId = useSelector((state: RootState) => state.authSlice.user.id)
     const userIdToken = useSelector((state: RootState) => state.authSlice.accessToken)
     const likeSongs = useSelector((state: RootState) => state.songSlice.likeSongs)
 
@@ -33,6 +37,11 @@ function SoundBadge() {
         }
     }
     const handleToggleLike = async () => {
+        if(userId === '') {
+            navigate('/login')
+            return
+        }
+
         if(likeColor === '#fff') {
             try {
                 await likeSong(currSong.song_id, userIdToken)
@@ -50,6 +59,10 @@ function SoundBadge() {
     }
 
     useEffect(() => {
+        if(userId === '') {
+            return
+        }
+
         if(likeSongs.some(song => song.song_id === currSong.song_id)) {
             setLikeColor('#ff0000')
         } else {
