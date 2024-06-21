@@ -46,33 +46,34 @@ function SongMedia({ song }: SongMediaProps) {
 }
 
 type SongItemProps = {
-    playlist?: PlaylistModel
+    playlist?: PlaylistModel,
+    songs?: SongModel[]
 }
 
-function SongItem({ playlist }: SongItemProps) {
+function SongItem({ playlist, songs }: SongItemProps) {
     const currSongId = useSelector((state: RootState) => state.songSlice.currSong.song_id)
     
     const dispatch: AppDispatch = useDispatch()
 
     const handleSongClick = (index: number) => {
-        if(playlist) {
+        if(playlist && songs) {
             dispatch(setCurrPlaylist(playlist))
             dispatch(setSongIndex(index))
-            dispatch(setCurrSong(playlist.songs[index]))
+            dispatch(setCurrSong(songs[index]))
             dispatch(setIsPlayControlOn(true))
         }
     }
 
     return (
         <div className={cx('playlist')}>
-            {playlist?.songs ?
-                playlist.songs.map((song, index) => {
+            {songs ?
+                songs.map((song, index) => {
                     return (
                         <div 
                             key={index} 
                             className={cx('song-item')} 
                             onClick={() => handleSongClick(index)} 
-                            style={playlist.songs[index].song_id === currSongId ? {backgroundColor: '#ffffff1a'} : {}}
+                            style={songs[index].song_id === currSongId ? {backgroundColor: '#ffffff1a'} : {}}
                         >
                             <div className={cx('song-info')}>
                                 <img src={thumbnailUrl(song.song_id)} alt="" className={cx('song-image')}/>

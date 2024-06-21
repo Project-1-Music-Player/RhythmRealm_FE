@@ -88,3 +88,20 @@ export const removeSongFromPlaylist = async (playlistId: string, songId: string,
         throw err
     }
 }
+
+export const getSongsInPlaylist = async (playlistId: string | undefined, idToken: string) => {
+    try {
+        const response = await axios.get(
+            BASE_API_URL + PLAYLIST_API_ROUTES.getSongsInPlaylist + `/${playlistId}/songs`,
+            {
+                headers: {
+                    "Authorization": `Bearer ${idToken}`
+                }
+            }
+        )
+        return response.data
+    } catch(err) {
+        console.log('Get songs in playlist failed: ', err)
+        throw err
+    }
+}

@@ -28,4 +28,5 @@ export const PLAYLIST_API_ROUTES = {
     deletePlaylist: API_ROUTES.playlist + '',
     addSongToPlaylist: API_ROUTES.playlist + '',
     removeSongFromPlaylist: API_ROUTES.playlist + '',
+    getSongsInPlaylist: API_ROUTES.playlist + '',
 }

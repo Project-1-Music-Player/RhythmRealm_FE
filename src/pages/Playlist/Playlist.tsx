@@ -8,8 +8,9 @@ import styles from './Playlist.module.scss'
 
 import { RootState } from "@/redux/store"
 import { PlaylistModel } from "@/models/PlaylistModel"
-import { deletePlaylist } from "@/apis/playlistApi"
+import { deletePlaylist, getSongsInPlaylist } from "@/apis/playlistApi"
 import { getUploadSong } from "@/apis/songApi"
+import { SongModel } from "@/models/SongModel"
 
 import Hero from "./components/Hero"
 import ActionButton from "./components/ActionButton"
@@ -21,6 +22,7 @@ const cx = classNames.bind(styles)
 function Playlist() {
     const [isEditForm, setIsEditForm] = useState(false)
     const [playlist, setPlaylist] = useState<PlaylistModel>()
+    const [songs, setSongs] = useState<SongModel[]>([])
     const navigate = useNavigate()
     
     const user = useSelector((state: RootState) => state.authSlice.user)
@@ -44,9 +46,9 @@ function Playlist() {
             console.log('Delete playlist failed: ', err)
         }
     }
-    const getSongsInPlaylist = async () => {
+    const getUserSongs = async () => {
         try {
-            const songs = await getUploadSong(userIdToken)
+            const userSongs = await getUploadSong(userIdToken)
 
             setPlaylist({
                 playlist_id: user.id,
@@ -54,17 +56,28 @@ function Playlist() {
                 name: user.name,
                 owner: 'RosDeeper',
                 description: 'mayfav',
-                songs: songs
+                songs: []
             })
+            setSongs(userSongs)
         } catch(err) {
             console.error('Error fetching songs:', err)
         }
     }
+    const fetchSongsInPlaylist = async () => {
+        try {
+            const result = await getSongsInPlaylist(id, userIdToken)
+            setSongs(result)
+        } catch(err) {
+            console.log('Error fetching songs:', err)
+        }
+    }
+
     useEffect(() => {
         if(id === user.id) {
-            getSongsInPlaylist()
+            getUserSongs()
         } else {
             const playlist = userPlaylist.find(playlist => playlist.playlist_id === id)
+            fetchSongsInPlaylist()
             setPlaylist(playlist)
         }
     }, [])
@@ -72,7 +85,7 @@ function Playlist() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('hero')}>
-                <Hero playlist={playlist} length={playlist?.songs ? playlist.songs.length : 0}/>
+                <Hero playlist={playlist} length={songs?.length || 0}/>
 
                 {
                     id !== user.id ? 
@@ -93,7 +106,7 @@ function Playlist() {
                 </div>
             </div>
 
-            <SongItem playlist={playlist}/>
+            <SongItem playlist={playlist} songs={songs}/>
 
             {
                 isEditForm ?
