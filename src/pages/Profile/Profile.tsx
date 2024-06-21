@@ -7,7 +7,6 @@ import styles from './Profile.module.scss'
 import { RootState } from "@/redux/store"
 
 import ProfileHero from "./components/ProfileHero"
-import ProfileAll from './components/ProfileAll'
 import ProfilePlaylist from './components/ProfilePlaylist'
 import ProfileLike from "./components/ProfileLike"
 import ProfileFollow from "./components/ProfileFollow"
@@ -39,11 +38,16 @@ function Profile() {
 
     const renderProfileData = () => {
         if(currentTab === 0) {
-            return <ProfileAll profileData={currentUser}/>
+            return (
+                <>
+                    <ProfileLike/>
+                    <ProfilePlaylist/>
+                </>
+            )
         } else if(currentTab === 1) {
-            return <ProfilePlaylist profilePlaylist={currentUser.playlist}/>
+            return <ProfilePlaylist/>
         } else if(currentTab === 2) {
-            return <ProfileLike profileSong={currentUser.like_song}/>
+            return <ProfileLike/>
         } else {
             return <ProfileFollow profileFollow={currentUser.following}/>
         }

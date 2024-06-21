@@ -97,9 +97,10 @@
         height: 80px;
         object-fit: cover;
         margin-right: 40px;
+        border-radius: 10px;
     }
 
-    .song-author, .playlist-owner {
+    .song-author, .playlist-desc {
         font-size: 1.4rem;
         color: #ccc;
         font-weight: 500;
@@ -118,11 +119,22 @@
         white-space: nowrap;
     }
 
+    .song-genre {
+        font-size: 1.4rem;
+        color: white;
+        background-color: rgba($color: #d7d7d7, $alpha: .5);
+        min-width: 100px;
+        text-align: center;
+        padding: 3px 4px;
+        border-radius: 99px;
+    }
+
     .song-statistic {
-        margin-left: 300px;
+        flex: 1;
         display: flex;
         flex-direction: column;
         row-gap: 15px;
+        align-items: flex-end;
     }
 
     .song-reaction {

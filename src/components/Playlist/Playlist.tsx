@@ -15,7 +15,7 @@ function Playlist({ playlist } : PlaylistProps) {
     return (
         <>
             <img 
-                src={playlist.image ? playlist.image : defaultImg} 
+                src={playlist.image || defaultImg} 
                 alt="" 
                 className={cx('image')} 
             />

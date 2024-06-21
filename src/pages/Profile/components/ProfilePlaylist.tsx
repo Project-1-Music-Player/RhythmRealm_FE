@@ -1,35 +1,35 @@
 import classNames from "classnames/bind"
+import { useSelector } from "react-redux"
 
 import styles from '../Profile.module.scss'
 
-import { PlaylistModel } from "@/models/PlaylistModel"
+import { RootState } from "@/redux/store"
+import defaultImg from '@/assets/icons/song_note.png'
 
 const cx = classNames.bind(styles)
 
-type ProfilePlaylistProps = {
-    profilePlaylist: PlaylistModel[] | null
-}
+function ProfilePlaylist() {
+    const userPlaylists = useSelector((state: RootState) => state.playlistSlice.userPlaylist)
 
-function ProfilePlaylist({ profilePlaylist }: ProfilePlaylistProps) {
     return (
         <div>
             {
-                profilePlaylist ? (
-                    profilePlaylist.map((playlist, index) => {
+                userPlaylists.length !== 0 ? (
+                    userPlaylists.map((playlist, index) => {
                         return (
                             <div key={index} style={{marginBottom: '40px'}}>
                                 <div className={cx('playlist-info')}>
-                                    <img src={playlist.image} alt="" className={cx('playlist-image')}/>
+                                    <img src={playlist.image || defaultImg} alt="" className={cx('playlist-image')}/>
                                     
                                     <article>
-                                        <span className={cx('playlist-owner')}>{playlist.owner}</span>
+                                        <span className={cx('playlist-desc')}>{playlist.description}</span>
                                         <p className={cx('playlist-title')}>{playlist.name}</p>
                                     </article>
 
-                                    <article className={cx('playlist-count')}>{playlist.songs.length} Track(s)</article>
+                                    {/* <article className={cx('playlist-count')}>{playlist.songs.length} Track(s)</article> */}
                                 </div>
 
-                                <div className={cx('list-song')}>
+                                {/* <div className={cx('list-song')}>
                                     {
                                         playlist.songs.map((song, index) => {
                                             return (
@@ -42,7 +42,7 @@ function ProfilePlaylist({ profilePlaylist }: ProfilePlaylistProps) {
                                             )
                                         })
                                     }
-                                </div>
+                                </div> */}
                             </div>
                         )
                     })
