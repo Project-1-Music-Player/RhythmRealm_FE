@@ -7,7 +7,8 @@ import styles from './PlayControl.module.scss'
 import { setSongIndex } from "@/redux/slice/PlaylistSlice"
 import { setCurrSong } from "@/redux/slice/SongSlice"
 import { RootState, AppDispatch } from "@/redux/store"
-import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
+import { streamUrl } from "@/apis/songApi"
+import { formatSongDuration } from "@/utils/formatTime"
 
 import SoundBadge from "./components/SoundBadge"
 import ControlButton from "./components/ControlButton"
@@ -58,11 +59,8 @@ function PlayControl() {
         const currTime = e.currentTarget.currentTime
         const percent = ((currTime / e.currentTarget.duration) * 100).toFixed(2)
 
-        const minute = Math.floor(currTime / 60)
-        const seconds = Math.floor(currTime % 60)
-        
+        formatSongDuration(setCurrentDuration, null, currTime)
         setDurationPercent(parseFloat(percent))
-        setCurrentDuration(`${minute}:${seconds.toString().padStart(2, '0')}`)
     }
 
     const handleProgressBarClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -79,7 +77,8 @@ function PlayControl() {
     }
 
     const handleLoadAudio = (e: React.MouseEvent<HTMLAudioElement>) => {
-        changeDuration(e.currentTarget.duration)
+        const duration = e.currentTarget.duration
+        formatSongDuration(setDuration, null, duration)
         setDurationPercent(0)
 
         if(audioRef.current) {
@@ -108,17 +107,6 @@ function PlayControl() {
                 getOnNextClick()
             }
         }
-    }
-
-    const changeDuration = (duration: number) => {
-        const minute = Math.floor(duration / 60)
-        const seconds = Math.floor(duration % 60)
-        
-        setDuration(`${minute}:${seconds.toString().padStart(2, '0')}`)
-    }
-
-    const streamUrl = (songId: string) => {
-        return BASE_API_URL + MUSIC_API_ROUTES.streamSong + '/' + songId;
     }
 
     return (

@@ -3,13 +3,13 @@ import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { useNavigate, useParams } from "react-router-dom"
 import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import axios from "axios"
 
 import styles from './Playlist.module.scss'
 
 import { RootState } from "@/redux/store"
 import { PlaylistModel } from "@/models/PlaylistModel"
-import { BASE_API_URL, MUSIC_API_ROUTES, PLAYLIST_API_ROUTES } from "@/constants/api"
+import { deletePlaylist } from "@/apis/playlistApi"
+import { getUploadSong } from "@/apis/songApi"
 
 import Hero from "./components/Hero"
 import ActionButton from "./components/ActionButton"
@@ -38,30 +38,15 @@ function Playlist() {
 
     const handleDeletePlaylist = async () => {
         try {
-            await axios.delete(
-                BASE_API_URL + PLAYLIST_API_ROUTES.deletePlaylist + '/' +id,
-                {
-                    headers: {
-                        "Authorization": `Bearer ${userIdToken}`
-                    }
-                }
-            )
+            await deletePlaylist(id, userIdToken)
             navigate('/')
-
         } catch(err) {
             console.log('Delete playlist failed: ', err)
         }
     }
     const getSongsInPlaylist = async () => {
         try {
-            const response = await axios.get(   
-                BASE_API_URL + MUSIC_API_ROUTES.getSong,
-                {
-                    headers: { 
-                        'Authorization': `Bearer ${userIdToken}` 
-                    }
-                }
-            )
+            const songs = await getUploadSong(userIdToken)
 
             setPlaylist({
                 playlist_id: user.id,
@@ -69,9 +54,8 @@ function Playlist() {
                 name: user.name,
                 owner: 'RosDeeper',
                 description: 'mayfav',
-                songs: response.data
+                songs: songs
             })
-
         } catch(err) {
             console.error('Error fetching songs:', err)
         }

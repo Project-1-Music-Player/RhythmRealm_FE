@@ -1,14 +1,13 @@
 import classNames from "classnames/bind"
 import { useSelector } from "react-redux"
 import { useLocation } from "react-router-dom"
-import axios from "axios"
 import { useEffect, useState } from "react"
 
 import styles from './Search.module.scss'
 
 import Sidebar from "@/layout/components/Sidebar/Sidebar"
 import { RootState } from "@/redux/store"
-import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
+import { searchSong } from "@/apis/songApi"
 import { SongModel } from "@/models/SongModel"
 
 import SongResult from "./components/SongResult"
@@ -26,11 +25,8 @@ function Search() {
 
     const searchSongs = async () => {
         try {
-            const response = await axios.get(
-                BASE_API_URL + MUSIC_API_ROUTES.searchSong + `?q=${searchValue}`,
-            )
-            setSearchResults(response.data)
-
+            const searchResults = await searchSong(searchValue)
+            setSearchResults(searchResults)
         } catch(err) {
             console.log('Search failed: ', err)
         }

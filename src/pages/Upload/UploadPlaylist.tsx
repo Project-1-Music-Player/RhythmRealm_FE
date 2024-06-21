@@ -1,13 +1,12 @@
 import classNames from "classnames/bind"
 import React, { useState } from "react"
 import { useSelector } from "react-redux"
-import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
 import styles from "./UploadPlaylist.module.scss"
 
 import { RootState } from "@/redux/store"
-import { BASE_API_URL, PLAYLIST_API_ROUTES } from "@/constants/api"
+import { createPlaylist } from "@/apis/playlistApi"
 
 const cx = classNames.bind(styles)
 
@@ -39,21 +38,8 @@ function UploadPlaylist() {
 
     const handleCreate = async () => {
         try {
-            await axios.post(
-                BASE_API_URL + PLAYLIST_API_ROUTES.addPlaylist,
-                {
-                    name: playlistData.title,
-                    description: playlistData.description,
-                },
-                {
-                    headers: {
-                        'Authorization': `Bearer ${userIdToken}`,
-                        'Content-Type': 'application/json',
-                    }
-                }
-            )
+            await createPlaylist(playlistData.title, playlistData.description, userIdToken)
             navigate('/')
-
         } catch(err) {
             console.log('Create playlist failed: ', err)
         }

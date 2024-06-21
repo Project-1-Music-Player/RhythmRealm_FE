@@ -3,12 +3,11 @@ import { InputGroup } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 import React, { useEffect, useState } from "react"
-import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
 import styles from '../Header.module.scss'
 
-import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
+import { searchSong } from "@/apis/songApi"
 
 const cx = classNames.bind(styles)
 
@@ -23,12 +22,9 @@ function SearchBar({ setSearchResults, isShowSearchResults }: SearchBarProps) {
 
     const searchSongs = async () => {
         try {
-            const response = await axios.get(
-                BASE_API_URL + MUSIC_API_ROUTES.searchSong + `?q=${searchValue}`,
-            )
-            setSearchResults(response.data)
+            const searchResult = await searchSong(searchValue)
+            setSearchResults(searchResult)
             isShowSearchResults(true)
-
         } catch (error) {
             console.log('Search failed: ' + error)
         }

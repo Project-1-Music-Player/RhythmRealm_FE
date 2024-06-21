@@ -3,24 +3,15 @@ import { Form, Button } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import axios from "axios"
 
 import styles from './UploadSong.module.scss'
 
-import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
+import { uploadSong } from "@/apis/songApi"
 import { songGenres } from "@/constants/genreSongs"
 import { RootState } from "@/redux/store"
+import { UploadSongModel } from "@/models/SongModel"
 
 const cx = classNames.bind(styles)
-
-type UploadSongModel = {
-    title: string,
-    album: string,
-    genre: string,
-    releaseDate: string,
-    thumbnail: File | null,
-    song: File | null,
-}
 
 function UploadSong() {
     const navigate = useNavigate()
@@ -41,32 +32,8 @@ function UploadSong() {
         e.preventDefault()
 
         try {
-            const formData = new FormData()
-            formData.append('title', songData.title)
-            formData.append('album', songData.album)
-            formData.append('genre', songData.genre)
-            formData.append('releaseDate', songData.releaseDate)
-
-            if(songData.thumbnail) {
-                formData.append('thumbnail', songData.thumbnail)
-            }
-            if(songData.song) {
-                formData.append('song', songData.song)
-            }
-
-            await axios.post(
-                BASE_API_URL + MUSIC_API_ROUTES.uploadSong,
-                formData,
-                {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                        "Authorization": `Bearer ${userIdToken}`
-                    }
-                }
-            )
-            console.log('Upload successfully')
+            await uploadSong(songData, userIdToken)
             navigate(`/playlist/${userId}`)
-
         } catch(err) {
             console.log('Upload failed: ' + err)
         }

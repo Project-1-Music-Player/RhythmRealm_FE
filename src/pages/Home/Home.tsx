@@ -1,7 +1,6 @@
 import classNames from "classnames/bind"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import axios from "axios"
 
 import styles from "./Home.module.scss"
 
@@ -9,9 +8,11 @@ import Sidebar from "@/layout/components/Sidebar/Sidebar"
 import ModularPlaylist from "@/components/ModularPlaylist/ModularPlaylist"
 import { AppDispatch, RootState } from "@/redux/store"
 import { setUserPlaylist } from "@/redux/slice/PlaylistSlice"
+import { setLikeSongs } from "@/redux/slice/SongSlice"
 import { PlaylistModel } from "@/models/PlaylistModel"
 import { SongModel } from "@/models/SongModel"
-import { BASE_API_URL, MUSIC_API_ROUTES, PLAYLIST_API_ROUTES } from "@/constants/api"
+import { getUserPlaylists } from "@/apis/playlistApi"
+import { getAllSongs, getLikeSongs } from "@/apis/songApi"
 
 const cx = classNames.bind(styles)
 
@@ -35,29 +36,29 @@ function Home() {
         }
     ]
 
-    const getAllSongs = async () => {
+    const fetchSongs = async () => {
         try {
-            const response = await axios.get(
-                BASE_API_URL + MUSIC_API_ROUTES.getAllSongs
-            )
-            setAllSongs(response.data)
+            const songResults = await getAllSongs()
+            setAllSongs(songResults)
 
         } catch(err) {
             console.log('Get all songs failed: ', err)
         }
     }
-    const getAllUserPlaylists = async () => {
+    const fetchLikeSong = async () => {
         try {
-            const response = await axios.get(
-                BASE_API_URL + PLAYLIST_API_ROUTES.getPlaylist,
-                {
-                    headers: {
-                        'Authorization': `Bearer ${userIdToken}`
-                    }
-                }
-            )
-            setPlaylists(response.data)
-            dispatch(setUserPlaylist(response.data))
+            const likeSongResults = await getLikeSongs(userIdToken)
+            dispatch(setLikeSongs(likeSongResults))
+            console.log(likeSongResults)
+        } catch(err) {
+            console.log('Get all songs failed: ', err)
+        }
+    }
+    const fetchPlaylists = async () => {
+        try {
+            const playlistData = await getUserPlaylists(userIdToken)
+            setPlaylists(playlistData)
+            dispatch(setUserPlaylist(playlistData))
 
         } catch(err) {
             console.log('Get all playlists failed: ', err)
@@ -80,8 +81,9 @@ function Home() {
     }
 
     useEffect(() => {
-        getAllSongs()
-        getAllUserPlaylists()
+        fetchSongs()
+        fetchLikeSong()
+        fetchPlaylists()
     }, [])
 
     useEffect(() => {

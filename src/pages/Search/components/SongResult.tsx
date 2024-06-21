@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux"
 import styles from '../Search.module.scss'
 
 import { SongModel } from "@/models/SongModel"
-import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
+import { streamUrl, thumbnailUrl } from "@/apis/songApi"
 import { formatSongDuration, formatSongReleaseDate } from "@/utils/formatTime"
 import { AppDispatch } from "@/redux/store"
 import { setCurrSong } from "@/redux/slice/SongSlice"
@@ -24,13 +24,6 @@ function SongResult({ song_data }: SongResultProps) {
 
     const audioRef = useRef<HTMLAudioElement>(null)
     const [songDuration, setSongDuration] = useState('0:00')
-
-    const thumbnailUrl = (songId: string) => {
-        return BASE_API_URL + MUSIC_API_ROUTES.getThumbSong + '/' + songId;
-    }
-    const streamUrl = (songId: string) => {
-        return BASE_API_URL + MUSIC_API_ROUTES.streamSong + '/' + songId;
-    }
 
     const handlePlayClick = () => {
         dispatch(setCurrSong(song_data))
@@ -57,7 +50,7 @@ function SongResult({ song_data }: SongResultProps) {
                     <audio 
                         ref={audioRef} 
                         src={streamUrl(song_data.song_id)} 
-                        onLoadedData={() => formatSongDuration(audioRef, setSongDuration)}
+                        onLoadedData={() => formatSongDuration(setSongDuration, audioRef)}
                     ></audio>
 
                     <div style={{paddingRight: '16px'}}>

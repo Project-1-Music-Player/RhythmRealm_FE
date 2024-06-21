@@ -6,7 +6,7 @@ import React, { useState } from "react"
 import styles from '../Playlist.module.scss'
 
 import { PlaylistModel } from "@/models/PlaylistModel"
-import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
+import { thumbnailUrl } from "@/apis/songApi"
 
 const cx = classNames.bind(styles)
 
@@ -20,10 +20,6 @@ function EditPlaylistForm({ playlist, getIsCloseForm }: EditPlaylistFormProps) {
 
     const handleFormClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation()
-    }
-
-    const thumbnailUrl = (songID: string) => {
-        return BASE_API_URL + MUSIC_API_ROUTES.getThumbSong + '/' + songID;
     }
 
     return (

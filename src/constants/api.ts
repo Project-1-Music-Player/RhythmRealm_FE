@@ -13,10 +13,13 @@ export const AUTH_API_ROUTES = {
 export const MUSIC_API_ROUTES = {
     getSong: API_ROUTES.music + '',
     getAllSongs: API_ROUTES.music + '/all',
+    getLikeSongs: API_ROUTES.music + '/likes',
     uploadSong: API_ROUTES.music + '/upload',
     streamSong: API_ROUTES.music + '/stream',
     searchSong: API_ROUTES.music + '/search',
     getThumbSong: API_ROUTES.music + '/thumbnail',
+    likeSong: API_ROUTES.music + '',
+    unLikeSong: API_ROUTES.music + '',
 }
 
 export const PLAYLIST_API_ROUTES = {

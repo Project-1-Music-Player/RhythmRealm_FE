@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom"
 import React, { useState } from "react"
 import { User } from "firebase/auth"
 import { useDispatch } from "react-redux"
-import axios from "axios"
 
 import styles from "./Authen.module.scss"
 
@@ -12,7 +11,7 @@ import { RegisterModel } from "@/models/RegisterModel"
 import gglogo from '@/assets/icons/GG.png'
 import AuthenDecor from "@/components/AuthenDecor/AuthenDecor"
 import { auth, googleProvider, signInWithPopup } from "@/firebase"
-import { BASE_API_URL, AUTH_API_ROUTES } from "@/constants/api"
+import { googleSignIn } from "@/apis/authApi"
 import { AppDispatch } from "@/redux/store"
 import { login } from "@/redux/slice/AuthSlice"
 
@@ -50,21 +49,7 @@ function Register() {
             const result = await signInWithPopup(auth, googleProvider)
             user = result.user
             const idToken = await user.getIdToken()
-            
-            await axios.post(
-                BASE_API_URL + AUTH_API_ROUTES.loginGoogle, 
-                {
-                    username: user.displayName || '',
-                    email: user.email || '',
-                    role: 'listener',
-                },
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${idToken}`
-                    }
-                }
-            )
+            await googleSignIn(user.displayName || '', user.email ||'', idToken)
 
             dispatch(login({
                 user: {
@@ -78,9 +63,7 @@ function Register() {
             }))
 
             navigate('/')
-
             console.log('Login successfully: ', user.displayName)
-
         } catch(err) {
             console.error('Google sign-in failed:', err);
         }

@@ -1,12 +1,20 @@
 import React from "react"
 
 export const formatSongDuration = (
-    audioRef: React.RefObject<HTMLAudioElement>,
-    setDuration: Function
+    setDuration: Function,
+    audioRef: React.RefObject<HTMLAudioElement> | null,
+    songDuration?: number | null,
 ) => {
-    if(audioRef.current) {
-        const minute = Math.floor(audioRef.current.duration / 60)
-        const seconds = Math.floor(audioRef.current.duration % 60)
+    let time = songDuration
+
+    if(audioRef) {
+        if(audioRef.current) {
+            time = audioRef.current.duration
+        }
+    }
+    if(time) {
+        const minute = Math.floor(time / 60)
+        const seconds = Math.floor(time % 60)
         setDuration(`${minute}:${seconds.toString().padStart(2, '0')}`)
     }
 }

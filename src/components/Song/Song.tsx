@@ -1,14 +1,13 @@
 import classNames from "classnames/bind"
-import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 
 import styles from "./Song.module.scss"
 
-import { SongModel } from "@/models/SongModel"
-import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
+import { thumbnailUrl, streamUrl } from "@/apis/songApi"
 import { AppDispatch } from "@/redux/store"
 import { setIsPlayControlOn } from "@/redux/slice/PlaylistSlice"
 import { setCurrSong } from "@/redux/slice/SongSlice"
+import { SongModel } from "@/models/SongModel"
 
 const cx = classNames.bind(styles)
 
@@ -22,13 +21,6 @@ function Song({ song } : SongProps) {
     const handleSongClick = () => {
         dispatch(setCurrSong(song))
         dispatch(setIsPlayControlOn(true))
-    }
-
-    const thumbnailUrl = (songId: string) => {
-        return BASE_API_URL + MUSIC_API_ROUTES.getThumbSong + '/' + songId
-    }
-    const streamUrl = (songId: string) => {
-        return BASE_API_URL + MUSIC_API_ROUTES.streamSong + '/' + songId
     }
 
     return (

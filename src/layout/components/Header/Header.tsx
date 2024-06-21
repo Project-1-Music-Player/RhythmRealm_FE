@@ -48,8 +48,6 @@ function Header() {
             await auth.signOut()
             dispatch(logout())
             navigate('/login')
-            console.log('Logout successfully: ', user.name)
-
         } catch(err) {
             console.error('Sign out failed: ', err)
         }

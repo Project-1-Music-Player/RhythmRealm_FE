@@ -1,14 +1,15 @@
 import classNames from "classnames/bind"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHeart, faCaretDown, faPlus } from "@fortawesome/free-solid-svg-icons"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 import styles from '../PlayControl.module.scss'
 
 import { AppDispatch, RootState } from "@/redux/store"
 import { setIsPlayControlOn } from "@/redux/slice/PlaylistSlice"
-import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
+import { thumbnailUrl, likeSong, unLikeSong, getLikeSongs } from "@/apis/songApi"
+import { setLikeSongs } from "@/redux/slice/SongSlice"
 
 import ListPlaylist from "./ListPlaylist"
 
@@ -17,13 +18,44 @@ const cx = classNames.bind(styles)
 function SoundBadge() {
     const dispatch:AppDispatch = useDispatch()
     const currSong = useSelector((state: RootState) => state.songSlice.currSong)
+    const userIdToken = useSelector((state: RootState) => state.authSlice.accessToken)
+    const likeSongs = useSelector((state: RootState) => state.songSlice.likeSongs)
 
-    const [isLiked, setIsLiked] = useState(false)
+    const [likeColor, setLikeColor] = useState('#fff')
     const [openListPlaylist, setOpenListPlaylist] = useState(false)
 
-    const thumbnailUrl = (songID: string) => {
-        return BASE_API_URL + MUSIC_API_ROUTES.getThumbSong + '/' + songID;
+    const fetchLikeSongs = async () => {
+        try {
+            const likeSongResults = await getLikeSongs(userIdToken)
+            dispatch(setLikeSongs(likeSongResults))
+        } catch(err) {
+            console.log('Get all songs failed: ', err)
+        }
     }
+    const handleToggleLike = async () => {
+        if(likeColor === '#fff') {
+            try {
+                await likeSong(currSong.song_id, userIdToken)
+            } catch(err) {
+                console.log('Like song failed: ' + err)
+            }
+        } else {
+            try {
+                await unLikeSong(currSong.song_id, userIdToken)
+            } catch(err) {
+                console.log('Unlike song failed: ' + err)
+            }
+        }
+        fetchLikeSongs()
+    }
+
+    useEffect(() => {
+        if(likeSongs.some(song => song.song_id === currSong.song_id)) {
+            setLikeColor('#ff0000')
+        } else {
+            setLikeColor('#fff')
+        }
+    }, [currSong, likeSongs])
 
     return (
         <section className={cx('sound_badge')}>
@@ -37,11 +69,11 @@ function SoundBadge() {
             </div>
 
             <div className={cx('actions')}>
-                <div className={cx('actions_btn')} onClick={() => {setIsLiked(!isLiked)}}>
+                <div className={cx('actions_btn')} onClick={handleToggleLike}>
                     <FontAwesomeIcon 
                         icon={faHeart} 
                         className={cx('like')} 
-                        style={isLiked ? {color: '#FF0000'} : {color: '#fff'}}
+                        style={{ color: likeColor }}
                     />
                 </div>
                 <div className={cx('actions_btn')}>

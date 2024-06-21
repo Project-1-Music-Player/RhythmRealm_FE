@@ -9,7 +9,7 @@ import styles from "../Playlist.module.scss"
 import { PlaylistModel } from "@/models/PlaylistModel"
 import { SongModel } from "@/models/SongModel"
 import { formatSongDuration } from "@/utils/formatTime"
-import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
+import { streamUrl, thumbnailUrl } from "@/apis/songApi"
 import { RootState, AppDispatch } from "@/redux/store"
 import { setCurrSong } from "@/redux/slice/SongSlice"
 import { setCurrPlaylist, setSongIndex, setIsPlayControlOn } from "@/redux/slice/PlaylistSlice"
@@ -24,13 +24,9 @@ function SongMedia({ song }: SongMediaProps) {
     const audioRef = useRef<HTMLAudioElement>(null)
     const [songDuration, setSongDuration] = useState('0:00')
 
-    const streamUrl = (songID: string) => {
-        return BASE_API_URL + MUSIC_API_ROUTES.streamSong + '/' + songID;
-    }
-
     return (
         <div className={cx('song-media')}>
-            <audio ref={audioRef} src={streamUrl(song.song_id)} onLoadedData={() => formatSongDuration(audioRef, setSongDuration)}></audio>
+            <audio ref={audioRef} src={streamUrl(song.song_id)} onLoadedData={() => formatSongDuration(setSongDuration, audioRef)}></audio>
             
             <span className={cx('song-genre')}>{song.genre}</span>
 
@@ -65,10 +61,6 @@ function SongItem({ playlist }: SongItemProps) {
             dispatch(setCurrSong(playlist.songs[index]))
             dispatch(setIsPlayControlOn(true))
         }
-    }
-
-    const thumbnailUrl = (songID: string) => {
-        return BASE_API_URL + MUSIC_API_ROUTES.getThumbSong + '/' + songID;
     }
 
     return (
