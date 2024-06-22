@@ -22,6 +22,7 @@ export const MUSIC_API_ROUTES = {
     getThumbSong: API_ROUTES.music + '/thumbnail',
     likeSong: API_ROUTES.music + '',
     unLikeSong: API_ROUTES.music + '',
+    removeSong: API_ROUTES.music + '',
 }
 
 export const PLAYLIST_API_ROUTES = {

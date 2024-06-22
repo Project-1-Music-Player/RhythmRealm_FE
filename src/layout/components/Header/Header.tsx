@@ -97,8 +97,8 @@ function Header() {
                 </div> :
 
                 <div className={cx('authen')}>
-                    <Link to="/login" className={cx('login')}>Sign in</Link>
-                    <Link to="/register" className={cx('register')}>Sign up</Link>
+                    <Link to="/login" className={cx('login')}>Login to website</Link>
+                    {/* <Link to="/register" className={cx('register')}>Sign up</Link> */}
                 </div>
             }
 

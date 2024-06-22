@@ -28,6 +28,14 @@ function SoundBadge() {
     const [likeColor, setLikeColor] = useState('#fff')
     const [openListPlaylist, setOpenListPlaylist] = useState(false)
 
+    const handleAddSong = () => {
+        if(userId !== '') {
+            setOpenListPlaylist(true)
+        } else {
+            navigate("/login")
+        }
+    }
+
     const fetchLikeSongs = async () => {
         try {
             const likeSongResults = await getLikeSongs(userIdToken)
@@ -93,7 +101,7 @@ function SoundBadge() {
                     <FontAwesomeIcon 
                         icon={faPlus} 
                         className={cx('queue')}
-                        onClick={() => setOpenListPlaylist(true)}
+                        onClick={handleAddSong}
                     />
                 </div>
                 <div className={cx('actions_btn')}>

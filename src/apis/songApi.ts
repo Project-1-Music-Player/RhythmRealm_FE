@@ -132,3 +132,19 @@ export const unLikeSong = async (songId: string, idToken: string) => {
         throw err
     }
 }
+
+export const removeSong = async (songId: string, idToken: string) => {
+    try {
+        await axios.delete(
+            BASE_API_URL + MUSIC_API_ROUTES.removeSong + `/${songId}/remove`,
+            {
+                headers: {
+                    "Authorization": `Bearer ${idToken}`
+                }
+            }
+        )
+    } catch(err) {
+        console.log('Remove song failed: ' + err)
+        throw err
+    }
+}

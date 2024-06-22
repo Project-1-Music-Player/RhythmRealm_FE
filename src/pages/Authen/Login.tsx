@@ -93,11 +93,11 @@ function Login() {
 
             <div className={cx('form')}>
                 <div className={cx('head')}>
-                    <h3 className={cx('action_1')}>Sign In</h3>
-                    <Link to='/register' className={cx('action_1')}>Sign Up</Link>
+                    <h3 className={cx('action_1')}>Login To Website</h3>
+                    {/* <Link to='/register' className={cx('action_1')}>Sign Up</Link> */}
                 </div>
 
-                <Form id='loginForm' onSubmit={handleSubmit}>
+                {/* <Form id='loginForm' onSubmit={handleSubmit}>
                     <Form.Group className={cx('username_group')}>
                         <Form.Label className={cx('label')}>Username</Form.Label>
                         <Form.Control 
@@ -124,14 +124,14 @@ function Login() {
                         />
                         <span style={validPassword ? {} : {color: 'red'}} className={cx('err-message')}>Try another password</span>
                     </Form.Group>
-                </Form>
+                </Form> */}
 
-                <div style={{display: 'flex', marginTop: '40px', justifyContent: 'space-between'}}>
+                <div style={{display: 'flex', marginTop: '80px', justifyContent: 'space-between'}}>
                     <div className={cx('gg_btn')} onClick={handleGGSignIn}>
                         <img src={gglogo} alt="" className={cx('gg_logo')}/>
-                        <span className={cx('gg_text')}>Google</span>
+                        <span className={cx('gg_text')}>Login with Google account</span>
                     </div>
-                    <Button type="submit" className={cx('btn')} form="loginForm">Sign In</Button>
+                    {/* <Button type="submit" className={cx('btn')} form="loginForm">Sign In</Button> */}
                 </div>
             </div>
         </div>

@@ -1,7 +1,8 @@
 .wrapper {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    column-gap: 50px;
     width: 100%;
 }
 
@@ -23,8 +24,8 @@
 
     .action_1:nth-child(1) {
         color: #F9FF00;
-        padding-right: 70px;
-        border-right: solid 1px #fff;
+        // padding-right: 70px;
+        // border-right: solid 1px #fff;
     }
     
     .action_1:nth-child(2) {
@@ -50,6 +51,7 @@
         border-radius: 5px;
         border: 1px solid #D2D1D1;
         padding: 10px 25px; 
+        width: 100%;
     }
 
     .gg-logo {
@@ -59,7 +61,7 @@
     }
 
     .gg_text {
-        font-size: 2rem;
+        font-size: 1.8rem;
         color: #fff;
         font-weight: 500;
         margin-left: 15px;
