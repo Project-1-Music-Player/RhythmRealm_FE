@@ -14,8 +14,8 @@ function ProfilePlaylist() {
     return (
         <div>
             {
-                userPlaylists.length !== 0 ? (
-                    userPlaylists.map((playlist, index) => {
+                userPlaylists?.length > 0 ? (
+                    userPlaylists?.map((playlist, index) => {
                         return (
                             <div key={index} style={{marginBottom: '40px'}}>
                                 <div className={cx('playlist-info')}>

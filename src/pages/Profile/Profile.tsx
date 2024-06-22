@@ -15,9 +15,6 @@ const cx = classNames.bind(styles)
 
 const tabs = [
     {
-        title: 'All',
-    },
-    {
         title: 'Playlists',
     },
     {
@@ -32,21 +29,12 @@ function Profile() {
     const currentUser = useSelector((state: RootState) => state.userSlice.currentUser)
     const user = useSelector((state: RootState) => state.authSlice.user)
 
-    // const { id } = useParams()
-
     const [currentTab, setCurrentTab] = useState(0)
 
     const renderProfileData = () => {
         if(currentTab === 0) {
-            return (
-                <>
-                    <ProfileLike/>
-                    <ProfilePlaylist/>
-                </>
-            )
-        } else if(currentTab === 1) {
             return <ProfilePlaylist/>
-        } else if(currentTab === 2) {
+        } else if(currentTab === 1) {
             return <ProfileLike/>
         } else {
             return <ProfileFollow profileFollow={currentUser.following}/>

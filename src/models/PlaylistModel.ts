@@ -8,3 +8,8 @@ export interface PlaylistModel {
     owner: string | '',
     songs: SongModel[],
 }
+
+export interface PlaylistForm {
+    title: string,
+    description: string,
+}

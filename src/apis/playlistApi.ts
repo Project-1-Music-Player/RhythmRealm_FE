@@ -19,7 +19,7 @@ export const getUserPlaylists = async (idToken: string) => {
     }
 }
 
-export const createPlaylist = async (title:string, desc: string, idToken: string) => {
+export const createPlaylist = async (title: string, desc: string, idToken: string) => {
     try {
         await axios.post(
             BASE_API_URL + PLAYLIST_API_ROUTES.addPlaylist,
@@ -36,6 +36,27 @@ export const createPlaylist = async (title:string, desc: string, idToken: string
         )
     } catch(err) {
         console.log('Create playlist failed: ', err)
+        throw err
+    }
+}
+
+export const updatePlaylist = async (playlistId: string, title: string, desc: string, idToken: string) => {
+    try {
+        await axios.put(
+            BASE_API_URL + PLAYLIST_API_ROUTES.updatePlaylist + '/' + playlistId,
+            {
+                name: title,
+                description: desc,
+            },
+            {
+                headers: {
+                    'Authorization': `Bearer ${idToken}`,
+                    'Content-Type': 'application/json',
+                }
+            }
+        )
+    } catch(err) {
+        console.log('Update playlist failed: ', err)
         throw err
     }
 }
@@ -84,7 +105,7 @@ export const removeSongFromPlaylist = async (playlistId: string, songId: string,
             }
         )
     } catch(err) {
-        console.log('Add song to playlist failed: ', err)
+        console.log('Remove song to playlist failed: ', err)
         throw err
     }
 }

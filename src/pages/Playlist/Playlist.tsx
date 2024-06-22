@@ -109,9 +109,9 @@ function Playlist() {
             <SongItem playlist={playlist} songs={songs}/>
 
             {
-                isEditForm ?
+                isEditForm && playlist ?
                 <div className={cx('form-wrapper')} onClick={(e) => handleOutFormClick(e)}>
-                    <EditPlaylistForm playlist={playlist} getIsCloseForm={getIsCloseForm}/>
+                    <EditPlaylistForm playlist={playlist} songs={songs} getIsCloseForm={getIsCloseForm}/>
                 </div>
 
                 : <></>

@@ -7,13 +7,9 @@ import styles from "./UploadPlaylist.module.scss"
 
 import { RootState } from "@/redux/store"
 import { createPlaylist } from "@/apis/playlistApi"
+import { PlaylistForm } from "@/models/PlaylistModel"
 
 const cx = classNames.bind(styles)
-
-type PlaylistForm = {
-    title: string,
-    description: string,
-}
 
 function UploadPlaylist() {
     const userIdToken = useSelector((state: RootState) => state.authSlice.accessToken)

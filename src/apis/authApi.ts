@@ -23,3 +23,21 @@ export const googleSignIn = async (userName: string, userEmail: string, idToken:
         throw err
     }
 }
+
+export const updateUserRole = async (idToken: string) => {
+    try {        
+        await axios.put(
+            BASE_API_URL + AUTH_API_ROUTES.updateRole,
+            {},
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${idToken}`
+                }
+            }
+        )
+    } catch(err) {
+        console.error('Update role failed:', err)
+        throw err
+    }
+}
