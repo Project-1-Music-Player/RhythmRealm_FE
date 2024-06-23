@@ -1,21 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-import { AuthModel } from "@/models/AuthModel"
-
-const initialState: AuthModel = {
-    user: {
-        id: '',
-        name: '',
-        avatar: '',
-        role: 'listener',
-    },
-    accessToken: '',
-    refreshToken: '',
-}
+import { AuthModel, initialAuth } from "@/models/AuthModel"
 
 const AuthSlice = createSlice({
     name: 'auth',
-    initialState: initialState,
+    initialState: initialAuth,
     reducers: {
         login: (state, action: PayloadAction<AuthModel>) => {
             state.user = action.payload.user
@@ -24,9 +13,9 @@ const AuthSlice = createSlice({
         },
 
         logout: (state) => {
-            state.user = initialState.user
-            state.accessToken = initialState.accessToken
-            state.refreshToken = initialState.refreshToken
+            state.user = initialAuth.user
+            state.accessToken = initialAuth.accessToken
+            state.refreshToken = initialAuth.refreshToken
         }
     } 
 })

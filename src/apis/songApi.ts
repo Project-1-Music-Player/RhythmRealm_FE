@@ -1,7 +1,7 @@
 import axios from "axios"
 
 import { BASE_API_URL, MUSIC_API_ROUTES } from "@/constants/api"
-import { UploadSongModel } from "@/models/SongModel"
+import { SongForm } from "@/models/SongModel"
 
 export const getUploadSong = async (idToken: string) => {
     try {
@@ -49,7 +49,7 @@ export const getLikeSongs = async (idToken: string) => {
     }
 }
 
-export const uploadSong = async (songData: UploadSongModel, idToken: string) => {
+export const uploadSong = async (songData: SongForm, idToken: string) => {
     try {
         const formData = new FormData()
         formData.append('title', songData.title)

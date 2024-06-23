@@ -9,7 +9,7 @@ import styles from './UploadSong.module.scss'
 import { uploadSong } from "@/apis/songApi"
 import { songGenres } from "@/constants/genreSongs"
 import { RootState } from "@/redux/store"
-import { UploadSongModel } from "@/models/SongModel"
+import { SongForm } from "@/models/SongModel"
 
 const cx = classNames.bind(styles)
 
@@ -18,7 +18,7 @@ function UploadSong() {
     const userIdToken = useSelector((state: RootState) => state.authSlice.accessToken)
     const userId = useSelector((state: RootState) => state.authSlice.user.id)
 
-    const [songData, setSongData] = useState<UploadSongModel>({
+    const [songData, setSongData] = useState<SongForm>({
         title: '',
         album: '',
         genre: '',

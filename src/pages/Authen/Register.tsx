@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux"
 
 import styles from "./Authen.module.scss"
 
-import { RegisterModel } from "@/models/RegisterModel"
 import gglogo from '@/assets/icons/GG.png'
 import AuthenDecor from "@/components/AuthenDecor/AuthenDecor"
 import { auth, googleProvider, signInWithPopup } from "@/firebase"
@@ -21,33 +20,10 @@ function Register() {
     const dispatch: AppDispatch = useDispatch()
     const navigate = useNavigate()
     
-    let user: User | null = null
-    
-    const [formData, setFormData] = useState<RegisterModel>({
-        username: '',
-        password: '',
-        repassword: '',
-    })
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        // e.preventDefault()
-
-        console.log(formData)
-    }
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target
-
-        setFormData({
-            ...formData,
-            [name]: value
-        })
-    }
-
     const handleGGClick = async () => {
         try {
             const result = await signInWithPopup(auth, googleProvider)
-            user = result.user
+            const user = result.user
             const idToken = await user.getIdToken()
             await googleSignIn(user.displayName || '', user.email ||'', idToken)
 
@@ -79,7 +55,7 @@ function Register() {
                     <h3 className={cx('action_2')}>Sign Up</h3>
                 </div>
 
-                <Form id="registerForm" onSubmit={handleSubmit}>
+                {/* <Form id="registerForm" onSubmit={handleSubmit}>
                     <Form.Group className={cx('username_group')}>
                         <Form.Label className={cx('label')}>Username</Form.Label>
                         <Form.Control 
@@ -116,7 +92,7 @@ function Register() {
                         />
                         <span className={cx('err-message')}>Try again</span>
                     </Form.Group>
-                </Form>
+                </Form> */}
 
                 <div style={{display: 'flex', marginTop: '40px', justifyContent: 'space-between'}}>
                     <div className={cx('gg_btn')}  onClick={handleGGClick}>

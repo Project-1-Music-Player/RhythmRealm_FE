@@ -20,7 +20,7 @@ function Playlist({ playlist } : PlaylistProps) {
                 className={cx('image')} 
             />
             <p className={cx('title')}>{playlist.name}</p>
-            <span className={cx('author')}>{playlist.owner ? playlist.owner : playlist.description}</span>
+            <span className={cx('author')}>{playlist.owner || playlist.description}</span>
         </>
     )
 }

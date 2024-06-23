@@ -2,17 +2,15 @@ import classNames from "classnames/bind"
 
 import styles from '../Profile.module.scss'
 
-import { UserModel } from "@/models/UserModel"
 import { UserAuthModel } from "@/models/AuthModel"
 
 const cx = classNames.bind(styles)
 
 type ProfileHeroProps = {
-    selectedUser: UserModel,
     user: UserAuthModel
 }
 
-function ProfileHero({ selectedUser, user }: ProfileHeroProps) {
+function ProfileHero({ user }: ProfileHeroProps) {
     return (
         <div className={cx('profile-hero')}>
             <div className={cx('profile-info')}>
@@ -27,12 +25,12 @@ function ProfileHero({ selectedUser, user }: ProfileHeroProps) {
             <div className={cx('profile-follow-statistic')}>
                 <article>
                     <span className={cx('title')}>Followers</span>
-                    <span className={cx('statistic')}>{selectedUser.followers}</span>
+                    <span className={cx('statistic')}>0</span>
                 </article>
 
                 <article>
                     <span className={cx('title')}>Following</span>
-                    <span className={cx('statistic')}>{selectedUser.following?.length}</span>
+                    <span className={cx('statistic')}>0</span>
                 </article>
             </div>
 

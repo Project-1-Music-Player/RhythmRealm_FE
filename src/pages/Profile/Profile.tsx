@@ -26,7 +26,6 @@ const tabs = [
 ]
 
 function Profile() {
-    const currentUser = useSelector((state: RootState) => state.userSlice.currentUser)
     const user = useSelector((state: RootState) => state.authSlice.user)
 
     const [currentTab, setCurrentTab] = useState(0)
@@ -37,13 +36,13 @@ function Profile() {
         } else if(currentTab === 1) {
             return <ProfileLike/>
         } else {
-            return <ProfileFollow profileFollow={currentUser.following}/>
+            return <ProfileFollow profileFollow={null}/>
         }
     }
 
     return (
         <div className={cx('wrapper')}>
-            <ProfileHero selectedUser={currentUser} user={user}/>
+            <ProfileHero user={user}/>
 
             <div className={cx('profile-media')}>
                 <nav className={cx('navigation')}>

@@ -1,6 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { SongModel } from "@/models/SongModel"
-import { MockModular } from "@/MockData/ModularPlaylistData"
+import { SongModel, initialSong } from "@/models/SongModel"
 
 interface SongState {
     currSong: SongModel,
@@ -8,7 +7,7 @@ interface SongState {
 }
 
 const initialState: SongState = {
-    currSong: MockModular.list_playlist[0].songs[0],
+    currSong: initialSong,
     likeSongs: []
 }
 

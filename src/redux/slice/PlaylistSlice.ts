@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-import { PlaylistModel } from "@/models/PlaylistModel"
-import { MockModular } from "@/MockData/ModularPlaylistData"
+import { PlaylistModel, initialPlaylist } from "@/models/PlaylistModel"
 
 interface PlaylistState {
     currPlaylist: PlaylistModel,
@@ -11,7 +10,7 @@ interface PlaylistState {
 }
 
 const initialState: PlaylistState = {
-    currPlaylist: MockModular.list_playlist[0],
+    currPlaylist: initialPlaylist,
     songIndex: 0,
     isPlayControlOn: false,
     userPlaylist: [],

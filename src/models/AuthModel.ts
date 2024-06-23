@@ -10,3 +10,14 @@ export interface AuthModel {
     accessToken: string,
     refreshToken: string,
 }
+
+export const initialAuth: AuthModel = {
+    user: {
+        id: '',
+        name: '',
+        avatar: '',
+        role: 'listener',
+    },
+    accessToken: '',
+    refreshToken: '',
+}

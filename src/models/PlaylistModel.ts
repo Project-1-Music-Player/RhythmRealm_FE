@@ -5,11 +5,20 @@ export interface PlaylistModel {
     image: string,
     name: string,
     description: string,
-    owner: string | '',
+    owner: string,
     songs: SongModel[],
 }
 
 export interface PlaylistForm {
     title: string,
     description: string,
+}
+
+export const initialPlaylist: PlaylistModel = {
+    playlist_id: '',
+    image: '',
+    name: '',
+    description: '',
+    owner: '',
+    songs: []
 }

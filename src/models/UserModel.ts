@@ -1,4 +1,3 @@
-// model
 import { SongModel } from "./SongModel"
 import { PlaylistModel } from "./PlaylistModel"
 
@@ -21,4 +20,17 @@ export interface UserModel {
     following: UserArtistFollow[] | null;
     like_song: SongModel[] | null;
     playlist: PlaylistModel[] | null;
+}
+
+export const initialUser: UserModel = {
+    id: '',
+    username: '',
+    password: '',
+    role: 'listener',
+    avatar: '',
+    name: '',
+    followers: null,
+    following: null,
+    like_song: null,
+    playlist: null,
 }

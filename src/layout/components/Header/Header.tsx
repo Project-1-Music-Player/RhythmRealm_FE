@@ -29,10 +29,6 @@ function Header() {
     const [uploadBtn, setUploadBtn] = useState(true)
     const [isShowSearchResults, setIsShowSearchResults] = useState(false)
     const [searchResult, setSearchResult] = useState<SongModel[]>([])
-
-    const handleUploadBtn = () => {
-        navigate('/upload-song')
-    }
     
     const windowUrl = location.pathname.includes('/upload')
     useEffect(() => {
@@ -69,7 +65,7 @@ function Header() {
                 <div className={cx('authen')}>
                     <span 
                         className={cx('upload')}  
-                        onClick={handleUploadBtn}
+                        onClick={() => navigate('/upload-song')}
                         style={uploadBtn ? {backgroundColor: '#828282'} : {}}
                     >UPLOAD SONG</span>
 
@@ -98,7 +94,6 @@ function Header() {
 
                 <div className={cx('authen')}>
                     <Link to="/login" className={cx('login')}>Login to website</Link>
-                    {/* <Link to="/register" className={cx('register')}>Sign up</Link> */}
                 </div>
             }
 
