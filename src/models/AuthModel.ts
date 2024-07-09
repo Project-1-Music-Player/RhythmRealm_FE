@@ -16,7 +16,7 @@ export const initialAuth: AuthModel = {
         id: '',
         name: '',
         avatar: '',
-        role: 'listener',
+        role: '',
     },
     accessToken: '',
     refreshToken: '',

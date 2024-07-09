@@ -15,6 +15,7 @@ import { SongModel } from "@/models/SongModel"
 
 import SearchBar from './components/SearchBar'
 import SearchResults from "./components/SearchResults"
+import UpdateRoles from "./components/UpdateRole"
 
 const cx = classNames.bind(styles)
 
@@ -24,9 +25,11 @@ function Header() {
     const dispatch: AppDispatch = useDispatch()
 
     const user = useSelector((state: RootState) => state.authSlice.user)
+    const userRole = useSelector((state: RootState) => state.authSlice.user.role)
 
     const [isMenuHovered, setIsMenuHovered] = useState(false)
     const [uploadBtn, setUploadBtn] = useState(true)
+    const [openUpdateRole, setOpenUpdateRole] = useState(false)
     const [isShowSearchResults, setIsShowSearchResults] = useState(false)
     const [searchResult, setSearchResult] = useState<SongModel[]>([])
     
@@ -49,6 +52,11 @@ function Header() {
         }
     }
 
+    const toggleUpdateRole = () => {
+        // navigate('/upload-song')
+        setOpenUpdateRole(true)
+    }
+
     return (
         <header className={cx('wrapper')}>
             <div className={cx('nav')}>
@@ -65,9 +73,9 @@ function Header() {
                 <div className={cx('authen')}>
                     <span 
                         className={cx('upload')}  
-                        onClick={() => navigate('/upload-song')}
+                        onClick={toggleUpdateRole}
                         style={uploadBtn ? {backgroundColor: '#828282'} : {}}
-                    >UPLOAD SONG</span>
+                    >{userRole === 'artist' ? 'UPLOAD SONG' : 'BECOME ARTIST'}</span>
 
                     <div 
                         className={cx('user')} 
@@ -89,7 +97,6 @@ function Header() {
                             : <></>
                         }
                     </div>
-                    
                 </div> :
 
                 <div className={cx('authen')}>
@@ -97,6 +104,7 @@ function Header() {
                 </div>
             }
 
+            {openUpdateRole ? <UpdateRoles setClose={setOpenUpdateRole}/> : <></>}
         </header>
     )
 }

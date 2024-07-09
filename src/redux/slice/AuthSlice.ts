@@ -16,9 +16,13 @@ const AuthSlice = createSlice({
             state.user = initialAuth.user
             state.accessToken = initialAuth.accessToken
             state.refreshToken = initialAuth.refreshToken
-        }
+        },
+
+        updateRole: (state, action: PayloadAction<string>) => {
+            state.user.role = action.payload
+        },
     } 
 })
 
-export const { login, logout } = AuthSlice.actions
+export const { login, logout, updateRole } = AuthSlice.actions
 export default AuthSlice.reducer

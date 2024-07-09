@@ -1,6 +1,6 @@
 import axios from "axios"
 
-import { BASE_API_URL, AUTH_API_ROUTES } from "@/constants/api"
+import { BASE_API_URL, AUTH_API_ROUTES, USER_API_ROUTES } from "@/constants/api"
 
 export const googleSignIn = async (userName: string, userEmail: string, idToken: string) => {
     try {        
@@ -27,7 +27,7 @@ export const googleSignIn = async (userName: string, userEmail: string, idToken:
 export const updateUserRole = async (idToken: string) => {
     try {        
         await axios.put(
-            BASE_API_URL + AUTH_API_ROUTES.updateRole,
+            BASE_API_URL + USER_API_ROUTES.updateRole,
             {},
             {
                 headers: {

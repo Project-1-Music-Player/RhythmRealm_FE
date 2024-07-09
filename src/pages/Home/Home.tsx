@@ -18,6 +18,7 @@ const cx = classNames.bind(styles)
 
 function Home() {
     const user = useSelector((state: RootState) => state.authSlice.user)
+    const userRole = useSelector((state: RootState) => state.authSlice.user.role)
     const userIdToken = useSelector((state: RootState) => state.authSlice.accessToken)
     const dispatch: AppDispatch = useDispatch()
 
@@ -93,7 +94,9 @@ function Home() {
     return (
         <div className={cx('container')}>
             <div className={cx('content')}>
-                {user.id !== '' ? <ModularPlaylist title='Uploaded Songs' playlists={userSongUpload} isPlaylist={false}/> : <></>}
+                {user.id !== '' && userRole === 'artist' ? 
+                    <ModularPlaylist title='Uploaded Songs' playlists={userSongUpload} isPlaylist={false}/> : <></>
+                }
 
                 <ModularPlaylist title='My Playlists' playlists={playlists} isPlaylist={true}/>
 

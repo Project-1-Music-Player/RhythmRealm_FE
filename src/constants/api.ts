@@ -9,7 +9,10 @@ export const API_ROUTES = {
 
 export const AUTH_API_ROUTES = {
     loginGoogle: API_ROUTES.auth + '/google',
-    updateRole: API_ROUTES.user + '/role',
+}
+
+export const USER_API_ROUTES = {
+    updateRole: API_ROUTES.user + '/promote',
 }
 
 export const MUSIC_API_ROUTES = {

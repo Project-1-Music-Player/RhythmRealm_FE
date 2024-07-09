@@ -1,13 +1,13 @@
 import classNames from "classnames/bind"
 import { useNavigate } from "react-router-dom"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 import styles from "./Authen.module.scss"
 
 import { auth, googleProvider, signInWithPopup } from "@/firebase"
 import AuthenDecor from "@/components/AuthenDecor/AuthenDecor"
 import { login } from "@/redux/slice/AuthSlice"
-import { AppDispatch } from "@/redux/store"
+import { AppDispatch, RootState } from "@/redux/store"
 import gglogo from '@/assets/icons/GG.png'
 import { googleSignIn } from "@/apis/authApi"
 
@@ -16,6 +16,8 @@ const cx = classNames.bind(styles)
 function Login() {
     const dispatch: AppDispatch = useDispatch()
     const navigate = useNavigate()
+
+    const userRole = useSelector((state: RootState) => state.authSlice.user.role)
 
     const handleGGSignIn = async () => {
         try {
@@ -29,10 +31,10 @@ function Login() {
                     id: user.uid,
                     name: user.displayName || '',
                     avatar: user.photoURL || '',
-                    role: 'listener'
+                    role: userRole,
                 },
                 accessToken: userIdToken,
-                refreshToken: user.refreshToken
+                refreshToken: user.refreshToken,
             }))
 
             navigate('/')
