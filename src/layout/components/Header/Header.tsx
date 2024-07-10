@@ -53,8 +53,11 @@ function Header() {
     }
 
     const toggleUpdateRole = () => {
-        // navigate('/upload-song')
-        setOpenUpdateRole(true)
+        if(userRole === 'artist') {
+            navigate('/upload-song')
+        } else {
+            setOpenUpdateRole(true)
+        }
     }
 
     return (

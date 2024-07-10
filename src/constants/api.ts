@@ -13,6 +13,7 @@ export const AUTH_API_ROUTES = {
 
 export const USER_API_ROUTES = {
     updateRole: API_ROUTES.user + '/promote',
+    getUserInfo: API_ROUTES.user + '/info',
 }
 
 export const MUSIC_API_ROUTES = {
