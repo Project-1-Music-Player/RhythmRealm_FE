@@ -4,7 +4,9 @@ import { faUserGroup, faRotate } from "@fortawesome/free-solid-svg-icons"
 
 import styles from './ArtistMenu.module.scss'
 
-import artist_avatar from '@/assets/images/artist_avatar.jpg'
+import mtp_avatar from '@/assets/images/SonTung.jpg'
+import hd_avatar from '@/assets/images/HoangDung.jpg'
+import hth_avatar from '@/assets/images/HieuThuHai.jpg'
 import { UserModel } from "@/models/UserModel"
 
 import ArtistCard from "./ArtistCard"
@@ -15,23 +17,23 @@ const fake_artist = [
     {
         id: '1',
         role: 'artist',
-        avatar: artist_avatar,
+        avatar: mtp_avatar,
         name: 'Son Tung M-TP',
-        followers: 1000000
+        followers: 12695437
     },
     {
         id: '2',
         role: 'artist',
-        avatar: artist_avatar,
-        name: 'Son Tung M-TP',
-        followers: 1000000
+        avatar: hd_avatar,
+        name: 'Hoang Dung',
+        followers: 592631
     },
     {
         id: '3',
         role: 'artist',
-        avatar: artist_avatar,
-        name: 'Son Tung M-TP',
-        followers: 1000000
+        avatar: hth_avatar,
+        name: 'Hieu Thu Hai',
+        followers: 350786
     }
 ] as UserModel[]
 

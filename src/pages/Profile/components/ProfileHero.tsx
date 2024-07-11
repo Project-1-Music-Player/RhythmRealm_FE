@@ -1,8 +1,10 @@
 import classNames from "classnames/bind"
+import { useSelector } from "react-redux"
 
 import styles from '../Profile.module.scss'
 
 import { UserAuthModel } from "@/models/AuthModel"
+import { RootState } from "@/redux/store"
 
 const cx = classNames.bind(styles)
 
@@ -11,6 +13,8 @@ type ProfileHeroProps = {
 }
 
 function ProfileHero({ user }: ProfileHeroProps) {
+    const userRole = useSelector((state: RootState) => state.authSlice.user.role)
+
     return (
         <div className={cx('profile-hero')}>
             <div className={cx('profile-info')}>
@@ -18,7 +22,7 @@ function ProfileHero({ user }: ProfileHeroProps) {
 
                 <div className={cx('profile-user-info')}>
                     <p className={cx('user-name')}>{user.name}</p>
-                    <p className={cx('user-role')}>{user.role === 'listener' ? 'Normal User' : 'Artist'}</p>
+                    <p className={cx('user-role')}>{userRole === 'listener' ? 'Normal User' : 'Artist'}</p>
                 </div>
             </div>
 
