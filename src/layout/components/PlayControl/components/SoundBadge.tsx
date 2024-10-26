@@ -71,7 +71,7 @@ function SoundBadge() {
             return
         }
 
-        if(likeSongs.some(song => song.song_id === currSong.song_id)) {
+        if(likeSongs?.some(song => song.song_id === currSong.song_id)) {
             setLikeColor('#ff0000')
         } else {
             setLikeColor('#fff')

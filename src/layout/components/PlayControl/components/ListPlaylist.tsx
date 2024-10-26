@@ -32,7 +32,7 @@ function ListPlaylist({ setOpen }: ListPlaylistProps) {
 
             <p className={cx('list-head')}>Choose Playlist</p>
             <div className={cx('list-show')}>
-                {userPlaylists.length > 0 ? 
+                {userPlaylists ? 
                     userPlaylists.map((playlist, index) => {
                         return (
                             <div

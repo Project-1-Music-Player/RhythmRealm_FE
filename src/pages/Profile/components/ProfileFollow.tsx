@@ -14,7 +14,7 @@ function ProfileFollow({ profileFollow }: ProfileFollowProps) {
     return (
         <div className={cx('profile-follow')}>
             {
-                profileFollow  ? (
+                profileFollow ? (
                     profileFollow.map((artist, index) => {
                         return (
                             <article key={index} className={cx('follow-info')}>

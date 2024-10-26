@@ -12,11 +12,12 @@ const cx = classNames.bind(styles)
 
 function ProfileLike() {
     const likeSongs = useSelector((state: RootState) => state.songSlice.likeSongs)
+    console.log(likeSongs?.length)
 
     return (
         <div className={cx('profile-song')}>
             {
-                likeSongs.length !== 0 ? (
+                likeSongs ? (
                     likeSongs.map((song, index) => {
                         return (
                             <div key={index} className={cx('song-wrapper')}>
