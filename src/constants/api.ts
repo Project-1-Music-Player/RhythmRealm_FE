@@ -4,6 +4,7 @@ export const API_ROUTES = {
     auth: 'auth',
     user: 'user',
     music: 'music',
+    artist: 'artists',
     playlist: 'playlists',
 }
 
@@ -37,4 +38,12 @@ export const PLAYLIST_API_ROUTES = {
     addSongToPlaylist: API_ROUTES.playlist + '',
     removeSongFromPlaylist: API_ROUTES.playlist + '',
     getSongsInPlaylist: API_ROUTES.playlist + '',
+}
+
+export const ARTISTS_API_ROUTES = {
+    getAllArtists: API_ROUTES.artist + '',
+    getArtist: API_ROUTES.artist + '',
+    followArtist: API_ROUTES.artist + '',
+    unFollowArtist: API_ROUTES.artist + '',
+    getFollowedArtist: API_ROUTES.artist + '',
 }

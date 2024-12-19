@@ -8,6 +8,7 @@
 .title, .refresh {
     display: flex;
     user-select: none;
+    padding-left: 100px;
 }
 
 .refresh {
@@ -31,10 +32,36 @@
     font-weight: 500;
 }
 
+.empty-label {
+    margin: 20px 0;
+    padding: 50px 50px;
+    padding-bottom: 70px;
+    border-bottom: solid 2px rgba($color: #616161, $alpha: 0.4);
+    overflow: auto;
+    color: #dfdede;
+    text-align: center;
+}
+
+.empty-label-1 {
+    margin: 20px 0;
+    padding: 50px 50px;
+    padding-bottom: 70px;
+    overflow: auto;
+    color: #dfdede;
+    text-align: center;
+}
+
 .body {
     margin: 20px 0;
     padding-bottom: 20px;
+    padding-right: 15px;
     border-bottom: solid 2px rgba($color: #616161, $alpha: 0.4);
+    height: 300px;
+    overflow: auto;
+
+    .item {
+        margin-bottom: 20px;
+    }
 }
 
 .card {
@@ -42,6 +69,7 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 25px;
+    border-radius: 5px;
 
     &:last-child {
         margin-bottom: 0;
@@ -51,6 +79,8 @@
 .info {
     display: flex;
     align-items: center;
+    border-radius: 5px;
+    padding: 0 10px;
 
     .avatar {
         width: 50px;
@@ -60,7 +90,7 @@
         margin-right: 15px;
     }
 
-    .title {
+    .artist_name {
         font-weight: 500;
         color: #fff;
     }
@@ -74,6 +104,11 @@
         color: #ababab;
         font-size: 1.3rem;
         font-weight: 500;
+    }
+
+    &:hover {
+        background-color: rgba($color: #ccc, $alpha: 0.2);
+        cursor: pointer;
     }
 }
 

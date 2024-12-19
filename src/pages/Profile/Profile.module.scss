@@ -87,6 +87,15 @@
     }
 }
 
+.playlist-info {
+    border-radius: 5px;
+
+    &:hover {
+        background-color: rgba($color: #ccc, $alpha: 0.2);
+        cursor: pointer;
+    }
+}
+
 .song-wrapper, .playlist-info {
     margin-bottom: 25px;
     display: flex;

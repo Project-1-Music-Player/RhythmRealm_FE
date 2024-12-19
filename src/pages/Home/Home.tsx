@@ -10,21 +10,27 @@ import ModularPlaylist from "@/components/ModularPlaylist/ModularPlaylist"
 import { AppDispatch, RootState } from "@/redux/store"
 import { setUserPlaylist } from "@/redux/slice/PlaylistSlice"
 import { setLikeSongs } from "@/redux/slice/SongSlice"
+import { setFollowedArtist, setAllArtists } from "@/redux/slice/ArtistSlice"
 import { PlaylistModel } from "@/models/PlaylistModel"
 import { SongModel } from "@/models/SongModel"
+import { ArtistModel } from "@/models/ArtistModel"
 import { getUserPlaylists } from "@/apis/playlistApi"
 import { getAllSongs, getLikeSongs } from "@/apis/songApi"
+import { getAllArtists, getArtistInfo, getFollowedArtist } from "@/apis/artistApi"
 
 const cx = classNames.bind(styles)
 
 function Home() {
     const user = useSelector((state: RootState) => state.authSlice.user)
+    const userId = useSelector((state: RootState) => state.authSlice.user.id)
     const userRole = useSelector((state: RootState) => state.authSlice.user.role)
     const userIdToken = useSelector((state: RootState) => state.authSlice.accessToken)
     const dispatch: AppDispatch = useDispatch()
 
     const [allSongs, setAllSongs] = useState<SongModel[]>([])
     const [playlists, setPlaylists] = useState<PlaylistModel[]>([])
+    const [followedArtist, setFollowArtist] = useState<ArtistModel[]>([])
+    // const [artists, setArtists] = useState<ArtistModel[]>([])
     const [groupedSongs, setGroupedSongs] = useState<{ [key: string]: SongModel[] }>({});
 
     const userSongUpload: PlaylistModel[] = [
@@ -51,14 +57,13 @@ function Home() {
         try {
             const likeSongResults = await getLikeSongs(userIdToken)
             dispatch(setLikeSongs(likeSongResults))
-            console.log(likeSongResults)
         } catch(err) {
             console.log('Get all songs failed: ', err)
         }
     }
     const fetchPlaylists = async () => {
         try {
-            const playlistData = await getUserPlaylists(userIdToken)
+            const playlistData = await getUserPlaylists(userIdToken, userId)
             setPlaylists(playlistData)
             dispatch(setUserPlaylist(playlistData))
 
@@ -66,6 +71,23 @@ function Home() {
             console.log('Get all playlists failed: ', err)
         }
     }
+    const fetchArtists = async () => {
+        try {
+            const artistData = await getAllArtists()
+            dispatch(setAllArtists(artistData))
+        } catch(err) {
+            console.log('Get all artists failed: ', err)
+        }
+    }
+    const fetchFollowedArtist = async () => {
+            try {
+                const followedArtist = await getFollowedArtist(userIdToken)
+                setFollowArtist(followedArtist)
+                dispatch(setFollowedArtist(followedArtist))
+            } catch(err) {
+                console.log('Get followed artist failed: ', err)
+            }
+        }
 
     const renderSongsOfGenre = () => {
         const songsByGenre: { [key: string]: SongModel[] } = {}
@@ -86,6 +108,8 @@ function Home() {
         fetchSongs()
         fetchLikeSong()
         fetchPlaylists()
+        fetchArtists()
+        fetchFollowedArtist()
     }, [])
 
     useEffect(() => {

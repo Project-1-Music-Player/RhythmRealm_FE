@@ -2,10 +2,10 @@ import axios from "axios"
 
 import { BASE_API_URL, PLAYLIST_API_ROUTES } from "@/constants/api"
 
-export const getUserPlaylists = async (idToken: string) => {
+export const getUserPlaylists = async (idToken: string, id: string | undefined) => {
     try {
         const response = await axios.get(
-            BASE_API_URL + PLAYLIST_API_ROUTES.getPlaylist,
+            `${BASE_API_URL}${id}/playlists`,
             {
                 headers: {
                     "Authorization": `Bearer ${idToken}`

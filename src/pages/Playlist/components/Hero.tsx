@@ -13,6 +13,7 @@ type HeroProps = {
 }
 
 function Hero({ playlist, length }: HeroProps) {
+    console.log(playlist)
     return (
         <div className={cx('hero-head')}>
             <img src={playlist?.image ?? defaultImg} alt="" className={cx('image')}/>
@@ -20,7 +21,7 @@ function Hero({ playlist, length }: HeroProps) {
             <div className={cx('hero-info')}>
                 <div className={cx('title-head')}>
                     <div className={cx('info')}>
-                        <h3 className={cx('title')}>{playlist?.name ? playlist.name : 'My songs'}</h3>
+                        <h3 className={cx('title')}>{playlist?.name}</h3>
                         <p className={cx('owner')}>{playlist?.description}</p>
                     </div>
                 </div>

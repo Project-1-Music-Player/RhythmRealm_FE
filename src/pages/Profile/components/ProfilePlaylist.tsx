@@ -1,23 +1,37 @@
 import classNames from "classnames/bind"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 import styles from '../Profile.module.scss'
 
-import { RootState } from "@/redux/store"
+import { AppDispatch, RootState } from "@/redux/store"
 import defaultImg from '@/assets/icons/song_note.png'
+import { PlaylistModel } from "@/models/PlaylistModel"
+import { useNavigate } from "react-router-dom"
 
 const cx = classNames.bind(styles)
 
-function ProfilePlaylist() {
+type ProfilePlaylistProps = {
+    isArtistProfile?: boolean;
+    playlist?: PlaylistModel[];
+}
+
+function ProfilePlaylist({ isArtistProfile, playlist }: ProfilePlaylistProps) {
     const userPlaylists = useSelector((state: RootState) => state.playlistSlice.userPlaylist)
+    const profilePlaylist = isArtistProfile ? playlist : userPlaylists
+    const navigate = useNavigate()
 
     return (
         <div>
-            {
-                userPlaylists?.length > 0 ? (
-                    userPlaylists?.map((playlist, index) => {
+            {profilePlaylist ? (
+                    profilePlaylist?.map((playlist, index) => {
                         return (
-                            <div key={index} style={{marginBottom: '40px'}}>
+                            <div 
+                                key={index} 
+                                style={{marginBottom: '40px'}} 
+                                onClick={() => {
+                                    navigate(`/playlist/${playlist.playlist_id}`)
+                                }}
+                            >
                                 <div className={cx('playlist-info')}>
                                     <img src={playlist.image || defaultImg} alt="" className={cx('playlist-image')}/>
                                     
@@ -26,7 +40,7 @@ function ProfilePlaylist() {
                                         <p className={cx('playlist-title')}>{playlist.name}</p>
                                     </article>
 
-                                    {/* <article className={cx('playlist-count')}>{playlist.songs.length} Track(s)</article> */}
+                                    {/* <article className={cx('playlist-count')}>{playlist?.songs?.length || '--'} Track(s)</article> */}
                                 </div>
 
                                 {/* <div className={cx('list-song')}>

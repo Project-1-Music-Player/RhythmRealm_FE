@@ -7,18 +7,24 @@ import styles from "../Profile.module.scss"
 
 import { RootState } from "@/redux/store"
 import { thumbnailUrl } from "@/apis/songApi"
+import { SongModel } from "@/models/SongModel"
 
 const cx = classNames.bind(styles)
 
-function ProfileLike() {
+type ProfileLikeProps = {
+    isArtistProfile?: boolean,
+    listSongs?: SongModel[],
+}
+
+function ProfileLike({ isArtistProfile, listSongs }: ProfileLikeProps) {
     const likeSongs = useSelector((state: RootState) => state.songSlice.likeSongs)
-    console.log(likeSongs?.length)
+    const songToMap = isArtistProfile ? listSongs : likeSongs
 
     return (
         <div className={cx('profile-song')}>
             {
-                likeSongs ? (
-                    likeSongs.map((song, index) => {
+                songToMap && songToMap?.length !== 0 ? (
+                    songToMap.map((song, index) => {
                         return (
                             <div key={index} className={cx('song-wrapper')}>
                                 <img src={thumbnailUrl(song.song_id)} alt="" className={cx('song-image')}/>
@@ -30,16 +36,19 @@ function ProfileLike() {
                                 
                                 <span className={cx('song-genre')}>{song.genre}</span>
 
-                                <div className={cx('song-statistic')}>
-                                    <div className={cx('song-reaction')}>
-                                        <FontAwesomeIcon icon={faHeart} className={cx('heart-icon')}/>
-                                    </div>
+                                {!isArtistProfile ? 
+                                    <div className={cx('song-statistic')}>
+                                        <div className={cx('song-reaction')}>
+                                            <FontAwesomeIcon icon={faHeart} className={cx('heart-icon')}/>
+                                        </div>
 
-                                    <div className={cx('song-reaction')}>
-                                        <FontAwesomeIcon icon={faHeadphones} className={cx('headphones-icon')}/>
-                                        {/* <span className={cx('song-num')}>{song.like_count}</span> */}
+                                        <div className={cx('song-reaction')}>
+                                            <FontAwesomeIcon icon={faHeadphones} className={cx('headphones-icon')}/>
+                                            {/* <span className={cx('song-num')}>{song.like_count}</span> */}
+                                        </div>
                                     </div>
-                                </div>
+                                    : <></>
+                                }
                             </div>
                         )
                     })

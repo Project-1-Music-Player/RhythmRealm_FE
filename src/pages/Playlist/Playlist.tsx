@@ -16,6 +16,7 @@ import Hero from "./components/Hero"
 import ActionButton from "./components/ActionButton"
 import SongItem from "./components/SongItem"
 import EditPlaylistForm from "./components/EditPlaylistForm"
+import { getUserPlaylists } from "@/apis/playlistApi"
 
 const cx = classNames.bind(styles)
 
@@ -28,6 +29,7 @@ function Playlist() {
     const user = useSelector((state: RootState) => state.authSlice.user)
     const userPlaylist = useSelector((state: RootState) => state.playlistSlice.userPlaylist)
     const userIdToken = useSelector((state: RootState) => state.authSlice.accessToken)
+    const artistId = useSelector((state: RootState) => state.artistSlice.artistId)
     
     const { id } = useParams()
 
@@ -63,6 +65,21 @@ function Playlist() {
             console.error('Error fetching songs:', err)
         }
     }
+    const fetchArtistPlaylist = async () => {
+        try {
+            const result = await getUserPlaylists(userIdToken, artistId)
+            setPlaylist({
+                playlist_id: user.id,
+                image: user.avatar,
+                name: result.name,
+                owner: 'RosDeeper',
+                description: result.description,
+                songs: []
+            })
+        } catch(err) {
+            console.error('Error fetching playlist:', err)
+        }
+    }
     const fetchSongsInPlaylist = async () => {
         try {
             const result = await getSongsInPlaylist(id, userIdToken)
@@ -73,13 +90,13 @@ function Playlist() {
     }
 
     useEffect(() => {
-        if(id === user.id) {
-            getUserSongs()
-        } else {
-            const playlist = userPlaylist.find(playlist => playlist.playlist_id === id)
-            fetchSongsInPlaylist()
-            setPlaylist(playlist)
-        }
+        if(artistId === user.id) {
+            // getUserSongs()
+            fetchArtistPlaylist()
+        } 
+        const playlist = userPlaylist.find(playlist => playlist.playlist_id === id)
+        fetchSongsInPlaylist()
+        setPlaylist(playlist)
     }, [])
 
     return (
