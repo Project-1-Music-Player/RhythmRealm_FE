@@ -19,6 +19,15 @@ export interface SongForm {
     song: File | null,
 }
 
+export interface SongSpotify {
+    spotify_info: {
+        album_image: string,
+        duration_ms: number,
+    }
+    artist: string,
+    track: string,
+}
+
 export const initialSong: SongModel = {
     song_id: '',
     user_id : '',

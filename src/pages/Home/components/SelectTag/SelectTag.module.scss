@@ -1,0 +1,97 @@
+.wrapper {
+    width: fit-content;
+    margin: 0 auto;
+    padding: 20px;
+    border-top: 2px dashed yellow;
+    width: 830px;
+}
+
+.label {
+    font-size: 1.6rem;
+    color: #ddd;
+    font-weight: 500;
+    letter-spacing: 1px;
+    min-width: 120px;
+    display: inline-block;
+}
+
+.select-input,
+.input {
+    width: 350px;
+    height: 46px;
+    background-color: transparent;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    font-size: 1.6rem;
+    border: 1px solid #ddd;
+    color: #ddd;
+    padding: 0 20px;
+    margin-left: 20px;
+    letter-spacing: 1px;
+}
+
+.select-input {
+    appearance: none;
+    cursor: pointer;
+}
+
+.genre-option {
+    background-color: #ccc;
+    color: #000;
+    margin-top: 10px;
+}
+
+.thumbnail {
+    display: none;
+}
+
+.thumbnail-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    display: block;
+    border-radius: 5px;
+    margin-left: 50px;
+}
+
+.file-label {
+    font-size: 1.6rem;
+    color: #000;
+    margin-left: 20px;
+    border-radius: 5px;
+    padding: 5px 25px;
+    min-width: 160px;
+    background-color: #ddd;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.song {
+    display: none;
+}
+
+.song-name {
+    font-size: 1.6rem;
+    color: #ddd;
+    font-weight: 500;
+    margin-left: 50px;
+}
+
+.cancel-btn {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
+}
+
+.submit-btn {
+    cursor: pointer;
+    border: none;
+    font-weight: 500;
+    padding: 10px 25px;
+    margin-left: 40px;
+    background-color: #CED200;
+    border-radius: 5px;
+    font-size: 1.6rem;
+}

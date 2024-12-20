@@ -90,13 +90,14 @@ function Playlist() {
     }
 
     useEffect(() => {
-        if(artistId === user.id) {
-            // getUserSongs()
+        if(id === user.id) {
+            getUserSongs()
             fetchArtistPlaylist()
-        } 
-        const playlist = userPlaylist.find(playlist => playlist.playlist_id === id)
-        fetchSongsInPlaylist()
-        setPlaylist(playlist)
+        } else {
+            const playlist = userPlaylist?.find(playlist => playlist.playlist_id === id)
+            fetchSongsInPlaylist()
+            setPlaylist(playlist)
+        }
     }, [])
 
     return (

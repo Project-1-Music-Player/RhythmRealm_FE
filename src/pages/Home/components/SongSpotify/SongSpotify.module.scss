@@ -1,0 +1,31 @@
+.wrapper {
+    cursor: pointer;
+    border-radius: 5px;
+
+    &:hover {
+        background-color: rgba($color: #fff, $alpha: .1);
+    }
+}
+
+.image {
+    width: 175px;
+    height: 175px;
+    object-fit: cover;
+    display: inline-block;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.title {
+    color: var(--white);
+    overflow: hidden;
+    max-width: 175px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.author {
+    color: #c9c9c9;
+    display: block;
+    font-size: 1.3rem;
+}

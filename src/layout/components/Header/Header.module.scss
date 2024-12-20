@@ -91,6 +91,7 @@
     color: var(--white);
     position: relative;
 
+    .music_emotion,
     .upload {
         cursor: pointer;
         border-radius: 5px;
@@ -100,6 +101,10 @@
         &:hover {
             background-color: #828282;
         }
+    }
+
+    .music_emotion {
+        margin-right: 40px;
     }
 
     .user {

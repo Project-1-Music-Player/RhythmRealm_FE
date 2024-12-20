@@ -13,10 +13,10 @@ import { setLikeSongs } from "@/redux/slice/SongSlice"
 import { setFollowedArtist, setAllArtists } from "@/redux/slice/ArtistSlice"
 import { PlaylistModel } from "@/models/PlaylistModel"
 import { SongModel } from "@/models/SongModel"
-import { ArtistModel } from "@/models/ArtistModel"
 import { getUserPlaylists } from "@/apis/playlistApi"
 import { getAllSongs, getLikeSongs } from "@/apis/songApi"
-import { getAllArtists, getArtistInfo, getFollowedArtist } from "@/apis/artistApi"
+import { getAllArtists, getFollowedArtist } from "@/apis/artistApi"
+import EmotionRecommend from "./components/EmotionRecommend"
 
 const cx = classNames.bind(styles)
 
@@ -24,13 +24,12 @@ function Home() {
     const user = useSelector((state: RootState) => state.authSlice.user)
     const userId = useSelector((state: RootState) => state.authSlice.user.id)
     const userRole = useSelector((state: RootState) => state.authSlice.user.role)
+    const isrecommend = useSelector((state: RootState) => state.songSlice.recommendEmotion)
     const userIdToken = useSelector((state: RootState) => state.authSlice.accessToken)
     const dispatch: AppDispatch = useDispatch()
 
     const [allSongs, setAllSongs] = useState<SongModel[]>([])
     const [playlists, setPlaylists] = useState<PlaylistModel[]>([])
-    const [followedArtist, setFollowArtist] = useState<ArtistModel[]>([])
-    // const [artists, setArtists] = useState<ArtistModel[]>([])
     const [groupedSongs, setGroupedSongs] = useState<{ [key: string]: SongModel[] }>({});
 
     const userSongUpload: PlaylistModel[] = [
@@ -80,14 +79,20 @@ function Home() {
         }
     }
     const fetchFollowedArtist = async () => {
-            try {
-                const followedArtist = await getFollowedArtist(userIdToken)
-                setFollowArtist(followedArtist)
-                dispatch(setFollowedArtist(followedArtist))
-            } catch(err) {
-                console.log('Get followed artist failed: ', err)
-            }
+        try {
+            const followedArtist = await getFollowedArtist(userIdToken)
+            dispatch(setFollowedArtist(followedArtist))
+        } catch(err) {
+            console.log('Get followed artist failed: ', err)
         }
+    }
+    useEffect(() => {
+        fetchSongs()
+        fetchLikeSong()
+        fetchPlaylists()
+        fetchArtists()
+        fetchFollowedArtist()
+    }, [])
 
     const renderSongsOfGenre = () => {
         const songsByGenre: { [key: string]: SongModel[] } = {}
@@ -103,32 +108,29 @@ function Home() {
 
         setGroupedSongs(songsByGenre)
     }
-
-    useEffect(() => {
-        fetchSongs()
-        fetchLikeSong()
-        fetchPlaylists()
-        fetchArtists()
-        fetchFollowedArtist()
-    }, [])
-
     useEffect(() => {
         renderSongsOfGenre()
     }, [allSongs])
 
     return (
         <div className={cx('container')}>
-            <div className={cx('content')}>
-                {user.id !== '' && userRole === 'artist' ? 
-                    <ModularPlaylist title='Uploaded Songs' playlists={userSongUpload} isPlaylist={false}/> : <></>
-                }
+            {isrecommend ? (
+                <div className={cx('content')}>
+                    <EmotionRecommend/>
+                </div>
+            ) : (
+                <div className={cx('content')}>
+                    {user.id !== '' && userRole === 'artist' ? 
+                        <ModularPlaylist title='Uploaded Songs' playlists={userSongUpload} isPlaylist={false}/> : <></>
+                    }
 
-                <ModularPlaylist title='My Playlists' playlists={playlists} isPlaylist={true}/>
+                    <ModularPlaylist title='My Playlists' playlists={playlists} isPlaylist={true}/>
 
-                {Object.keys(groupedSongs).map((genre) => (
-                    <ModularPlaylist title={genre} songs={groupedSongs[genre]} isPlaylist={false}/>
-                ))}
-            </div>
+                    {Object.keys(groupedSongs).map((genre) => (
+                        <ModularPlaylist title={genre} songs={groupedSongs[genre]} isPlaylist={false}/>
+                    ))}
+                </div>
+            )}
 
             <Sidebar isLogin={user.id !== '' ? true : false}/>
         </div>

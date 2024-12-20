@@ -12,6 +12,7 @@ import { auth } from "@/firebase"
 import { logout } from "@/redux/slice/AuthSlice"
 import { RootState, AppDispatch } from "@/redux/store"
 import { SongModel } from "@/models/SongModel"
+import { setRecommendEmotion } from "@/redux/slice/SongSlice"
 
 import SearchBar from './components/SearchBar'
 import SearchResults from "./components/SearchResults"
@@ -26,6 +27,7 @@ function Header() {
 
     const user = useSelector((state: RootState) => state.authSlice.user)
     const userRole = useSelector((state: RootState) => state.authSlice.user.role)
+    const isRecommend = useSelector((state: RootState) => state.songSlice.recommendEmotion)
 
     const [isMenuHovered, setIsMenuHovered] = useState(false)
     const [uploadBtn, setUploadBtn] = useState(true)
@@ -60,12 +62,19 @@ function Header() {
         }
     }
 
+    const handleRecommendClick = () => {
+        dispatch(setRecommendEmotion(!isRecommend))
+    }
+
     return (
         <header className={cx('wrapper')}>
             <div className={cx('nav')}>
                 <img src={Logo} alt="" className={cx('logo')} onClick={() => navigate('/')}/>
                 <ul className={cx('nav_list')}>
-                    <li className={cx('nav_item')} onClick={() => navigate('/')}>HOME</li>
+                    <li className={cx('nav_item')} onClick={() => {
+                        navigate('/')
+                        dispatch(setRecommendEmotion(false))
+                    }}>HOME</li>
                 </ul>
             </div>
 
@@ -74,6 +83,12 @@ function Header() {
 
             {user.id !== '' ? 
                 <div className={cx('authen')}>
+                    <span 
+                        onClick={handleRecommendClick}
+                        className={cx('music_emotion')}  
+                        style={isRecommend ? {backgroundColor: '#828282'} : {}}
+                    >MUSIC FOR EMOTION</span>
+
                     <span 
                         className={cx('upload')}  
                         onClick={toggleUpdateRole}

@@ -1,4 +1,5 @@
 export const BASE_API_URL = 'http://localhost:3000/'
+export const RECOMMEND_API = 'http://localhost:8000/api'
 
 export const API_ROUTES = {
     auth: 'auth',
@@ -46,4 +47,10 @@ export const ARTISTS_API_ROUTES = {
     followArtist: API_ROUTES.artist + '',
     unFollowArtist: API_ROUTES.artist + '',
     getFollowedArtist: API_ROUTES.artist + '',
+}
+
+export const MUSIC_RECOMMEND_ROUTES = {
+    getAllTag: '/tags',
+    getRecommendTag: '/recommend',
+    getRecommendEmotion: '/recommend/emotion'
 }

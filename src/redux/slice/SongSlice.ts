@@ -3,12 +3,14 @@ import { SongModel, initialSong } from "@/models/SongModel"
 
 interface SongState {
     currSong: SongModel,
-    likeSongs: SongModel[]
+    likeSongs: SongModel[],
+    recommendEmotion: boolean,
 }
 
 const initialState: SongState = {
     currSong: initialSong,
-    likeSongs: []
+    likeSongs: [],
+    recommendEmotion: false,
 }
 
 const SongSlice = createSlice({
@@ -21,9 +23,13 @@ const SongSlice = createSlice({
 
         setLikeSongs: (state, action: PayloadAction<SongModel[]>) => {
             state.likeSongs = action.payload
+        },
+
+        setRecommendEmotion: (state, action: PayloadAction<boolean>) => {
+            state.recommendEmotion = action.payload
         }
     }
 })
 
-export const { setCurrSong, setLikeSongs } = SongSlice.actions
+export const { setCurrSong, setLikeSongs, setRecommendEmotion } = SongSlice.actions
 export default SongSlice.reducer
